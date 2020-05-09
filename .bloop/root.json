@@ -23,12 +23,14 @@
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-protobuf-v3_2.12/2.6.3/akka-protobuf-v3_2.12-2.6.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-guice_2.12/2.8.1/play-guice_2.12-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/errorprone/error_prone_annotations/2.3.2/error_prone_annotations-2.3.2.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-api_2.12/2.8.0/play-jdbc-api_2.12-2.8.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/javax/inject/javax.inject/1/javax.inject-1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play_2.12/2.8.1/play_2.12-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-parsing_2.12/10.1.11/akka-parsing_2.12-10.1.11.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/checkerframework/checker-qual/2.8.1/checker-qual-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-evolutions_2.12/2.8.0/play-jdbc-evolutions_2.12-2.8.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-exceptions/2.8.1/play-exceptions-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_2.12/1.2.0/scala-xml_2.12-1.2.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar",
@@ -40,6 +42,7 @@
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/filters-helpers_2.12/2.8.1/filters-helpers_2.12-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.10.2/jackson-module-parameter-names-2.10.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick_2.12/3.3.2/slick_2.12-3.3.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar",
@@ -56,8 +59,10 @@
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-actor-typed_2.12/2.6.3/akka-actor-typed_2.12-2.6.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/guava/28.1-jre/guava-28.1-jre.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.0.0/scala-collection-compat_2.12-2.0.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.12.8/scala-library-2.12.8.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-logback_2.12/2.8.1/play-logback_2.12-2.8.1.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick-evolutions_2.12/5.0.0/play-slick-evolutions_2.12-5.0.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.12/2.10.2/jackson-module-scala_2.12-2.10.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/inject/guice/4.2.2/guice-4.2.2.jar",
@@ -65,7 +70,10 @@
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.2/jackson-databind-2.10.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-server_2.12/2.8.1/play-server_2.12-2.8.1.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/google/inject/extensions/guice-assistedinject/4.2.2/guice-assistedinject-4.2.2.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/zaxxer/HikariCP/3.2.0/HikariCP-3.2.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/build-link/2.8.1/build-link-2.8.1.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.12/mysql-connector-java-8.0.12.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick-hikaricp_2.12/3.3.2/slick-hikaricp_2.12-3.3.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-slf4j_2.12/2.6.3/akka-slf4j_2.12-2.6.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.10.2/jackson-dataformat-cbor-2.10.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.12/0.9.0/scala-java8-compat_2.12-0.9.0.jar",
@@ -75,6 +83,7 @@
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.12.8/scala-reflect-2.12.8.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.4.1/ssl-config-core_2.12-0.4.1.jar",
+            "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick_2.12/5.0.0/play-slick_2.12-5.0.0.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.12/2.6.3/akka-stream_2.12-2.6.3.jar",
             "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.18/animal-sniffer-annotations-1.18.jar",
@@ -261,6 +270,23 @@
                     ]
                 },
                 {
+                    "organization" : "com.typesafe.play",
+                    "name" : "play-jdbc-api_2.12",
+                    "version" : "2.8.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "play-jdbc-api_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-api_2.12/2.8.0/play-jdbc-api_2.12-2.8.0.jar"
+                        },
+                        {
+                            "name" : "play-jdbc-api_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-api_2.12/2.8.0/play-jdbc-api_2.12-2.8.0-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "javax.inject",
                     "name" : "javax.inject",
                     "version" : "1",
@@ -359,6 +385,23 @@
                             "name" : "jjwt",
                             "classifier" : "sources",
                             "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.typesafe.play",
+                    "name" : "play-jdbc-evolutions_2.12",
+                    "version" : "2.8.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "play-jdbc-evolutions_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-evolutions_2.12/2.8.0/play-jdbc-evolutions_2.12-2.8.0.jar"
+                        },
+                        {
+                            "name" : "play-jdbc-evolutions_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-jdbc-evolutions_2.12/2.8.0/play-jdbc-evolutions_2.12-2.8.0-sources.jar"
                         }
                     ]
                 },
@@ -546,6 +589,23 @@
                             "name" : "logback-classic",
                             "classifier" : "sources",
                             "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.typesafe.slick",
+                    "name" : "slick_2.12",
+                    "version" : "3.3.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "slick_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick_2.12/3.3.2/slick_2.12-3.3.2.jar"
+                        },
+                        {
+                            "name" : "slick_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick_2.12/3.3.2/slick_2.12-3.3.2-sources.jar"
                         }
                     ]
                 },
@@ -817,6 +877,23 @@
                     ]
                 },
                 {
+                    "organization" : "org.scala-lang.modules",
+                    "name" : "scala-collection-compat_2.12",
+                    "version" : "2.0.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "scala-collection-compat_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.0.0/scala-collection-compat_2.12-2.0.0.jar"
+                        },
+                        {
+                            "name" : "scala-collection-compat_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-collection-compat_2.12/2.0.0/scala-collection-compat_2.12-2.0.0-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "com.typesafe.play",
                     "name" : "play-logback_2.12",
                     "version" : "2.8.1",
@@ -830,6 +907,23 @@
                             "name" : "play-logback_2.12",
                             "classifier" : "sources",
                             "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-logback_2.12/2.8.1/play-logback_2.12-2.8.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.typesafe.play",
+                    "name" : "play-slick-evolutions_2.12",
+                    "version" : "5.0.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "play-slick-evolutions_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick-evolutions_2.12/5.0.0/play-slick-evolutions_2.12-5.0.0.jar"
+                        },
+                        {
+                            "name" : "play-slick-evolutions_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick-evolutions_2.12/5.0.0/play-slick-evolutions_2.12-5.0.0-sources.jar"
                         }
                     ]
                 },
@@ -953,6 +1047,23 @@
                     ]
                 },
                 {
+                    "organization" : "com.zaxxer",
+                    "name" : "HikariCP",
+                    "version" : "3.2.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "HikariCP",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/zaxxer/HikariCP/3.2.0/HikariCP-3.2.0.jar"
+                        },
+                        {
+                            "name" : "HikariCP",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/zaxxer/HikariCP/3.2.0/HikariCP-3.2.0-sources.jar"
+                        }
+                    ]
+                },
+                {
                     "organization" : "com.typesafe.play",
                     "name" : "build-link",
                     "version" : "2.8.1",
@@ -966,6 +1077,40 @@
                             "name" : "build-link",
                             "classifier" : "sources",
                             "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/build-link/2.8.1/build-link-2.8.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "mysql",
+                    "name" : "mysql-connector-java",
+                    "version" : "8.0.12",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "mysql-connector-java",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.12/mysql-connector-java-8.0.12.jar"
+                        },
+                        {
+                            "name" : "mysql-connector-java",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.12/mysql-connector-java-8.0.12-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.typesafe.slick",
+                    "name" : "slick-hikaricp_2.12",
+                    "version" : "3.3.2",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "slick-hikaricp_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick-hikaricp_2.12/3.3.2/slick-hikaricp_2.12-3.3.2.jar"
+                        },
+                        {
+                            "name" : "slick-hikaricp_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/slick/slick-hikaricp_2.12/3.3.2/slick-hikaricp_2.12-3.3.2-sources.jar"
                         }
                     ]
                 },
@@ -1119,6 +1264,23 @@
                             "name" : "ssl-config-core_2.12",
                             "classifier" : "sources",
                             "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.12/0.4.1/ssl-config-core_2.12-0.4.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization" : "com.typesafe.play",
+                    "name" : "play-slick_2.12",
+                    "version" : "5.0.0",
+                    "configurations" : "default",
+                    "artifacts" : [
+                        {
+                            "name" : "play-slick_2.12",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick_2.12/5.0.0/play-slick_2.12-5.0.0.jar"
+                        },
+                        {
+                            "name" : "play-slick_2.12",
+                            "classifier" : "sources",
+                            "path" : "/Users/takapi327/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/play/play-slick_2.12/5.0.0/play-slick_2.12-5.0.0-sources.jar"
                         }
                     ]
                 },
