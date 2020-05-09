@@ -1,0 +1,82 @@
+5 09, 2020 2:36:17 午後 org.xnio.Xnio <clinit>
+INFO: XNIO version 3.6.5.Final
+5 09, 2020 2:36:17 午後 org.xnio.nio.NioXnio <clinit>
+INFO: XNIO NIO Implementation Version 3.6.5.Final
+5 09, 2020 2:36:17 午後 org.jboss.threads.Version <clinit>
+INFO: JBoss Threads version 2.3.0.Beta2
+The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket...
+Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket
+request received: build/initialize
+BSP initialization handshake complete.
+shutdown request received: build/shutdown
+Client in /Users/takapi327/development/play-scala-app/.bloop triggered cancellation. Cancelling tasks...
+The task for 'bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket' finished.
+Project root has no analysis and setup.
+Project root-test has no analysis and setup.
+The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket...
+Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket
+request received: build/initialize
+BSP initialization handshake complete.
+shutdown request received: build/shutdown
+Client in /Users/takapi327/development/play-scala-app/.bloop triggered cancellation. Cancelling tasks...
+The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket...
+Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket
+request received: build/initialize
+BSP initialization handshake complete.
+ tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  time: connected to build server in 2.7s
+INFO  time: imported build in 0.21s
+INFO  time: indexed workspace in 3.34s
+INFO  running 'sbt metalsEnable bloopInstall'
+INFO  [info] Loading settings for project global-plugins from metals.sbt ...
+INFO  [info] Loading global plugins from /Users/takapi327/.sbt/1.0/plugins
+INFO  [info] Loading settings for project play-scala-app-build from plugins.sbt ...
+INFO  [info] Loading project definition from /Users/takapi327/development/play-scala-app/project
+INFO  [success] Generated .bloop/play-scala-app-build.json
+INFO  [success] Total time: 1 s, completed 2020/05/09 14:37:11
+INFO  [info] Loading settings for project root from build.sbt ...
+INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
+INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
+INFO  [info] semanticdb-scalac is enabled
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [success] Generated .bloop/root.json
+INFO  [success] Generated .bloop/root-test.json
+INFO  [success] Total time: 90 s (01:30), completed 2020/05/09 14:38:44
+INFO  sbt exit: 0
+INFO  time: ran 'sbt bloopInstall' in 1m39s
+INFO  running embedded 'bloop bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket'
+INFO  bloop exit: 0
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  time: connected to build server in 0.23s
+INFO  disconnected: build server
+INFO  time: imported build in 0.17s
+ERROR timeout: build server 'bloop' during shutdown
+INFO  time: indexed workspace in 2.21s
+INFO  running 'sbt metalsEnable bloopInstall'
+INFO  [info] Loading settings for project global-plugins from metals.sbt ...
+INFO  [info] Loading global plugins from /Users/takapi327/.sbt/1.0/plugins
+INFO  [info] Loading settings for project play-scala-app-build from plugins.sbt ...
+INFO  [info] Loading project definition from /Users/takapi327/development/play-scala-app/project
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [success] Generated .bloop/play-scala-app-build.json
+INFO  [success] Total time: 2 s, completed 2020/05/09 14:44:53
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [info] Loading settings for project root from build.sbt ...
+INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
+INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
+INFO  [info] semanticdb-scalac is enabled
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
+INFO  [success] Generated .bloop/root.json
+INFO  [success] Generated .bloop/root-test.json
+INFO  [success] Total time: 13 s, completed 2020/05/09 14:45:10
+INFO  sbt exit: 0
+INFO  time: ran 'sbt bloopInstall' in 26s
+INFO  running embedded 'bloop bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket'
+INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
+INFO  time: connected to build server in 0.22s
+INFO  disconnected: build server
+INFO  time: imported build in 0.16s
+INFO  time: indexed workspace in 0.92s
+ERROR timeout: build server 'bloop' during shutdown
