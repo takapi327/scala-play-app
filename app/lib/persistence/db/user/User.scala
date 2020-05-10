@@ -1,3 +1,4 @@
+/*
 package lib.persistence.db
 
 import java.time.LocalDateTime
@@ -28,3 +29,4 @@ case class UserTable()
 
   //private val user = TableQuery[UserTable]
 }
+*/
