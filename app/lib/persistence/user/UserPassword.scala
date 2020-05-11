@@ -23,19 +23,19 @@ class UserPassRepository @Inject()
     def id            = column[Pass.Id]          ("id", O.PrimaryKey, O.AutoInc)
     def password      = column[String]           ("password")
     def repassword    = column[String]           ("repassword")
-    def updatedAt     = column[LocalDateTime]    ("updatedAt")
-    def createdAt     = column[LocalDateTime]    ("createdAt")
+    //def updatedAt     = column[LocalDateTime]    ("updatedAt")
+    //def createdAt     = column[LocalDateTime]    ("createdAt")
 
     type TableElementTuple = (
-      Pass.Id, String, String, LocalDateTime, LocalDateTime
+      Pass.Id, String, String
     )
 
-    def * = (id, password, repassword, updatedAt, createdAt) <> (
+    def * = (id, password, repassword) <> (
       (x: TableElementTuple) => Pass(
-        Some(x._1), x._2 ,x._3, x._4, x._5
+        Some(x._1), x._2 ,x._3
       ),
       (v: Pass) => Pass.unapply(v).map {t => (
-        t._1.getOrElse(0L), t._2 , t._3, t._4, t._5
+        t._1.getOrElse(0L), t._2 , t._3
       )}
     )
   }

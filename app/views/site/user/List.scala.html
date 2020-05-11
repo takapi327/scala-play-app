@@ -1,0 +1,14 @@
+@(vv: model.ViewValueUserList)
+
+@common.main(vv) {
+  @for(user <- vv.data){
+    @userList(user)
+  }
+}
+
+@userList(user: lib.model.User) = {
+  <div>@user.id</div>
+  <div>@user.passId</div>
+  <div>@user.name</div>
+  <div>@user.mail</div>
+}

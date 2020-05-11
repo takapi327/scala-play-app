@@ -9,8 +9,8 @@ case class UserPassword (
   id:          Option[Id],
   password:    String,
   repassword:  String,
-  updateAt:    LocalDateTime,
-  createdAt:   LocalDateTime
+  //updateAt:    LocalDateTime,
+  //createdAt:   LocalDateTime
 )
 
 object UserPassword {

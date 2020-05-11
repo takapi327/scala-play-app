@@ -29,24 +29,24 @@ class UserRepository @Inject()
     def passId        = column[Option[Pass.Id]]  ("passId")
     def name          = column[String]           ("name")
     def mail          = column[String]           ("mail")
-    def updatedAt     = column[LocalDateTime]    ("updatedAt")
-    def createdAt     = column[LocalDateTime]    ("createdAt")
+    //def updatedAt     = column[LocalDateTime]    ("updated_at")
+    //def createdAt     = column[LocalDateTime]    ("created_at")
 /*
     def * = (id, passId, name, mail, updatedAt, createdAt) <> (
       (User.apply _).tupled, User.unapply
     )
 */
     type TableElementTuple = (
-      User.Id, Option[Pass.Id], String, String, LocalDateTime, LocalDateTime
+      User.Id, Option[Pass.Id], String, String
     )
 
-    def * = (id, passId, name, mail, updatedAt, createdAt) <> (
+    def * = (id, passId, name, mail) <> (
       (x: TableElementTuple) => User(
-        Some(x._1), x._2 ,x._3, x._4, x._5, x._6
+        Some(x._1), x._2 ,x._3, x._4
       ),
       (v: User) => User.unapply(v).map {t => (
         //Some((user.id, user.passId, user.name, user.mail, user.updateAt, user.createdAt))
-        t._1.getOrElse(0L), t._2 , t._3, t._4, t._5, t._6
+        t._1.getOrElse(0L), t._2 , t._3, t._4
       )}
     )
   }

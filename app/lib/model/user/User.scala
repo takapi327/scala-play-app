@@ -9,9 +9,9 @@ case class User (
   id:          Option[Id],
   passId:      Option[Pass.Id],
   name:        String,
-  mail:        String,
-  updateAt:    LocalDateTime,
-  createdAt:   LocalDateTime
+  mail:        String
+  //updateAt:    LocalDateTime,
+  //createdAt:   LocalDateTime
 )
 
 object User {
