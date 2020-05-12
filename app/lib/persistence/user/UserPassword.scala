@@ -18,6 +18,11 @@ class UserPassRepository @Inject()
   import dbConfig._
   import profile.api._
 
+  def add(id: User.Id, pass: String): Future[Int] =
+    db.run {
+      userPass += Pass(Some(id), pass)
+    }
+
   /******** 定義 ********/ 
   private class UserPassTable(tag: Tag) extends Table[Pass](tag, "userPassword"){
     def id            = column[User.Id]          ("id", O.PrimaryKey)
@@ -38,5 +43,5 @@ class UserPassRepository @Inject()
       )}
     )
   }
-  private val user = TableQuery[UserPassTable]
+  private val userPass = TableQuery[UserPassTable]
 }
