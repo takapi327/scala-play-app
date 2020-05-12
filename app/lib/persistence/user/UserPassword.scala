@@ -6,7 +6,7 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
-import lib.model.{UserPassword => Pass}
+import lib.model.{User, UserPassword => Pass}
 
 @Singleton
 class UserPassRepository @Inject()
@@ -20,22 +20,21 @@ class UserPassRepository @Inject()
 
   /******** 定義 ********/ 
   private class UserPassTable(tag: Tag) extends Table[Pass](tag, "userPassword"){
-    def id            = column[Pass.Id]          ("id", O.PrimaryKey, O.AutoInc)
+    def id            = column[User.Id]          ("id", O.PrimaryKey)
     def password      = column[String]           ("password")
-    def repassword    = column[String]           ("repassword")
     //def updatedAt     = column[LocalDateTime]    ("updatedAt")
     //def createdAt     = column[LocalDateTime]    ("createdAt")
 
     type TableElementTuple = (
-      Pass.Id, String, String
+      Option[User.Id], String
     )
 
-    def * = (id, password, repassword) <> (
+    def * = (id.?, password) <> (
       (x: TableElementTuple) => Pass(
-        Some(x._1), x._2 ,x._3
+        x._1, x._2
       ),
       (v: Pass) => Pass.unapply(v).map {t => (
-        t._1.getOrElse(0L), t._2 , t._3
+        t._1, t._2
       )}
     )
   }
