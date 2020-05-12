@@ -22,7 +22,12 @@ class UserRepository @Inject()
     db.run {
       user.result
     }
-
+/*
+  def add(passId: Option[Long], name: String, mail: String): Future[Long] =
+    db.run {
+      user += User(passId, name, mail)
+    }
+*/
   /******** 定義 ********/ 
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
