@@ -4,7 +4,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import lib.model._
 
-case class SignupForm(name: String, email: String, password: String)
+case class SignupForm(name: String, mail: String, password: String)
 
 object StatusValue {
 // formの作成

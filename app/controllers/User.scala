@@ -17,6 +17,7 @@ import model._
 @Singleton
 class UserController @Inject()(
   userRepo: UserRepository,
+  passRepo: UserPassRepository,
   cc: MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
@@ -35,16 +36,24 @@ class UserController @Inject()(
     }
   }
 
-  def showAddForm() = Action {implicit request =>
+  def showSignupForm() = Action {implicit request =>
     Ok(views.html.site.user.Add(new ViewValueUserAdd))
   }
 
-  def create() = Action {implicit request =>
-    val vv = ViewValueHome(
-      title  = "Home",
-      cssSrc = Seq("main.css"),
-      jsSrc  = Seq("main.js")
+  def create() = Action.async {implicit request =>
+    StatusValue.signupForm.bindFromRequest.fold(
+      errorForm => {
+        Future.successful(Ok(views.html.site.user.Add(new ViewValueUserAdd)))
+      },
+      userForm => {
+        val pass     = userForm.password
+        for {
+          userId <- userRepo.add(userForm.name, userForm.mail)
+          _      <- passRepo.add(userId, pass)
+        } yield {
+          Redirect(routes.HomeController.index)
+        }
+      }
     )
-    Ok(views.html.site.index(vv)) 
   }
 }
