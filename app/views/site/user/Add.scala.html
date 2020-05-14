@@ -1,0 +1,29 @@
+@(vv: model.ViewValueUserAdd)(implicit 
+  request: MessagesRequestHeader
+)
+
+@common.main(vv) {
+  @userAdd()
+}
+
+@userAdd() = {
+  @helper.form(action = routes.UserController.create()){
+    @helper.CSRF.formField
+      <div class="">
+        @helper.inputText(
+          vv.form("name")
+        )
+      </div>
+      <div class="">
+        @helper.inputText(
+          vv.form("mail")
+        )
+      </div>
+      <div class="">
+        @helper.inputText(
+          vv.form("password")
+        )
+      </div>
+      <button class="todo_btn">登録</button>
+  }
+}
