@@ -6,16 +6,13 @@ import java.security.Identity
 import UserPassword._
 
 case class UserPassword (
-  id:          Option[Id],
+  id:          Option[User.Id],
   password:    String,
-  repassword:  String,
-  updateAt:    LocalDateTime,
-  createdAt:   LocalDateTime
+  //updateAt:    LocalDateTime,
+  //createdAt:   LocalDateTime
 )
 
 object UserPassword {
 
-  type Id = Long
-
-  case class FormValue (password: String, repassword: String)
+  //case class FormValue (password: String)
 }
