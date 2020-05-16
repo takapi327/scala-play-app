@@ -7,7 +7,8 @@ case class ViewValueUserList(
   title:  String ,
   cssSrc: Seq[String],
   jsSrc:  Seq[String],
-  data:   Seq[lib.model.User]
+ // data:   Seq[lib.model.User]
+  cookie: Option[play.api.mvc.Cookie]
 ) extends ViewValueCommon
 
 case class ViewValueUserAdd(

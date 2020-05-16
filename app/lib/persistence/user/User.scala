@@ -28,10 +28,10 @@ class UserRepository @Inject()
       user += User(Some(0), name, mail)
     }
 
-  def filterByMail(umail: String): Future[Seq[User]] =
+  def filterByMail(umail: String): Future[Option[User]] =
     db.run {
       user.filter(_.mail === umail)
-      .result
+      .result.headOption
     }
 
 
