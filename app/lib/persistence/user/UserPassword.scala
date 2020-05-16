@@ -18,9 +18,9 @@ class UserPassRepository @Inject()
   import dbConfig._
   import profile.api._
 
-  def add(id: User.Id, pass: String): Future[Int] =
+  def add(uid: Option[User.Id], pass: String): Future[Int] =
     db.run {
-      userPass += Pass(Some(id), pass)
+      userPass += Pass(uid, pass)
     }
 
   /******** 定義 ********/ 

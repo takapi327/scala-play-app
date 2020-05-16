@@ -25,8 +25,15 @@ class UserRepository @Inject()
 
   def add(name: String, mail: String): Future[Int] =
     db.run {
-      user += User(Some(0) ,name, mail)
+      user += User(Some(0), name, mail)
     }
+
+  def filterByMail(umail: String): Future[Seq[User]] =
+    db.run {
+      user.filter(_.mail === umail)
+      .result
+    }
+
 
   /******** 定義 ********/ 
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){

@@ -16,9 +16,9 @@ import model._
 
 @Singleton
 class UserController @Inject()(
-  userRepo: UserRepository,
-  passRepo: UserPassRepository,
-  cc: MessagesControllerComponents
+  userRepo:   UserRepository,
+  passRepo:   UserPassRepository,
+  cc:         MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
 
@@ -40,18 +40,19 @@ class UserController @Inject()(
     Ok(views.html.site.user.Add(new ViewValueUserAdd))
   }
 
-  def create() = Action.async {implicit request =>
+  def signup() = Action.async {implicit request =>
     StatusValue.signupForm.bindFromRequest.fold(
       errorForm => {
         Future.successful(Ok(views.html.site.user.Add(new ViewValueUserAdd)))
       },
       userForm => {
-        val pass     = userForm.password
+        val pass = userForm.password
         for {
-          userId <- userRepo.add(userForm.name, userForm.mail)
-          _      <- passRepo.add(userId, pass)
+          userData <- userRepo.add(userForm.name, userForm.mail)
+          userId   <- userRepo.filterByMail(userForm.mail)
+          _        <- passRepo.add(userId.head.id, pass)
         } yield {
-          Redirect(routes.HomeController.index)
+          Redirect(routes.HomeController.index).withCookies(Cookie("user", userForm.name)).bakeCookies()
         }
       }
     )

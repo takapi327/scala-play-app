@@ -7,8 +7,8 @@
 GET     /                           controllers.HomeController.index
 
 GET     /user                       controllers.UserController.index
-GET     /add                        controllers.UserController.showSignupForm
-POST    /create                     controllers.UserController.create
+GET     /signupForm                 controllers.UserController.showSignupForm
+POST    /signup                     controllers.UserController.signup
 
 
 # Map static resources from the /public folder to the /assets URL path
