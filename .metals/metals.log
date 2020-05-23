@@ -339,49 +339,475 @@ Project root-test has no analysis and setup.
 警告: Unmatched cancel notification for request id 53
 5 21, 2020 11:50:06 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 警告: Unmatched cancel notification for request id 54
-orted Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
-WARN  unsupported Scala 2.13.1
+5 23, 2020 3:55:10 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+警告: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didChange",
+  "params": {
+    "textDocument": {
+      "version": 100,
+      "uri": "file:///Users/takapi327/development/play-scala-app/app/controllers/User.scala"
+    },
+    "contentChanges": [
+      {
+        "text": "package controllers\n\nimport javax.inject._\nimport play.api.mvc._\nimport scala.concurrent._\nimport lib.model._\nimport lib.persistence._\nimport play.api.data.Form\nimport play.api.data.Forms._\n\n// CSRF対策\nimport play.filters.csrf.CSRF\nimport play.api.i18n.I18nSupport\n\nimport model._\n\n@Singleton\nclass UserController @Inject()(\n  userRepo:   UserRepository,\n  passRepo:   UserPassRepository,\n  cc:         MessagesControllerComponents\n)(implicit ec: ExecutionContext) \n  extends MessagesAbstractController(cc){\n/*\n  def index() \u003d Action {implicit request \u003d\u003e\n    \n    for {\n      userSeq \u003c- userRepo.getAll() \n    } yield {\n      \n     val cookie \u003d request.cookies.get(\"user\")\n      val vv \u003d ViewValueUserList(\n        title \u003d \"User一覧\",\n        cssSrc \u003d Seq(\"main.css\"),\n        jsSrc  \u003d Seq(\"main.js\")\n        //data   \u003d userSeq\n        //cookie \u003d cookie.getOrElse(Cookie(\"user\", \"no-cookie.\"))\n      )\n      Ok(views.html.site.user.List(vv))\n  //  }\n  }\n*/\n  def showSignupForm() \u003d Action {implicit request \u003d\u003e\n    Ok(views.html.site.user.Add(new ViewValueUserAdd))\n  }\n\n  def signup() \u003d Action.async {implicit request \u003d\u003e\n    StatusValue.signupForm.bindFromRequest.fold(\n      errorForm \u003d\u003e {\n        Future.successful(Ok(views.html.site.user.Add(new ViewValueUserAdd)))\n      },\n      userForm \u003d\u003e {\n        val pass \u003d userForm.password\n        for {\n          mailFil \u003c- userRepo.filterByMail(userForm.mail)\n            .map(user \u003d\u003e user match {\n              case Some(_) \u003d\u003e false\n              case None    \u003d\u003e true\n            })\n          userDate \u003c- mailFil match {\n            case true  \u003d\u003e userRepo.add(userForm.name, userForm.mail)\n            // ↓処理が死んでるので後で修正\n            case false \u003d\u003e Future.successful(NotFound(views.html.error.page404(new ViewValueError)))\n          }\n          _      \u003c- mailFil match {\n            case true  \u003d\u003e passRepo.add(Some(userDate), pass)\n            // ↓処理が死んでるので後で修正\n            case false \u003d\u003e Future.successful(NotFound(views.html.error.page404(new ViewValueError)))\n          }\n          result \u003c- mailFil match {\n            case\n            case true \u003d\u003e \n              val cookie \u003d request.cookies.get(\"user\").map(_.value).getOrElse(\"Nothing.\")\n              val vv \u003d ViewValueUserList(\n                title  \u003d \"User一覧\",\n                cssSrc \u003d Seq(\"main.css\"),\n                jsSrc  \u003d Seq(\"main.js\"),\n                //cookie \u003d cookie,\n                // either \u003d x\n              )\n              Ok(views.html.site.user.List(vv)).withCookies(Cookie(\"user\", cookie)).bakeCookies() \n          }\n        } yield {\n          result\n          //val x \u003d userRepo.signup(userId.head.id, userForm.name, userForm.mail)\n          //val token \u003d CSRF.getToken(request)\n        }\n      }\n    )\n  }\n}\n"
+      }
+    ]
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: org.scalameta.invariants.InvariantFailedException: invariant failed:
+when verifying scala.meta.classifiers.`package`.XtensionClassifiable[scala.meta.tokens.Token](ScalametaParser.this.token)(scala.meta.tokens.Token.classifiable[scala.meta.tokens.Token]).isNot[scala.meta.tokens.Token.KwCase](Token.this.KwCase.classifier[scala.meta.tokens.Token]).&&(org.scalameta.`package`.debug(ScalametaParser.this.token))
+found that scala.meta.classifiers.`package`.XtensionClassifiable[scala.meta.tokens.Token](ScalametaParser.this.token)(scala.meta.tokens.Token.classifiable[scala.meta.tokens.Token]).isNot[scala.meta.tokens.Token.KwCase](Token.this.KwCase.classifier[scala.meta.tokens.Token]) is false
+where ScalametaParser = scala.meta.internal.parsers.ScalametaParser@3ae4169f
+where ScalametaParser.this.token = case
+where Token = scala.meta.tokens.Token$@5a4ef5e
+	at org.scalameta.invariants.InvariantFailedException$.raise(Exceptions.scala:15)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$caseClause$1(ScalametaParser.scala:1988)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.caseClause(ScalametaParser.scala:1987)
+	at scala.meta.internal.parsers.ScalametaParser.caseClauses(ScalametaParser.scala:2020)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$19(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrError(ScalametaParser.scala:317)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrNil(ScalametaParser.scala:320)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$18(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.generator(ScalametaParser.scala:2079)
+	at scala.meta.internal.parsers.ScalametaParser.enumerator(ScalametaParser.scala:2049)
+	at scala.meta.internal.parsers.ScalametaParser.enumerators(ScalametaParser.scala:2037)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$8(ScalametaParser.scala:1480)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrError(ScalametaParser.scala:317)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrNil(ScalametaParser.scala:320)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1480)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockStatSeq$2(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.stat(ScalametaParser.scala:3222)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$2(ScalametaParser.scala:1979)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$1(ScalametaParser.scala:1978)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.blockExpr(ScalametaParser.scala:1977)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$21(ScalametaParser.scala:1608)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1583)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExpr(ScalametaParser.scala:1951)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$argumentExprs$3(ScalametaParser.scala:1964)
+	at scala.meta.internal.parsers.ScalametaParser.partOrEllipsis$1(ScalametaParser.scala:748)
+	at scala.meta.internal.parsers.ScalametaParser.tokenSeparated(ScalametaParser.scala:754)
+	at scala.meta.internal.parsers.ScalametaParser.commaSeparated(ScalametaParser.scala:760)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$argumentExprs$1(ScalametaParser.scala:1964)
+	at scala.meta.internal.parsers.ScalametaParser.inParens(ScalametaParser.scala:299)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExprs(ScalametaParser.scala:1958)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$3(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$1(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExprRest(ScalametaParser.scala:1894)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1891)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockStatSeq$2(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.stat(ScalametaParser.scala:3222)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$implicitClosure$3(ScalametaParser.scala:1626)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.implicitClosure(ScalametaParser.scala:1626)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3345)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$2(ScalametaParser.scala:1979)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$1(ScalametaParser.scala:1978)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.blockExpr(ScalametaParser.scala:1977)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExprs(ScalametaParser.scala:1956)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$3(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$1(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExprRest(ScalametaParser.scala:1894)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1891)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$funDefRest$1(ScalametaParser.scala:2842)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.funDefRest(ScalametaParser.scala:2811)
+	at scala.meta.internal.parsers.ScalametaParser.funDefOrDclOrSecondaryCtor(ScalametaParser.scala:2807)
+	at scala.meta.internal.parsers.ScalametaParser.defOrDclOrSecondaryCtor(ScalametaParser.scala:2760)
+	at scala.meta.internal.parsers.ScalametaParser.nonLocalDefOrDcl(ScalametaParser.scala:2748)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$templateStat$1.applyOrElse(ScalametaParser.scala:3287)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$templateStat$1.applyOrElse(ScalametaParser.scala:3283)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:3234)
+	at scala.meta.internal.parsers.ScalametaParser.templateStats(ScalametaParser.scala:3282)
+	at scala.meta.internal.parsers.ScalametaParser.templateStatSeq(ScalametaParser.scala:3279)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$templateBody$1(ScalametaParser.scala:3155)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.templateBody(ScalametaParser.scala:3155)
+	at scala.meta.internal.parsers.ScalametaParser.templateBodyOpt(ScalametaParser.scala:3160)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$template$1(ScalametaParser.scala:3119)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.template(ScalametaParser.scala:3103)
+	at scala.meta.internal.parsers.ScalametaParser.templateOpt(ScalametaParser.scala:3145)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$classDef$1(ScalametaParser.scala:2926)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.classDef(ScalametaParser.scala:2910)
+	at scala.meta.internal.parsers.ScalametaParser.tmplDef(ScalametaParser.scala:2878)
+	at scala.meta.internal.parsers.ScalametaParser.topLevelTmplDef(ScalametaParser.scala:2870)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:3253)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:3243)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:3234)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:3242)
+	at scala.meta.internal.parsers.ScalametaParser.bracelessPackageStats$1(ScalametaParser.scala:3428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$9(ScalametaParser.scala:3434)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:3434)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:3406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:3389)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:3388)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:3394)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:128)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:128)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$189.apply(ScalametaParser.scala:3446)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:21)
+	at scala.meta.internal.metals.Trees.$anonfun$parse$1(Trees.scala:48)
+	at scala.Option.map(Option.scala:163)
+	at scala.meta.internal.metals.Trees.parse(Trees.scala:46)
+	at scala.meta.internal.metals.Trees.didChange(Trees.scala:31)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChange$1(MetalsLanguageServer.scala:588)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChange$1$adapted(MetalsLanguageServer.scala:585)
+	at scala.Option.foreach(Option.scala:274)
+	at scala.meta.internal.metals.MetalsLanguageServer.didChange(MetalsLanguageServer.scala:585)
+	... 15 more
+
+5 23, 2020 3:55:10 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleNotification
+警告: Notification threw an exception: {
+  "jsonrpc": "2.0",
+  "method": "textDocument/didChange",
+  "params": {
+    "textDocument": {
+      "version": 101,
+      "uri": "file:///Users/takapi327/development/play-scala-app/app/controllers/User.scala"
+    },
+    "contentChanges": [
+      {
+        "text": "package controllers\n\nimport javax.inject._\nimport play.api.mvc._\nimport scala.concurrent._\nimport lib.model._\nimport lib.persistence._\nimport play.api.data.Form\nimport play.api.data.Forms._\n\n// CSRF対策\nimport play.filters.csrf.CSRF\nimport play.api.i18n.I18nSupport\n\nimport model._\n\n@Singleton\nclass UserController @Inject()(\n  userRepo:   UserRepository,\n  passRepo:   UserPassRepository,\n  cc:         MessagesControllerComponents\n)(implicit ec: ExecutionContext) \n  extends MessagesAbstractController(cc){\n/*\n  def index() \u003d Action {implicit request \u003d\u003e\n    \n    for {\n      userSeq \u003c- userRepo.getAll() \n    } yield {\n      \n     val cookie \u003d request.cookies.get(\"user\")\n      val vv \u003d ViewValueUserList(\n        title \u003d \"User一覧\",\n        cssSrc \u003d Seq(\"main.css\"),\n        jsSrc  \u003d Seq(\"main.js\")\n        //data   \u003d userSeq\n        //cookie \u003d cookie.getOrElse(Cookie(\"user\", \"no-cookie.\"))\n      )\n      Ok(views.html.site.user.List(vv))\n  //  }\n  }\n*/\n  def showSignupForm() \u003d Action {implicit request \u003d\u003e\n    Ok(views.html.site.user.Add(new ViewValueUserAdd))\n  }\n\n  def signup() \u003d Action.async {implicit request \u003d\u003e\n    StatusValue.signupForm.bindFromRequest.fold(\n      errorForm \u003d\u003e {\n        Future.successful(Ok(views.html.site.user.Add(new ViewValueUserAdd)))\n      },\n      userForm \u003d\u003e {\n        val pass \u003d userForm.password\n        for {\n          mailFil \u003c- userRepo.filterByMail(userForm.mail)\n            .map(user \u003d\u003e user match {\n              case Some(_) \u003d\u003e false\n              case None    \u003d\u003e true\n            })\n          userDate \u003c- mailFil match {\n            case true  \u003d\u003e userRepo.add(userForm.name, userForm.mail)\n            // ↓処理が死んでるので後で修正\n            case false \u003d\u003e Future.successful(NotFound(views.html.error.page404(new ViewValueError)))\n          }\n          _      \u003c- mailFil match {\n            case true  \u003d\u003e passRepo.add(Some(userDate), pass)\n            // ↓処理が死んでるので後で修正\n            case false \u003d\u003e Future.successful(NotFound(views.html.error.page404(new ViewValueError)))\n          }\n          result \u003c- mailFil match {\n            case \n            case true \u003d\u003e \n              val cookie \u003d request.cookies.get(\"user\").map(_.value).getOrElse(\"Nothing.\")\n              val vv \u003d ViewValueUserList(\n                title  \u003d \"User一覧\",\n                cssSrc \u003d Seq(\"main.css\"),\n                jsSrc  \u003d Seq(\"main.js\"),\n                //cookie \u003d cookie,\n                // either \u003d x\n              )\n              Ok(views.html.site.user.List(vv)).withCookies(Cookie(\"user\", cookie)).bakeCookies() \n          }\n        } yield {\n          result\n          //val x \u003d userRepo.signup(userId.head.id, userForm.name, userForm.mail)\n          //val token \u003d CSRF.getToken(request)\n        }\n      }\n    )\n  }\n}\n"
+      }
+    ]
+  }
+}
+java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:67)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.notify(GenericEndpoint.java:152)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleNotification(RemoteEndpoint.java:220)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:187)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:192)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:94)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:113)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.reflect.InvocationTargetException
+	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$null$0(GenericEndpoint.java:65)
+	... 11 more
+Caused by: org.scalameta.invariants.InvariantFailedException: invariant failed:
+when verifying scala.meta.classifiers.`package`.XtensionClassifiable[scala.meta.tokens.Token](ScalametaParser.this.token)(scala.meta.tokens.Token.classifiable[scala.meta.tokens.Token]).isNot[scala.meta.tokens.Token.KwCase](Token.this.KwCase.classifier[scala.meta.tokens.Token]).&&(org.scalameta.`package`.debug(ScalametaParser.this.token))
+found that scala.meta.classifiers.`package`.XtensionClassifiable[scala.meta.tokens.Token](ScalametaParser.this.token)(scala.meta.tokens.Token.classifiable[scala.meta.tokens.Token]).isNot[scala.meta.tokens.Token.KwCase](Token.this.KwCase.classifier[scala.meta.tokens.Token]) is false
+where ScalametaParser = scala.meta.internal.parsers.ScalametaParser@18275278
+where ScalametaParser.this.token = case
+where Token = scala.meta.tokens.Token$@5a4ef5e
+	at org.scalameta.invariants.InvariantFailedException$.raise(Exceptions.scala:15)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$caseClause$1(ScalametaParser.scala:1988)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.caseClause(ScalametaParser.scala:1987)
+	at scala.meta.internal.parsers.ScalametaParser.caseClauses(ScalametaParser.scala:2020)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$19(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrError(ScalametaParser.scala:317)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrNil(ScalametaParser.scala:320)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$18(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1522)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.generator(ScalametaParser.scala:2079)
+	at scala.meta.internal.parsers.ScalametaParser.enumerator(ScalametaParser.scala:2049)
+	at scala.meta.internal.parsers.ScalametaParser.enumerators(ScalametaParser.scala:2037)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$8(ScalametaParser.scala:1480)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrError(ScalametaParser.scala:317)
+	at scala.meta.internal.parsers.ScalametaParser.inBracesOrNil(ScalametaParser.scala:320)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1480)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockStatSeq$2(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.stat(ScalametaParser.scala:3222)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$2(ScalametaParser.scala:1979)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$1(ScalametaParser.scala:1978)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.blockExpr(ScalametaParser.scala:1977)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1874)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$21(ScalametaParser.scala:1608)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1583)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExpr(ScalametaParser.scala:1951)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$argumentExprs$3(ScalametaParser.scala:1964)
+	at scala.meta.internal.parsers.ScalametaParser.partOrEllipsis$1(ScalametaParser.scala:748)
+	at scala.meta.internal.parsers.ScalametaParser.tokenSeparated(ScalametaParser.scala:754)
+	at scala.meta.internal.parsers.ScalametaParser.commaSeparated(ScalametaParser.scala:760)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$argumentExprs$1(ScalametaParser.scala:1964)
+	at scala.meta.internal.parsers.ScalametaParser.inParens(ScalametaParser.scala:299)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExprs(ScalametaParser.scala:1958)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$3(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$1(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExprRest(ScalametaParser.scala:1894)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1891)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockStatSeq$2(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.stat(ScalametaParser.scala:3222)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3353)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$implicitClosure$3(ScalametaParser.scala:1626)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.implicitClosure(ScalametaParser.scala:1626)
+	at scala.meta.internal.parsers.ScalametaParser.blockStatSeq(ScalametaParser.scala:3345)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$block$1(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.block(ScalametaParser.scala:1984)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$2(ScalametaParser.scala:1979)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$blockExpr$1(ScalametaParser.scala:1978)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.blockExpr(ScalametaParser.scala:1977)
+	at scala.meta.internal.parsers.ScalametaParser.argumentExprs(ScalametaParser.scala:1956)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$3(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExprRest$1(ScalametaParser.scala:1912)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExprRest(ScalametaParser.scala:1894)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$simpleExpr$1(ScalametaParser.scala:1891)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.simpleExpr(ScalametaParser.scala:1837)
+	at scala.meta.internal.parsers.ScalametaParser.prefixExpr(ScalametaParser.scala:1828)
+	at scala.meta.internal.parsers.ScalametaParser.postfixExpr(ScalametaParser.scala:1808)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$11(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$expr$1(ScalametaParser.scala:1500)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1428)
+	at scala.meta.internal.parsers.ScalametaParser.expr(ScalametaParser.scala:1406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$funDefRest$1(ScalametaParser.scala:2842)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.funDefRest(ScalametaParser.scala:2811)
+	at scala.meta.internal.parsers.ScalametaParser.funDefOrDclOrSecondaryCtor(ScalametaParser.scala:2807)
+	at scala.meta.internal.parsers.ScalametaParser.defOrDclOrSecondaryCtor(ScalametaParser.scala:2760)
+	at scala.meta.internal.parsers.ScalametaParser.nonLocalDefOrDcl(ScalametaParser.scala:2748)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$templateStat$1.applyOrElse(ScalametaParser.scala:3287)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$templateStat$1.applyOrElse(ScalametaParser.scala:3283)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:3234)
+	at scala.meta.internal.parsers.ScalametaParser.templateStats(ScalametaParser.scala:3282)
+	at scala.meta.internal.parsers.ScalametaParser.templateStatSeq(ScalametaParser.scala:3279)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$templateBody$1(ScalametaParser.scala:3155)
+	at scala.meta.internal.parsers.ScalametaParser.inBraces(ScalametaParser.scala:312)
+	at scala.meta.internal.parsers.ScalametaParser.templateBody(ScalametaParser.scala:3155)
+	at scala.meta.internal.parsers.ScalametaParser.templateBodyOpt(ScalametaParser.scala:3160)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$template$1(ScalametaParser.scala:3119)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.template(ScalametaParser.scala:3103)
+	at scala.meta.internal.parsers.ScalametaParser.templateOpt(ScalametaParser.scala:3145)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$classDef$1(ScalametaParser.scala:2926)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.classDef(ScalametaParser.scala:2910)
+	at scala.meta.internal.parsers.ScalametaParser.tmplDef(ScalametaParser.scala:2878)
+	at scala.meta.internal.parsers.ScalametaParser.topLevelTmplDef(ScalametaParser.scala:2870)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:3253)
+	at scala.meta.internal.parsers.ScalametaParser$$anonfun$topStat$1.applyOrElse(ScalametaParser.scala:3243)
+	at scala.runtime.AbstractPartialFunction.apply(AbstractPartialFunction.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.statSeq(ScalametaParser.scala:3234)
+	at scala.meta.internal.parsers.ScalametaParser.topStatSeq(ScalametaParser.scala:3242)
+	at scala.meta.internal.parsers.ScalametaParser.bracelessPackageStats$1(ScalametaParser.scala:3428)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$9(ScalametaParser.scala:3434)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$batchSource$1(ScalametaParser.scala:3434)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.batchSource(ScalametaParser.scala:3406)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$source$1(ScalametaParser.scala:3389)
+	at scala.meta.internal.parsers.ScalametaParser.atPos(ScalametaParser.scala:374)
+	at scala.meta.internal.parsers.ScalametaParser.autoPos(ScalametaParser.scala:380)
+	at scala.meta.internal.parsers.ScalametaParser.source(ScalametaParser.scala:3388)
+	at scala.meta.internal.parsers.ScalametaParser.entrypointSource(ScalametaParser.scala:3394)
+	at scala.meta.internal.parsers.ScalametaParser.$anonfun$parseSource$2(ScalametaParser.scala:128)
+	at scala.meta.internal.parsers.ScalametaParser.parseRule(ScalametaParser.scala:38)
+	at scala.meta.internal.parsers.ScalametaParser.parseSource(ScalametaParser.scala:128)
+	at scala.meta.parsers.Parse$.$anonfun$parseSource$1(Parse.scala:29)
+	at scala.meta.internal.parsers.ScalametaParser$$anon$189.apply(ScalametaParser.scala:3446)
+	at scala.meta.parsers.Api$XtensionParseDialectInput.parse(Api.scala:21)
+	at scala.meta.internal.metals.Trees.$anonfun$parse$1(Trees.scala:48)
+	at scala.Option.map(Option.scala:163)
+	at scala.meta.internal.metals.Trees.parse(Trees.scala:46)
+	at scala.meta.internal.metals.Trees.didChange(Trees.scala:31)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChange$1(MetalsLanguageServer.scala:588)
+	at scala.meta.internal.metals.MetalsLanguageServer.$anonfun$didChange$1$adapted(MetalsLanguageServer.scala:585)
+	at scala.Option.foreach(Option.scala:274)
+	at scala.meta.internal.metals.MetalsLanguageServer.didChange(MetalsLanguageServer.scala:585)
+	... 15 more
+
+5 23, 2020 4:04:05 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 60
+5 23, 2020 4:10:50 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 84
+5 23, 2020 4:17:12 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 96
+5 23, 2020 10:16:32 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 103
+5 23, 2020 10:18:48 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 118
+5 23, 2020 10:19:01 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 123
+5 23, 2020 10:19:38 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 135
+ 2.13.1
 WARN  unsupported Scala 2.13.1
 WARN  unsupported Scala 2.13.1
 WARN  unsupported Scala 2.13.1

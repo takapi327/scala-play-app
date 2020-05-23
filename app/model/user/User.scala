@@ -4,9 +4,9 @@ import play.api.data.Form
 import play.api.data.Forms._
 
 case class ViewValueUserList(
-  title:  String ,
-  cssSrc: Seq[String],
-  jsSrc:  Seq[String]
+  title:  String       = "マイページ",
+  cssSrc: Seq[String]  = Seq("main.css"),
+  jsSrc:  Seq[String]  = Seq("main.js")
  // data:   Seq[lib.model.User]
   //cookie: String, //Option[play.api.mvc.Cookie],
   //either: Either[String, lib.model.User]

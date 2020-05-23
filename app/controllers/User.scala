@@ -47,38 +47,39 @@ class UserController @Inject()(
   def signup() = Action.async {implicit request =>
     StatusValue.signupForm.bindFromRequest.fold(
       errorForm => {
-        Future.successful(Ok(views.html.site.user.Add(new ViewValueUserAdd)))
+        Future.successful(BadRequest(views.html.site.user.Add(new ViewValueUserAdd(form = errorForm))))
       },
       userForm => {
         val pass = userForm.password
         for {
+
           mailFil <- userRepo.filterByMail(userForm.mail)
             .map(user => user match {
               case Some(_) => false
               case None    => true
             })
+
           userDate <- mailFil match {
             case true  => userRepo.add(userForm.name, userForm.mail)
-            // ↓処理が死んでるので後で修正
-            case false => userRepo.add(userForm.name, userForm.mail)
+            case false => Future.successful(0L)
           }
-          _      <- mailFil match {
+
+          _  <- mailFil match {
             case true  => passRepo.add(Some(userDate), pass)
-            // ↓処理が死んでるので後で修正
-            case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
+            case false => Future.successful(0)
           }
+
+          result <- mailFil match {
+            case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
+            case true  => 
+              val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
+              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(Cookie("user", cookie)).bakeCookies())
+          }
+          
         } yield {
+          result
           //val x = userRepo.signup(userId.head.id, userForm.name, userForm.mail)
-          val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
-          val token = CSRF.getToken(request)
-          val vv = ViewValueUserList(
-            title  = "User一覧",
-            cssSrc = Seq("main.css"),
-            jsSrc  = Seq("main.js"),
-            //cookie = cookie,
-           // either = x
-          )
-        Ok(views.html.site.user.List(vv)).withCookies(Cookie("user", cookie)).bakeCookies() 
+          //val token = CSRF.getToken(request)
         }
       }
     )
