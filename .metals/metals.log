@@ -1,82 +1,429 @@
-5 09, 2020 2:36:17 午後 org.xnio.Xnio <clinit>
+5 21, 2020 11:14:13 午後 org.xnio.Xnio <clinit>
 INFO: XNIO version 3.6.5.Final
-5 09, 2020 2:36:17 午後 org.xnio.nio.NioXnio <clinit>
+5 21, 2020 11:14:13 午後 org.xnio.nio.NioXnio <clinit>
 INFO: XNIO NIO Implementation Version 3.6.5.Final
-5 09, 2020 2:36:17 午後 org.jboss.threads.Version <clinit>
+5 21, 2020 11:14:13 午後 org.jboss.threads.Version <clinit>
 INFO: JBoss Threads version 2.3.0.Beta2
-The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket...
-Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket
+The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp7128351573065719437/-1k2a1qpwg223s.socket...
+Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp7128351573065719437/-1k2a1qpwg223s.socket
 request received: build/initialize
 BSP initialization handshake complete.
+sbt.internal.inc.InvalidComponent: The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+
+	Note: Unresolved dependencies path:
+		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3(ZincComponentCompiler.scala:272)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3$adapted(ZincComponentCompiler.scala:262)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$2(ZincComponentCompiler.scala:262)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.internal.util.BufferedLogger.bufferQuietly(BufferedLogger.scala:106)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1(ZincComponentCompiler.scala:262)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1$adapted(ZincComponentCompiler.scala:259)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+	at sbt.internal.inc.ZincComponentCompiler.compileAndInstall(ZincComponentCompiler.scala:259)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compiledBridgeJar$1(ZincComponentCompiler.scala:225)
+	at sbt.internal.inc.IfMissing$Define.run(IfMissing.scala:19)
+	at sbt.internal.inc.ZincComponentManager.createAndCache$1(ZincComponentManager.scala:46)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$3(ZincComponentManager.scala:57)
+	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$2(ZincComponentManager.scala:57)
+	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$lockSecondaryCache$1(ZincComponentManager.scala:84)
+	at scala.Option.map(Option.scala:163)
+	at sbt.internal.inc.ZincComponentManager.lockSecondaryCache(ZincComponentManager.scala:82)
+	at sbt.internal.inc.ZincComponentManager.fromSecondary$1(ZincComponentManager.scala:55)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$6(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$5(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+	at sbt.internal.inc.ZincComponentManager.lockLocalCache(ZincComponentManager.scala:78)
+	at sbt.internal.inc.ZincComponentManager.files(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager.file(ZincComponentManager.scala:66)
+	at sbt.internal.inc.ZincComponentCompiler.compiledBridgeJar(ZincComponentCompiler.scala:225)
+	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.compiledBridge(ZincComponentCompiler.scala:83)
+	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.fetchCompiledBridge(ZincComponentCompiler.scala:90)
+	at sbt.internal.inc.AnalyzingCompiler.loader(AnalyzingCompiler.scala:357)
+	at sbt.internal.inc.AnalyzingCompiler.getInterfaceClass(AnalyzingCompiler.scala:375)
+	at sbt.internal.inc.AnalyzingCompiler.call(AnalyzingCompiler.scala:342)
+	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:237)
+	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:224)
+	at sbt.internal.inc.FreshCompilerCache.apply(CompilerCache.scala:79)
+	at sbt.internal.inc.AnalyzingCompiler.compile(AnalyzingCompiler.scala:127)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.compileSources$1(BloopHighLevelCompiler.scala:132)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.$anonfun$compile$16(BloopHighLevelCompiler.scala:191)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.timed$1(BloopHighLevelCompiler.scala:69)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.$anonfun$compile$15(BloopHighLevelCompiler.scala:191)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:187)
+	at monix.eval.internal.TaskRunLoop$RestartCallback$1.onSuccess(TaskRunLoop.scala:119)
+	at monix.eval.Task$.$anonfun$forkedUnit$2(Task.scala:1463)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m[31m[E][0m Unhandled error handling request Request(buildTarget/compile,Some({
+[0m[31m[E][0m   "targets" : [
+[0m[31m[E][0m     {
+[0m[31m[E][0m       "uri" : "file:/Users/takapi327/development/play-scala-app/?id=root-test"
+[0m[31m[E][0m     }
+[0m[31m[E][0m   ]
+[0m[31m[E][0m }),String("6"))
+[0m[31m[E][0m sbt.internal.inc.InvalidComponent: The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+[0m[31m[E][0m 
+[0m[31m[E][0m 	Note: Unresolved dependencies path:
+[0m[31m[E][0m 		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+[0m[31m[E][0m 		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3(ZincComponentCompiler.scala:272)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3$adapted(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$2(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+[0m[31m[E][0m 	at sbt.internal.util.BufferedLogger.bufferQuietly(BufferedLogger.scala:106)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1$adapted(ZincComponentCompiler.scala:259)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.compileAndInstall(ZincComponentCompiler.scala:259)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compiledBridgeJar$1(ZincComponentCompiler.scala:225)
+[0m[31m[E][0m 	at sbt.internal.inc.IfMissing$Define.run(IfMissing.scala:19)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.createAndCache$1(ZincComponentManager.scala:46)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$3(ZincComponentManager.scala:57)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$2(ZincComponentManager.scala:57)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$lockSecondaryCache$1(ZincComponentManager.scala:84)
+[0m[31m[E][0m 	at scala.Option.map(Option.scala:163)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lockSecondaryCache(ZincComponentManager.scala:82)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.fromSecondary$1(ZincComponentManager.scala:55)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$6(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$5(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lockLocalCache(ZincComponentManager.scala:78)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.files(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.file(ZincComponentManager.scala:66)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.compiledBridgeJar(ZincComponentCompiler.scala:225)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.compiledBridge(ZincComponentCompiler.scala:83)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.fetchCompiledBridge(ZincComponentCompiler.scala:90)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.loader(AnalyzingCompiler.scala:357)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.getInterfaceClass(AnalyzingCompiler.scala:375)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.call(AnalyzingCompiler.scala:342)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:237)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:224)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$cleanStatePerBuildRun$3(CompilationTask.scala:207)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$cleanStatePerBuildRun$3$adapted(CompilationTask.scala:198)
+[0m[31m[E][0m 	at scala.collection.immutable.Set$Set1.foreach(Set.scala:97)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.cleanStatePerBuildRun(CompilationTask.scala:198)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$compile$11(CompilationTask.scala:153)
+[0m[31m[E][0m 	at monix.eval.Task.$anonfun$map$1(Task.scala:407)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:176)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$RestartCallback$1.onSuccess(TaskRunLoop.scala:119)
+[0m[31m[E][0m 	at monix.eval.Callback$Extensions$.monix$eval$Callback$Extensions$$$anonfun$asyncOnSuccess$1(Callback.scala:100)
+[0m[31m[E][0m 	at monix.eval.Callback$Extensions$$anonfun$asyncOnSuccess$extension$1.run(Callback.scala:100)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.monix$execution$schedulers$TrampolineExecutionContext$$localRunLoop(TrampolineExecutionContext.scala:109)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.startLoopOptimal(TrampolineExecutionContext.scala:93)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.execute(TrampolineExecutionContext.scala:78)
+[0m[31m[E][0m 	at monix.execution.schedulers.BatchingScheduler.execute(BatchingScheduler.scala:50)
+[0m[31m[E][0m 	at monix.execution.schedulers.BatchingScheduler.execute$(BatchingScheduler.scala:47)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecutorScheduler.execute(ExecutorScheduler.scala:36)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecuteExtensions.executeTrampolined(ExecuteExtensions.scala:86)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecuteExtensions.executeTrampolined$(ExecuteExtensions.scala:85)
+[0m[31m[E][0m 	at monix.execution.Scheduler$Extensions.executeTrampolined(Scheduler.scala:187)
+[0m[31m[E][0m 	at monix.eval.internal.TaskGatherUnordered$.$anonfun$apply$1(TaskGatherUnordered.scala:37)
+[0m[31m[E][0m 	at monix.eval.internal.TaskGatherUnordered$.$anonfun$apply$1$adapted(TaskGatherUnordered.scala:35)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.executeOnFinish$1(TaskRunLoop.scala:158)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:224)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.startWithCallback(TaskRunLoop.scala:260)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.$anonfun$restartAsync$1(TaskRunLoop.scala:59)
+[0m[31m[E][0m 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[0m[31m[E][0m 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[0m[31m[E][0m 	at java.lang.Thread.run(Thread.java:748)
+[0m[31m[E][0m 
+[0m[31m[E][0m Response error: Error(ErrorObject(InternalError,The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+[0m[31m[E][0m 
+[0m[31m[E][0m 	Note: Unresolved dependencies path:
+[0m[31m[E][0m 		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+[0m[31m[E][0m 		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69,None),String("6"))
 shutdown request received: build/shutdown
 Client in /Users/takapi327/development/play-scala-app/.bloop triggered cancellation. Cancelling tasks...
-The task for 'bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp407037923190928342/19vnnotfl9qc4.socket' finished.
-Project root has no analysis and setup.
+The task for 'bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp7128351573065719437/-1k2a1qpwg223s.socket' finished.
 Project root-test has no analysis and setup.
-The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket...
-Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket
+Writing /Users/takapi327/development/play-scala-app/.bloop/root/root-analysis.bin.
+The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp4979831071067939301/-wm7f90zwudl2.socket...
+Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp4979831071067939301/-wm7f90zwudl2.socket
 request received: build/initialize
 BSP initialization handshake complete.
+sbt.internal.inc.InvalidComponent: The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+
+	Note: Unresolved dependencies path:
+		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3(ZincComponentCompiler.scala:272)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3$adapted(ZincComponentCompiler.scala:262)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$2(ZincComponentCompiler.scala:262)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.internal.util.BufferedLogger.bufferQuietly(BufferedLogger.scala:106)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1(ZincComponentCompiler.scala:262)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1$adapted(ZincComponentCompiler.scala:259)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+	at sbt.internal.inc.ZincComponentCompiler.compileAndInstall(ZincComponentCompiler.scala:259)
+	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compiledBridgeJar$1(ZincComponentCompiler.scala:225)
+	at sbt.internal.inc.IfMissing$Define.run(IfMissing.scala:19)
+	at sbt.internal.inc.ZincComponentManager.createAndCache$1(ZincComponentManager.scala:46)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$3(ZincComponentManager.scala:57)
+	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$2(ZincComponentManager.scala:57)
+	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$lockSecondaryCache$1(ZincComponentManager.scala:84)
+	at scala.Option.map(Option.scala:163)
+	at sbt.internal.inc.ZincComponentManager.lockSecondaryCache(ZincComponentManager.scala:82)
+	at sbt.internal.inc.ZincComponentManager.fromSecondary$1(ZincComponentManager.scala:55)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$6(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+	at sbt.internal.inc.ZincComponentManager.$anonfun$files$5(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+	at sbt.internal.inc.ZincComponentManager.lockLocalCache(ZincComponentManager.scala:78)
+	at sbt.internal.inc.ZincComponentManager.files(ZincComponentManager.scala:61)
+	at sbt.internal.inc.ZincComponentManager.file(ZincComponentManager.scala:66)
+	at sbt.internal.inc.ZincComponentCompiler.compiledBridgeJar(ZincComponentCompiler.scala:225)
+	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.compiledBridge(ZincComponentCompiler.scala:83)
+	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.fetchCompiledBridge(ZincComponentCompiler.scala:90)
+	at sbt.internal.inc.AnalyzingCompiler.loader(AnalyzingCompiler.scala:357)
+	at sbt.internal.inc.AnalyzingCompiler.getInterfaceClass(AnalyzingCompiler.scala:375)
+	at sbt.internal.inc.AnalyzingCompiler.call(AnalyzingCompiler.scala:342)
+	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:237)
+	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:224)
+	at sbt.internal.inc.FreshCompilerCache.apply(CompilerCache.scala:79)
+	at sbt.internal.inc.AnalyzingCompiler.compile(AnalyzingCompiler.scala:127)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.compileSources$1(BloopHighLevelCompiler.scala:132)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.$anonfun$compile$16(BloopHighLevelCompiler.scala:191)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.timed$1(BloopHighLevelCompiler.scala:69)
+	at sbt.internal.inc.bloop.internal.BloopHighLevelCompiler.$anonfun$compile$15(BloopHighLevelCompiler.scala:191)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:187)
+	at monix.eval.internal.TaskRunLoop$RestartCallback$1.onSuccess(TaskRunLoop.scala:119)
+	at monix.eval.Task$.$anonfun$forkedUnit$2(Task.scala:1463)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+[0m[31m[E][0m Unhandled error handling request Request(buildTarget/compile,Some({
+[0m[31m[E][0m   "targets" : [
+[0m[31m[E][0m     {
+[0m[31m[E][0m       "uri" : "file:/Users/takapi327/development/play-scala-app/?id=root-test"
+[0m[31m[E][0m     }
+[0m[31m[E][0m   ]
+[0m[31m[E][0m }),String("6"))
+[0m[31m[E][0m sbt.internal.inc.InvalidComponent: The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+[0m[31m[E][0m 
+[0m[31m[E][0m 	Note: Unresolved dependencies path:
+[0m[31m[E][0m 		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+[0m[31m[E][0m 		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3(ZincComponentCompiler.scala:272)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$3$adapted(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$2(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+[0m[31m[E][0m 	at sbt.internal.util.BufferedLogger.bufferQuietly(BufferedLogger.scala:106)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1(ZincComponentCompiler.scala:262)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compileAndInstall$1$adapted(ZincComponentCompiler.scala:259)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:376)
+[0m[31m[E][0m 	at sbt.io.IO$.withTemporaryDirectory(IO.scala:383)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.compileAndInstall(ZincComponentCompiler.scala:259)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.$anonfun$compiledBridgeJar$1(ZincComponentCompiler.scala:225)
+[0m[31m[E][0m 	at sbt.internal.inc.IfMissing$Define.run(IfMissing.scala:19)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.createAndCache$1(ZincComponentManager.scala:46)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$3(ZincComponentManager.scala:57)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$2(ZincComponentManager.scala:57)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$lockSecondaryCache$1(ZincComponentManager.scala:84)
+[0m[31m[E][0m 	at scala.Option.map(Option.scala:163)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lockSecondaryCache(ZincComponentManager.scala:82)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.fromSecondary$1(ZincComponentManager.scala:55)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$6(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.getOrElse$1(ZincComponentManager.scala:38)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.$anonfun$files$5(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager$$anon$1.call(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at bloop.BloopComponentsLock$.apply(BloopComponentsLock.scala:9)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lock(ZincComponentManager.scala:87)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.lockLocalCache(ZincComponentManager.scala:78)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.files(ZincComponentManager.scala:61)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentManager.file(ZincComponentManager.scala:66)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler.compiledBridgeJar(ZincComponentCompiler.scala:225)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.compiledBridge(ZincComponentCompiler.scala:83)
+[0m[31m[E][0m 	at sbt.internal.inc.ZincComponentCompiler$ZincCompilerBridgeProvider.fetchCompiledBridge(ZincComponentCompiler.scala:90)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.loader(AnalyzingCompiler.scala:357)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.getInterfaceClass(AnalyzingCompiler.scala:375)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.call(AnalyzingCompiler.scala:342)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:237)
+[0m[31m[E][0m 	at sbt.internal.inc.AnalyzingCompiler.newCachedCompiler(AnalyzingCompiler.scala:224)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$cleanStatePerBuildRun$3(CompilationTask.scala:207)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$cleanStatePerBuildRun$3$adapted(CompilationTask.scala:198)
+[0m[31m[E][0m 	at scala.collection.immutable.Set$Set1.foreach(Set.scala:97)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.cleanStatePerBuildRun(CompilationTask.scala:198)
+[0m[31m[E][0m 	at bloop.engine.tasks.CompilationTask$.$anonfun$compile$11(CompilationTask.scala:153)
+[0m[31m[E][0m 	at monix.eval.Task.$anonfun$map$1(Task.scala:407)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:176)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$RestartCallback$1.onSuccess(TaskRunLoop.scala:119)
+[0m[31m[E][0m 	at monix.eval.Callback$Extensions$.monix$eval$Callback$Extensions$$$anonfun$asyncOnSuccess$1(Callback.scala:100)
+[0m[31m[E][0m 	at monix.eval.Callback$Extensions$$anonfun$asyncOnSuccess$extension$1.run(Callback.scala:100)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.monix$execution$schedulers$TrampolineExecutionContext$$localRunLoop(TrampolineExecutionContext.scala:109)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.startLoopOptimal(TrampolineExecutionContext.scala:93)
+[0m[31m[E][0m 	at monix.execution.schedulers.TrampolineExecutionContext.execute(TrampolineExecutionContext.scala:78)
+[0m[31m[E][0m 	at monix.execution.schedulers.BatchingScheduler.execute(BatchingScheduler.scala:50)
+[0m[31m[E][0m 	at monix.execution.schedulers.BatchingScheduler.execute$(BatchingScheduler.scala:47)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecutorScheduler.execute(ExecutorScheduler.scala:36)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecuteExtensions.executeTrampolined(ExecuteExtensions.scala:86)
+[0m[31m[E][0m 	at monix.execution.schedulers.ExecuteExtensions.executeTrampolined$(ExecuteExtensions.scala:85)
+[0m[31m[E][0m 	at monix.execution.Scheduler$Extensions.executeTrampolined(Scheduler.scala:187)
+[0m[31m[E][0m 	at monix.eval.internal.TaskGatherUnordered$.$anonfun$apply$1(TaskGatherUnordered.scala:37)
+[0m[31m[E][0m 	at monix.eval.internal.TaskGatherUnordered$.$anonfun$apply$1$adapted(TaskGatherUnordered.scala:35)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.executeOnFinish$1(TaskRunLoop.scala:158)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.monix$eval$internal$TaskRunLoop$$loop$1(TaskRunLoop.scala:224)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.startWithCallback(TaskRunLoop.scala:260)
+[0m[31m[E][0m 	at monix.eval.internal.TaskRunLoop$.$anonfun$restartAsync$1(TaskRunLoop.scala:59)
+[0m[31m[E][0m 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[0m[31m[E][0m 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[0m[31m[E][0m 	at java.lang.Thread.run(Thread.java:748)
+[0m[31m[E][0m 
+[0m[31m[E][0m Response error: Error(ErrorObject(InternalError,The compiler bridge sources ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69:compile could not be retrieved.
+[0m[31m[E][0m 
+[0m[31m[E][0m 	Note: Unresolved dependencies path:
+[0m[31m[E][0m 		ch.epfl.scala:compiler-bridge_2.13:1.2.1+106-0dad4a69
+[0m[31m[E][0m 		  +- org.scala-sbt.temp:temp-module-52f238aede5a1d8d7a484c2bec27a144810e2ac0:1.2.1+106-0dad4a69,None),String("6"))
 shutdown request received: build/shutdown
 Client in /Users/takapi327/development/play-scala-app/.bloop triggered cancellation. Cancelling tasks...
-The server is listening for incoming connections at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket...
-Accepted incoming BSP client connection at local:///var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket
-request received: build/initialize
-BSP initialization handshake complete.
- tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
-INFO  time: connected to build server in 2.7s
-INFO  time: imported build in 0.21s
-INFO  time: indexed workspace in 3.34s
-INFO  running 'sbt metalsEnable bloopInstall'
-INFO  [info] Loading settings for project global-plugins from metals.sbt ...
-INFO  [info] Loading global plugins from /Users/takapi327/.sbt/1.0/plugins
-INFO  [info] Loading settings for project play-scala-app-build from plugins.sbt ...
-INFO  [info] Loading project definition from /Users/takapi327/development/play-scala-app/project
-INFO  [success] Generated .bloop/play-scala-app-build.json
-INFO  [success] Total time: 1 s, completed 2020/05/09 14:37:11
-INFO  [info] Loading settings for project root from build.sbt ...
-INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
-INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
-INFO  [info] semanticdb-scalac is enabled
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [success] Generated .bloop/root.json
-INFO  [success] Generated .bloop/root-test.json
-INFO  [success] Total time: 90 s (01:30), completed 2020/05/09 14:38:44
-INFO  sbt exit: 0
-INFO  time: ran 'sbt bloopInstall' in 1m39s
-INFO  running embedded 'bloop bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp5723348791620435991/wu5gr56w0h3n.socket'
-INFO  bloop exit: 0
-INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
-INFO  time: connected to build server in 0.23s
-INFO  disconnected: build server
-INFO  time: imported build in 0.17s
-ERROR timeout: build server 'bloop' during shutdown
-INFO  time: indexed workspace in 2.21s
-INFO  running 'sbt metalsEnable bloopInstall'
-INFO  [info] Loading settings for project global-plugins from metals.sbt ...
-INFO  [info] Loading global plugins from /Users/takapi327/.sbt/1.0/plugins
-INFO  [info] Loading settings for project play-scala-app-build from plugins.sbt ...
-INFO  [info] Loading project definition from /Users/takapi327/development/play-scala-app/project
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [success] Generated .bloop/play-scala-app-build.json
-INFO  [success] Total time: 2 s, completed 2020/05/09 14:44:53
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [info] Loading settings for project root from build.sbt ...
-INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
-INFO  [info] Set current project to play-scala-app (in build file:/Users/takapi327/development/play-scala-app/)
-INFO  [info] semanticdb-scalac is enabled
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [warn] There may be incompatibilities among your library dependencies; run 'evicted' to see detailed eviction warnings.
-INFO  [success] Generated .bloop/root.json
-INFO  [success] Generated .bloop/root-test.json
-INFO  [success] Total time: 13 s, completed 2020/05/09 14:45:10
-INFO  sbt exit: 0
-INFO  time: ran 'sbt bloopInstall' in 26s
-INFO  running embedded 'bloop bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp286462470363610206/1a2eagqdre351.socket'
-INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/takapi327/Library/Caches/org.scalameta.metals/bsp.trace.json
-INFO  time: connected to build server in 0.22s
-INFO  disconnected: build server
-INFO  time: imported build in 0.16s
-INFO  time: indexed workspace in 0.92s
-ERROR timeout: build server 'bloop' during shutdown
+The task for 'bsp --protocol local --socket /var/folders/n3/fxy07lns69q4hrbhsjd8_5rr0000gn/T/bsp4979831071067939301/-wm7f90zwudl2.socket' finished.
+Project root-test has no analysis and setup.
+5 21, 2020 11:41:28 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 3
+5 21, 2020 11:43:17 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 12
+5 21, 2020 11:45:19 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 17
+5 21, 2020 11:46:55 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 28
+5 21, 2020 11:47:10 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 35
+5 21, 2020 11:48:01 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 39
+5 21, 2020 11:48:25 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 48
+5 21, 2020 11:48:27 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 52
+5 21, 2020 11:48:29 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 53
+5 21, 2020 11:50:06 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 54
+orted Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1

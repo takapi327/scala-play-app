@@ -6,9 +6,10 @@ import play.api.data.Forms._
 case class ViewValueUserList(
   title:  String ,
   cssSrc: Seq[String],
-  jsSrc:  Seq[String],
+  jsSrc:  Seq[String]
  // data:   Seq[lib.model.User]
-  cookie: Option[play.api.mvc.Cookie]
+  //cookie: String, //Option[play.api.mvc.Cookie],
+  //either: Either[String, lib.model.User]
 ) extends ViewValueCommon
 
 case class ViewValueUserAdd(

@@ -6,7 +6,7 @@ import java.security.Identity
 import UserPassword._
 
 case class UserPassword (
-  id:          Option[User.Id],
+  user_id:     Option[User.Id],
   password:    String,
   //updateAt:    LocalDateTime,
   //createdAt:   LocalDateTime

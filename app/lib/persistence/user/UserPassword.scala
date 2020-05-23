@@ -25,7 +25,7 @@ class UserPassRepository @Inject()
 
   /******** 定義 ********/ 
   private class UserPassTable(tag: Tag) extends Table[Pass](tag, "userPassword"){
-    def id            = column[User.Id]          ("id", O.PrimaryKey)
+    def user_id       = column[User.Id]          ("user_id", O.PrimaryKey)
     def password      = column[String]           ("password")
     //def updatedAt     = column[LocalDateTime]    ("updatedAt")
     //def createdAt     = column[LocalDateTime]    ("createdAt")
@@ -34,7 +34,7 @@ class UserPassRepository @Inject()
       Option[User.Id], String
     )
 
-    def * = (id.?, password) <> (
+    def * = (user_id.?, password) <> (
       (x: TableElementTuple) => Pass(
         x._1, x._2
       ),

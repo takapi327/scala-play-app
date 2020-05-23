@@ -59,22 +59,26 @@ class UserController @Inject()(
             })
           userDate <- mailFil match {
             case true  => userRepo.add(userForm.name, userForm.mail)
+            // ↓処理が死んでるので後で修正
+            case false => userRepo.add(userForm.name, userForm.mail)
+          }
+          _      <- mailFil match {
+            case true  => passRepo.add(Some(userDate), pass)
+            // ↓処理が死んでるので後で修正
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
           }
-          userId <- userRepo.filterByMail(userForm.mail)
-          _      <- userDate match {
-            case m if m == 1 => passRepo.add(userId.head.id, pass)
-            case _           => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
-          }
         } yield {
-          val cookie = request.cookies.get("user")
+          //val x = userRepo.signup(userId.head.id, userForm.name, userForm.mail)
+          val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
+          val token = CSRF.getToken(request)
           val vv = ViewValueUserList(
             title  = "User一覧",
             cssSrc = Seq("main.css"),
             jsSrc  = Seq("main.js"),
-            cookie = cookie
+            //cookie = cookie,
+           // either = x
           )
-          Ok(views.html.site.user.List(vv)).withCookies(Cookie("user", userId.head.name)).bakeCookies() 
+        Ok(views.html.site.user.List(vv)).withCookies(Cookie("user", cookie)).bakeCookies() 
         }
       }
     )
