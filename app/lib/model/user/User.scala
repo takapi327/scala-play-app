@@ -14,7 +14,17 @@ case class User (
 
 object User {
 
-  type Id = Long
+  type Id   = Long
+  type name = String
+  type mail = String
+  
+  def apply(id: Option[Id], name: String, mail: String): User = {
+    new User(
+      id   = id,
+      name = name,
+      mail = mail
+    )
+  }
   
   //case class FormValue (name: String, mail: String)
 }
