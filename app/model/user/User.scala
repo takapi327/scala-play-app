@@ -13,9 +13,9 @@ case class ViewValueUserList(
 ) extends ViewValueCommon
 
 case class ViewValueUserAdd(
-  title:      String                      = "Sign up",
-  cssSrc:     Seq[String]                 = Seq("main.css"),
-  jsSrc:      Seq[String]                 = Seq("main.js"),
-  form:       Form[model.SignupForm]  = StatusValue.signupForm
+  title:      String                 = "Sign up",
+  cssSrc:     Seq[String]            = Seq("main.css"),
+  jsSrc:      Seq[String]            = Seq("main.js"),
+  form:       Form[model.SignupForm] = StatusValue.signupForm
   //passForm:   Form[lib.model.UserPassword.FormValue] = StatusValue.passForm
 ) extends ViewValueCommon

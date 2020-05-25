@@ -16,9 +16,9 @@ import model._
 
 @Singleton
 class UserController @Inject()(
-  userRepo:   UserRepository,
-  passRepo:   UserPassRepository,
-  cc:         MessagesControllerComponents
+  userRepo: UserRepository,
+  passRepo: UserPassRepository,
+  cc:       MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
 /*
@@ -50,30 +50,45 @@ class UserController @Inject()(
         Future.successful(BadRequest(views.html.site.user.Add(new ViewValueUserAdd(form = errorForm))))
       },
       userForm => {
-        val pass = userForm.password
+        val pass     = userForm.password
+        val userMail = userRepo.filterByMail(userForm.mail)
+        val uName    = userForm.name
         for {
-
-          mailFil <- userRepo.filterByMail(userForm.mail)
-            .map(user => user match {
+          /* メールが重複していないかどうか */
+          mailFil <- userMail.map(user =>
+            user match {
               case Some(_) => false
               case None    => true
             })
 
+          /* user登録 */
           userDate <- mailFil match {
-            case true  => userRepo.add(userForm.name, userForm.mail)
+            case true  => userRepo.add(uName, userForm.mail)
             case false => Future.successful(0L)
           }
 
+          /* password登録 */
           _  <- mailFil match {
             case true  => passRepo.add(Some(userDate), pass)
             case false => Future.successful(0)
           }
-
+          
           result <- mailFil match {
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
-            case true  => 
-              val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
-              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(Cookie("user", cookie)).bakeCookies())
+            case true  =>
+              val token  = CSRF.getToken(request).map(x => x.toString).getOrElse("None")
+              //val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
+              //val c = request.cookies.get(userForm.name).getOrElse(Cookie(userForm.name, token)).value
+              //val token = CSRF.getToken(request).map(x => x.toString).getOrElse("None")
+              val newCookie = Cookie(
+                name   = uName,
+                value  = token,
+                maxAge = Some(3600),
+                secure = true
+              )
+              println(token)
+              println(newCookie)
+              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie).bakeCookies())
           }
           
         } yield {

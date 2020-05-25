@@ -807,7 +807,237 @@ where Token = scala.meta.tokens.Token$@5a4ef5e
 警告: Unmatched cancel notification for request id 123
 5 23, 2020 10:19:38 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
 警告: Unmatched cancel notification for request id 135
- 2.13.1
+5 24, 2020 1:19:59 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 137
+5 24, 2020 2:02:04 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 148
+5 24, 2020 2:15:49 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 180
+5 24, 2020 2:16:56 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 195
+5 24, 2020 2:19:13 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 213
+5 24, 2020 2:29:20 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 220
+5 24, 2020 2:32:56 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 230
+5 24, 2020 2:33:10 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 257
+5 24, 2020 2:38:55 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 261
+5 24, 2020 2:47:15 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 280
+5 24, 2020 2:48:05 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 299
+5 24, 2020 2:48:09 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 304
+5 24, 2020 2:48:32 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 306
+5 24, 2020 4:25:48 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 312
+5 24, 2020 4:25:58 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 367
+5 24, 2020 4:26:25 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 369
+5 24, 2020 4:27:20 午後 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+警告: Unmatched cancel notification for request id 374
+ unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
+WARN  unsupported Scala 2.13.1
 WARN  unsupported Scala 2.13.1
 WARN  unsupported Scala 2.13.1
 WARN  unsupported Scala 2.13.1
