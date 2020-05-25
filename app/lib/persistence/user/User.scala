@@ -23,10 +23,23 @@ class UserRepository @Inject()
       user.result
     }
 
-  def add(name: String, mail: String): Future[Int] =
+  def add(name: String, mail: String): Future[Long] =
     db.run {
-      user += User(Some(0) ,name, mail)
+      (user returning user.map(_.id)) += User(Some(0), name, mail)
     }
+
+  def filterByMail(umail: String): Future[Option[User]] =
+    db.run {
+      user.filter(_.mail === umail)
+      .result.headOption
+    }
+
+  def signup(uid: Option[User.Id], name: User.name, mail: User.mail): Either[String, User] = {
+    uid match {
+      case Some(_) => Right(User(uid, name, mail))
+      case None    => Left("Not Found")
+    }
+  }
 
   /******** 定義 ********/ 
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
