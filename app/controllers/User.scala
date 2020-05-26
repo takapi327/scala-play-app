@@ -80,10 +80,7 @@ class UserController @Inject()(
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
             case true  =>
               val token: String = TokenGenerator().next(30)
-              val newCookie = Cookie(
-                name   = uName,
-                value  = token
-              )
+              val newCookie     = Cookie(uName, token)
               authRepo.add(Some(userDate), token)
               Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie))
           }
