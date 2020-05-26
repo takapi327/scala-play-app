@@ -1,18 +1,20 @@
 package controllers
 
-import javax.inject._
-import play.api.mvc._
-import scala.concurrent._
 import lib.model._
 import lib.persistence._
+import model._
+import auth._
+
+import scala.concurrent._
+import javax.inject._
+
+import play.api.mvc._
 import play.api.data.Form
 import play.api.data.Forms._
-
 // CSRF対策
 import play.filters.csrf.CSRF
 import play.api.i18n.I18nSupport
 
-import model._
 
 @Singleton
 class UserController @Inject()(
@@ -76,25 +78,16 @@ class UserController @Inject()(
           result <- mailFil match {
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
             case true  =>
-              val token  = CSRF.getToken(request).map(x => x.toString).getOrElse("None")
-              //val cookie = request.cookies.get("user").map(_.value).getOrElse("Nothing.")
-              //val c = request.cookies.get(userForm.name).getOrElse(Cookie(userForm.name, token)).value
-              //val token = CSRF.getToken(request).map(x => x.toString).getOrElse("None")
+              val token: String = TokenGenerator().next(30)
               val newCookie = Cookie(
                 name   = uName,
-                value  = token,
-                maxAge = Some(3600),
-                secure = true
+                value  = token
               )
-              println(token)
-              println(newCookie)
-              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie).bakeCookies())
+              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie))
           }
           
         } yield {
           result
-          //val x = userRepo.signup(userId.head.id, userForm.name, userForm.mail)
-          //val token = CSRF.getToken(request)
         }
       }
     )
