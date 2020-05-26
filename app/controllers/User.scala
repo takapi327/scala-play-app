@@ -20,6 +20,7 @@ import play.api.i18n.I18nSupport
 class UserController @Inject()(
   userRepo: UserRepository,
   passRepo: UserPassRepository,
+  authRepo: AuthTokenRepository,
   cc:       MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
@@ -83,6 +84,7 @@ class UserController @Inject()(
                 name   = uName,
                 value  = token
               )
+              authRepo.add(Some(userDate), token)
               Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie))
           }
           
