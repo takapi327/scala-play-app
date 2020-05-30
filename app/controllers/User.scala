@@ -30,10 +30,10 @@ class UserController @Inject()(
     val getUserId = authRepo.filterByToken(userToken)
     for {
       userTokenId <- getUserId
-      userId = userTokenId.map(x => x.userId.get)
-      user <- userId.map(u => userRepo.filterById(u)).get
+      userId      =  userTokenId.map(x => x.userId.get)
+      userDetail  <- userId.map(u => userRepo.filterById(u)).get
     } yield {
-      Ok(views.html.site.user.List(ViewValueUserList(user = user)))
+      Ok(views.html.site.user.List(ViewValueUserList(user = userDetail)))
     }
   }
 
