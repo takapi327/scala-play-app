@@ -31,20 +31,9 @@ class UserController @Inject()(
     for {
       userTokenId <- getUserId
       userId = userTokenId.map(x => x.userId.get)
-      user <- userId match {
-        case Some(id) => userRepo.filterById(id)
-        case None     => Future.successful(0L)
-      }
+      user <- userId.map(u => userRepo.filterById(u)).get
     } yield {
-      println(user)
-
-      /*
-      userId match {
-        case Some(_) => Ok(views.html.site.user.List(new ViewValueUserList))
-        case None    => NotFound(views.html.error.page404(new ViewValueError))
-      }
-*/
-      Ok(views.html.site.user.List(new ViewValueUserList))
+      Ok(views.html.site.user.List(ViewValueUserList(user = user)))
     }
   }
 

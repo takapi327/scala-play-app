@@ -1,12 +1,14 @@
 package model
 
+import lib.model.User
 import play.api.data.Form
 import play.api.data.Forms._
 
 case class ViewValueUserList(
   title:  String       = "マイページ",
   cssSrc: Seq[String]  = Seq("main.css"),
-  jsSrc:  Seq[String]  = Seq("main.js")
+  jsSrc:  Seq[String]  = Seq("main.js"),
+  user:   Option[User]
  // data:   Seq[lib.model.User]
   //cookie: String, //Option[play.api.mvc.Cookie],
   //either: Either[String, lib.model.User]
