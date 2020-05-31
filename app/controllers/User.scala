@@ -26,14 +26,25 @@ class UserController @Inject()(
   extends MessagesAbstractController(cc){
 
   def index() = Action.async {implicit request =>
-    val userToken = request.cookies.get("user").map(_.value).getOrElse("Not-Found-User")
-    val getUserId = authRepo.filterByToken(userToken)
+    val userToken = request.cookies.get("user").map(_.value)    
     for {
-      userTokenId <- getUserId
-      userId      =  userTokenId.map(x => x.userId.get)
-      userDetail  <- userId.map(u => userRepo.filterById(u)).get
+      getUserId <- userToken match {
+        case Some(token) => authRepo.filterByToken(token)
+        case None        => Future(None)
+      }
+      userId = getUserId match {
+        case Some(user) => user.userId
+        case None       => None
+      }
+      userDetail <- userId match {
+        case Some(uid) => userRepo.filterById(uid)
+        case None      => Future(None)
+      }
     } yield {
-      Ok(views.html.site.user.List(ViewValueUserList(user = userDetail)))
+      userDetail match {
+        case Some(u) => Ok(views.html.site.user.List(ViewValueUserList(user = Some(u))))
+        case None    => NotFound(views.html.error.page404(new ViewValueError))
+      }
     }
   }
 
@@ -66,7 +77,7 @@ class UserController @Inject()(
 
           /* password登録 */
           _  <- mailFil match {
-            case true  => passRepo.add(Some(userDate), pass)
+            case true  => passRepo.add(userDate, pass)
             case false => Future.successful(0)
           }
           
@@ -75,7 +86,7 @@ class UserController @Inject()(
             case true  =>
               val token: String = TokenGenerator().next(30)
               val newCookie     = Cookie("user", token)
-              authRepo.add(Some(userDate), token)
+              authRepo.add(Some(userDate), Some(token))
               Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
           }
           
@@ -93,7 +104,11 @@ class UserController @Inject()(
   def login() = Action.async {implicit request =>
     StatusValue.loginForm.bindFromRequest.fold(
       errorForm => {
-        Future.successful(BadRequest(views.html.site.user.Login(new ViewValueUserLogin(form = errorForm))))
+        Future.successful(
+          BadRequest(views.html.site.user.Login(
+            new ViewValueUserLogin(form = errorForm)
+          ))
+        )
       },
       loginSucces => {
         val pass = loginSucces.password
@@ -103,14 +118,23 @@ class UserController @Inject()(
           passUser <- passRepo.filterByPass(pass)
         } yield {
           val userMailId = mailUser.map(x => x.id.get)
-          val userPassId = passUser.map(y => y.user_id.get).get
-          val newToken = userMailId match {
-            case Some(id) if id == userPassId => TokenGenerator().next(30)
-            case None                         => "NotFound"
+          val userPassId = passUser.map(y => y.user_id).getOrElse(0)
+          val newToken   = 
+            userMailId match {
+              case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
+              case Some(_)  if userPassId == 0                     => None
+              case None                                            => None
+            }
+          
+          newToken match {
+            case Some(_) => authRepo.updateToken(userMailId, newToken)
+            case None    => authRepo.updateToken(userMailId, None)
           }
-          authRepo.updateToken(userMailId, newToken)
-          val newCookie = Cookie("user", newToken)
-          Redirect(routes.UserController.index).withCookies(newCookie)
+          val newCookie = Cookie("user", newToken.getOrElse("No-Cookie"))
+          newToken match {
+            case Some(_) => Redirect(routes.UserController.index).withCookies(newCookie)
+            case None    => BadRequest(views.html.site.user.Login(new ViewValueUserLogin))
+          }
         }
       }
     )

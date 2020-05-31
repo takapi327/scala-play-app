@@ -18,7 +18,7 @@ class UserPassRepository @Inject()
   import dbConfig._
   import profile.api._
 
-  def add(uid: Option[User.Id], pass: String): Future[Int] =
+  def add(uid: User.Id, pass: String): Future[Int] =
     db.run {
       userPass += Pass(uid, pass)
     }
@@ -37,10 +37,10 @@ class UserPassRepository @Inject()
     //def createdAt     = column[LocalDateTime]    ("createdAt")
 
     type TableElementTuple = (
-      Option[User.Id], String
+      User.Id, String
     )
 
-    def * = (user_id.?, password) <> (
+    def * = (user_id, password) <> (
       (x: TableElementTuple) => Pass(
         x._1, x._2
       ),
