@@ -85,4 +85,8 @@ class UserController @Inject()(
       }
     )
   }
+
+  def showLoginForm() = Action {implicit request =>
+    Ok(views.html.site.user.Login(new ViewValueUserLogin))
+  }
 }
