@@ -7,7 +7,7 @@
 }
 
 @userLogin() = {
-  @helper.form(action = routes.UserController.signup()){
+  @helper.form(action = routes.UserController.login()){
     @helper.CSRF.formField
       <div class="">
         @helper.inputText(
