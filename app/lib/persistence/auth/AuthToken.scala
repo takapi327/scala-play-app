@@ -18,7 +18,7 @@ class AuthTokenRepository @Inject()
   import dbConfig._
   import profile.api._
 
-  def add(uid: Option[User.Id], token: String): Future[Int] =
+  def add(uid: Option[User.Id], token: Option[String]): Future[Int] =
     db.run {
       userAuthToken += UserSession(uid, token)
     }
@@ -29,7 +29,7 @@ class AuthTokenRepository @Inject()
       .result.headOption
     }
 
-  def updateToken(uid: Option[User.Id], newToken: String): Future[Int] = 
+  def updateToken(uid: Option[User.Id], newToken: Option[String]): Future[Int] = 
     db.run {
       userAuthToken.insertOrUpdate(UserSession(uid, newToken))
     }
@@ -43,10 +43,10 @@ class AuthTokenRepository @Inject()
     //def createdAt     = column[LocalDateTime]    ("createdAt")
 
     type TableElementTuple = (
-      Option[User.Id], String
+      Option[User.Id], Option[String]
     )
 
-    def * = (userId.?, token) <> (
+    def * = (userId.?, token.?) <> (
       (x: TableElementTuple) => UserSession(
         x._1, x._2
       ),
