@@ -6,6 +6,7 @@ target
 /.project
 /.settings
 .metals/
+.metals/metals.lock.db
 .metals.log
 .metals.sbt
 /RUNNING_PID
