@@ -29,10 +29,15 @@ class AuthTokenRepository @Inject()
       .result.headOption
     }
 
+  def updateToken(uid: Option[User.Id], newToken: String): Future[Int] = 
+    db.run {
+      userAuthToken.insertOrUpdate(UserSession(uid, newToken))
+    }
+
 
   /******** 定義 ********/ 
   private class AuthTokenTable(tag: Tag) extends Table[UserSession](tag, "userAuthToken"){
-    def userId     = column[User.Id]          ("user_id")
+    def userId     = column[User.Id]          ("user_id", O.PrimaryKey)
     def token      = column[String]           ("token")
     //def updatedAt     = column[LocalDateTime]    ("updatedAt")
     //def createdAt     = column[LocalDateTime]    ("createdAt")

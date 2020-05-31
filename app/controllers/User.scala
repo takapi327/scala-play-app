@@ -102,16 +102,15 @@ class UserController @Inject()(
           mailUser <- userRepo.filterByMail(mail)
           passUser <- passRepo.filterByPass(pass)
         } yield {
-          println(mailUser)
-          println(passUser)
           val userMailId = mailUser.map(x => x.id.get)
           val userPassId = passUser.map(y => y.user_id.get).get
           val newToken = userMailId match {
             case Some(id) if id == userPassId => TokenGenerator().next(30)
             case None                         => "NotFound"
           }
-          println(newToken)
-          Ok(views.html.site.user.Login(new ViewValueUserLogin))
+          authRepo.updateToken(userMailId, newToken)
+          val newCookie = Cookie("user", newToken)
+          Redirect(routes.UserController.index).withCookies(newCookie)
         }
       }
     )
