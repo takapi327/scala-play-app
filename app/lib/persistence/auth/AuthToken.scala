@@ -23,6 +23,13 @@ class AuthTokenRepository @Inject()
       userAuthToken += UserSession(uid, token)
     }
 
+  def filterByToken(token: String): Future[Option[UserSession]] =
+    db.run {
+      userAuthToken.filter(_.token === token)
+      .result.headOption
+    }
+
+
   /******** 定義 ********/ 
   private class AuthTokenTable(tag: Tag) extends Table[UserSession](tag, "userAuthToken"){
     def userId     = column[User.Id]          ("user_id")

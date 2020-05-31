@@ -34,6 +34,12 @@ class UserRepository @Inject()
       .result.headOption
     }
 
+  def filterById(uid:Long): Future[Option[User]] =
+    db.run {
+      user.filter(_.id === uid)
+      .result.headOption
+    }
+
   def signup(uid: Option[User.Id], name: User.name, mail: User.mail): Either[String, User] = {
     uid match {
       case Some(_) => Right(User(uid, name, mail))

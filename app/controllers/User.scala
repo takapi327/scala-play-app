@@ -24,25 +24,19 @@ class UserController @Inject()(
   cc:       MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
-/*
-  def index() = Action {implicit request =>
-    
+
+  def index() = Action.async {implicit request =>
+    val userToken = request.cookies.get("user").map(_.value).getOrElse("Not-Found-User")
+    val getUserId = authRepo.filterByToken(userToken)
     for {
-      userSeq <- userRepo.getAll() 
+      userTokenId <- getUserId
+      userId      =  userTokenId.map(x => x.userId.get)
+      userDetail  <- userId.map(u => userRepo.filterById(u)).get
     } yield {
-      
-     val cookie = request.cookies.get("user")
-      val vv = ViewValueUserList(
-        title = "User一覧",
-        cssSrc = Seq("main.css"),
-        jsSrc  = Seq("main.js")
-        //data   = userSeq
-        //cookie = cookie.getOrElse(Cookie("user", "no-cookie."))
-      )
-      Ok(views.html.site.user.List(vv))
-  //  }
+      Ok(views.html.site.user.List(ViewValueUserList(user = userDetail)))
+    }
   }
-*/
+
   def showSignupForm() = Action {implicit request =>
     Ok(views.html.site.user.Add(new ViewValueUserAdd))
   }
@@ -80,9 +74,9 @@ class UserController @Inject()(
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
             case true  =>
               val token: String = TokenGenerator().next(30)
-              val newCookie     = Cookie(uName, token)
+              val newCookie     = Cookie("user", token)
               authRepo.add(Some(userDate), token)
-              Future.successful(Ok(views.html.site.user.List(new ViewValueUserList)).withCookies(newCookie))
+              Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
           }
           
         } yield {

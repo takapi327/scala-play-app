@@ -1,7 +1,12 @@
 @(vv: model.ViewValueUserList)
 
 @common.main(vv) {
+@for(user <- vv.user){
+  <div>@user.id.get</div>
+  <div>@user.name</div>
+  <div>@user.mail</div>
 
+}
   <a href="/">Home</a>
 }
 
