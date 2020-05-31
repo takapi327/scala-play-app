@@ -85,4 +85,34 @@ class UserController @Inject()(
       }
     )
   }
+
+  def showLoginForm() = Action {implicit request =>
+    Ok(views.html.site.user.Login(new ViewValueUserLogin))
+  }
+
+  def login() = Action.async {implicit request =>
+    StatusValue.loginForm.bindFromRequest.fold(
+      errorForm => {
+        Future.successful(BadRequest(views.html.site.user.Login(new ViewValueUserLogin(form = errorForm))))
+      },
+      loginSucces => {
+        val pass = loginSucces.password
+        val mail = loginSucces.mail
+        for {
+          mailUser <- userRepo.filterByMail(mail)
+          passUser <- passRepo.filterByPass(pass)
+        } yield {
+          val userMailId = mailUser.map(x => x.id.get)
+          val userPassId = passUser.map(y => y.user_id.get).get
+          val newToken = userMailId match {
+            case Some(id) if id == userPassId => TokenGenerator().next(30)
+            case None                         => "NotFound"
+          }
+          authRepo.updateToken(userMailId, newToken)
+          val newCookie = Cookie("user", newToken)
+          Redirect(routes.UserController.index).withCookies(newCookie)
+        }
+      }
+    )
+  }
 }

@@ -23,6 +23,12 @@ class UserPassRepository @Inject()
       userPass += Pass(uid, pass)
     }
 
+  def filterByPass(pass: String): Future[Option[Pass]] =
+    db.run {
+      userPass.filter(_.password === pass)
+      .result.headOption
+    }
+
   /******** 定義 ********/ 
   private class UserPassTable(tag: Tag) extends Table[Pass](tag, "userPassword"){
     def user_id       = column[User.Id]          ("user_id", O.PrimaryKey)

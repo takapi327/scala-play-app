@@ -21,3 +21,10 @@ case class ViewValueUserAdd(
   form:       Form[model.SignupForm] = StatusValue.signupForm
   //passForm:   Form[lib.model.UserPassword.FormValue] = StatusValue.passForm
 ) extends ViewValueCommon
+
+case class ViewValueUserLogin(
+  title:      String                = "Login",
+  cssSrc:     Seq[String]           = Seq("main.css"),
+  jsSrc:      Seq[String]           = Seq("main.js"),
+  form:       Form[model.LoginForm] = StatusValue.loginForm
+) extends ViewValueCommon
