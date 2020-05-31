@@ -26,14 +26,25 @@ class UserController @Inject()(
   extends MessagesAbstractController(cc){
 
   def index() = Action.async {implicit request =>
-    val userToken = request.cookies.get("user").map(_.value).getOrElse("Not-Found-User")
-    val getUserId = authRepo.filterByToken(userToken)
+    val userToken = request.cookies.get("user").map(_.value)    
     for {
-      userTokenId <- getUserId
-      userId      =  userTokenId.map(x => x.userId.get)
-      userDetail  <- userId.map(u => userRepo.filterById(u)).get
+      getUserId <- userToken match {
+        case Some(token) => authRepo.filterByToken(token)
+        case None        => Future(None)
+      }
+      userId = getUserId match {
+        case Some(user) => user.userId
+        case None       => None
+      }
+      userDetail <- userId match {
+        case Some(uid) => userRepo.filterById(uid)
+        case None      => Future(None)
+      }
     } yield {
-      Ok(views.html.site.user.List(ViewValueUserList(user = userDetail)))
+      userDetail match {
+        case Some(u) => Ok(views.html.site.user.List(ViewValueUserList(user = Some(u))))
+        case None    => NotFound(views.html.error.page404(new ViewValueError))
+      }
     }
   }
 
@@ -123,9 +134,7 @@ class UserController @Inject()(
           newToken match {
             case Some(_) => Redirect(routes.UserController.index).withCookies(newCookie)
             case None    => BadRequest(views.html.site.user.Login(new ViewValueUserLogin))
-
           }
-          //Redirect(routes.UserController.index).withCookies(newCookie)
         }
       }
     )
