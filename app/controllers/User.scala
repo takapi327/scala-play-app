@@ -66,7 +66,7 @@ class UserController @Inject()(
 
           /* password登録 */
           _  <- mailFil match {
-            case true  => passRepo.add(Some(userDate), pass)
+            case true  => passRepo.add(userDate, pass)
             case false => Future.successful(0)
           }
           
@@ -75,7 +75,7 @@ class UserController @Inject()(
             case true  =>
               val token: String = TokenGenerator().next(30)
               val newCookie     = Cookie("user", token)
-              authRepo.add(Some(userDate), token)
+              authRepo.add(Some(userDate), Some(token))
               Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
           }
           
@@ -93,7 +93,11 @@ class UserController @Inject()(
   def login() = Action.async {implicit request =>
     StatusValue.loginForm.bindFromRequest.fold(
       errorForm => {
-        Future.successful(BadRequest(views.html.site.user.Login(new ViewValueUserLogin(form = errorForm))))
+        Future.successful(
+          BadRequest(views.html.site.user.Login(
+            new ViewValueUserLogin(form = errorForm)
+          ))
+        )
       },
       loginSucces => {
         val pass = loginSucces.password
@@ -103,14 +107,25 @@ class UserController @Inject()(
           passUser <- passRepo.filterByPass(pass)
         } yield {
           val userMailId = mailUser.map(x => x.id.get)
-          val userPassId = passUser.map(y => y.user_id.get).get
-          val newToken = userMailId match {
-            case Some(id) if id == userPassId => TokenGenerator().next(30)
-            case None                         => "NotFound"
+          val userPassId = passUser.map(y => y.user_id).getOrElse(0)
+          val newToken   = 
+            userMailId match {
+              case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
+              case Some(_)  if userPassId == 0                     => None
+              case None                                            => None
+            }
+          
+          newToken match {
+            case Some(_) => authRepo.updateToken(userMailId, newToken)
+            case None    => authRepo.updateToken(userMailId, None)
           }
-          authRepo.updateToken(userMailId, newToken)
-          val newCookie = Cookie("user", newToken)
-          Redirect(routes.UserController.index).withCookies(newCookie)
+          val newCookie = Cookie("user", newToken.getOrElse("No-Cookie"))
+          newToken match {
+            case Some(_) => Redirect(routes.UserController.index).withCookies(newCookie)
+            case None    => BadRequest(views.html.site.user.Login(new ViewValueUserLogin))
+
+          }
+          //Redirect(routes.UserController.index).withCookies(newCookie)
         }
       }
     )
