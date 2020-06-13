@@ -34,6 +34,10 @@ class AuthTokenRepository @Inject()
       userAuthToken.insertOrUpdate(UserSession(uid, newToken))
     }
 
+  def deleteToken(userToken: String): Future[Int] =
+    db.run {
+      userAuthToken.filter(_.token === userToken).delete
+    }
 
   /******** 定義 ********/ 
   private class AuthTokenTable(tag: Tag) extends Table[UserSession](tag, "userAuthToken"){

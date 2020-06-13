@@ -20,11 +20,6 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * a path of `/`.
    */
   def index() = Action { implicit request: Request[AnyContent] =>
-    val vv = ViewValueHome(
-      title  = "Home",
-      cssSrc = Seq("main.css"),
-      jsSrc  = Seq("main.js")
-    )
-    Ok(views.html.site.index(vv))
+    Ok(views.html.site.index(new ViewValueHome))
   }
 }

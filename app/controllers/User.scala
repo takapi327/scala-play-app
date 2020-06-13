@@ -43,7 +43,7 @@ class UserController @Inject()(
     } yield {
       userDetail match {
         case Some(u) => Ok(views.html.site.user.List(ViewValueUserList(user = Some(u))))
-        case None    => NotFound(views.html.error.page404(new ViewValueError))
+        case None    => NotFound(views.html.site.index(new ViewValueHome))
       }
     }
   }
@@ -139,4 +139,18 @@ class UserController @Inject()(
       }
     )
   }
+
+   def logout() = Action.async {implicit request =>
+     val userCookies = request.cookies.get("user").map(_.value)
+     userCookies match {
+       case None        => Future.successful(BadRequest(views.html.site.index(new ViewValueHome)))
+       case Some(token) => {
+         for {
+           _ <- authRepo.deleteToken(token)
+         } yield {
+           Redirect(routes.HomeController.index).discardingCookies(DiscardingCookie("user"))
+         }
+       }
+     }
+   }
 }
