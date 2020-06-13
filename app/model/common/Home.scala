@@ -1,7 +1,7 @@
 package model
 
 case class ViewValueHome(
-  title:  String,
-  cssSrc: Seq[String],
-  jsSrc:  Seq[String]
+  title:  String       = "Home",
+  cssSrc: Seq[String]  = Seq("main.css"),
+  jsSrc:  Seq[String]  = Seq("main.js")
 ) extends ViewValueCommon
