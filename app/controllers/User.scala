@@ -4,6 +4,7 @@ import lib.model._
 import lib.persistence._
 import model._
 import auth._
+import action.auth.AuthAction
 
 import scala.concurrent._
 import javax.inject._
@@ -18,14 +19,17 @@ import play.api.i18n.I18nSupport
 
 @Singleton
 class UserController @Inject()(
-  userRepo: UserRepository,
-  passRepo: UserPassRepository,
-  authRepo: AuthTokenRepository,
+  userRepo:   UserRepository,
+  passRepo:   UserPassRepository,
+  authRepo:   AuthTokenRepository,
+  authAction: AuthAction,
   cc:       MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc){
 
-  def index() = Action.async {implicit request =>
+  def index() = authAction.async {implicit request =>
+    Future(Ok(views.html.site.user.List(new ViewValueUserList)))
+    /*
     val userToken = request.cookies.get("user").map(_.value)    
     val boolean = userToken match {
         case Some(_) => true
@@ -47,6 +51,7 @@ class UserController @Inject()(
       }
       
     }
+    */
   }
 
   def showSignupForm() = Action {implicit request =>

@@ -8,7 +8,7 @@ case class ViewValueUserList(
   title:  String       = "マイページ",
   cssSrc: Seq[String]  = Seq("main.css"),
   jsSrc:  Seq[String]  = Seq("main.js"),
-  user:   Option[User]
+  user:   Option[User] = Option(User(Some(4L), "test", "test"))
  // data:   Seq[lib.model.User]
   //cookie: String, //Option[play.api.mvc.Cookie],
   //either: Either[String, lib.model.User]
