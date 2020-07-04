@@ -9,4 +9,11 @@ target
 .metals/metals.lock.db
 .metals.log
 .metals.sbt
+.DS_Store
+.bloop/bloop.settings.json
+.bloop/root/bloop-bsp-clients-classes/
+.bloop/root/bloop-internal-classes/
+project/metals.sbt
+.bloop/root-test.json
+.bloop/root.json
 /RUNNING_PID
