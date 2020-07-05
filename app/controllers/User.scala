@@ -4,7 +4,7 @@ import lib.model._
 import lib.persistence._
 import model._
 import auth._
-import action.auth.AuthAction
+import action.auth.{AuthAction, IsAlreadyLoginAction}
 
 import scala.concurrent._
 import javax.inject._
@@ -19,19 +19,20 @@ import play.api.i18n.I18nSupport
 
 @Singleton
 class UserController @Inject()(
-  userRepo:   UserRepository,
-  passRepo:   UserPassRepository,
-  authRepo:   AuthTokenRepository,
-  authAction: AuthAction,
-  cc:         MessagesControllerComponents
+  userRepo:             UserRepository,
+  passRepo:             UserPassRepository,
+  authRepo:             AuthTokenRepository,
+  AuthAction:           AuthAction,
+  IsAlreadyLoginAction: IsAlreadyLoginAction,
+  cc:                   MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc) with I18nSupport {
 
-  def index() = authAction.async {implicit request =>
+  def index() = AuthAction.async {implicit request =>
     Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
   }
 
-  def showSignupForm() = Action {implicit request =>
+  def showSignupForm() = IsAlreadyLoginAction {implicit request =>
     Ok(views.html.site.user.Add(new ViewValueUserAdd))
   }
 
@@ -80,7 +81,7 @@ class UserController @Inject()(
     )
   }
 
-  def showLoginForm() = Action {implicit request =>
+  def showLoginForm() = IsAlreadyLoginAction {implicit request =>
     Ok(views.html.site.user.Login(new ViewValueUserLogin))
   }
 
