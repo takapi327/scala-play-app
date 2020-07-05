@@ -1,6 +1,8 @@
 package action.auth
 
 import model._
+import lib.model._
+import lib.persistence._
 
 import javax.inject._
 import scala.concurrent.{ ExecutionContext, Future }
@@ -8,12 +10,17 @@ import scala.concurrent.{ ExecutionContext, Future }
 import play.api.mvc._
 import play.api.i18n.MessagesApi
 import play.mvc.Results._
+import java.lang.ProcessBuilder.Redirect
+import controllers.routes
 
 
-class UserRequest[A](val user: String, request: Request[A], messagesApi: MessagesApi) extends WrappedRequest[A](request)
+class UserRequest[A](val user: Option[User], request: Request[A], messagesApi: MessagesApi) extends WrappedRequest[A](request)
 
 @Singleton
 class AuthAction @Inject()(
+  userRepo:        UserRepository,
+  passRepo:        UserPassRepository,
+  authRepo:        AuthTokenRepository,
   playBodyParsers: PlayBodyParsers,
   messagesApi:     MessagesApi
 )(implicit val executionContext: ExecutionContext)
@@ -26,8 +33,19 @@ class AuthAction @Inject()(
     block:   UserRequest[A] => Future[Result]
   ): Future[Result] = {
     request.cookies.get("user") match {
-      case Some(username) => block(new UserRequest(username.value, request, messagesApi))
-      case None           => Future(Results.Status(404))
+      case None           => Future(Results.BadRequest(views.html.error.page404(new ViewValueError)))
+      case Some(username) => {
+        for {
+          authUser <- authRepo.filterByToken(username.value) 
+          user <- authUser match { 
+            case Some(user) => userRepo.filterById(user.userId.getOrElse(0))
+            case None       => Future(None)
+          }
+          result   <- block(new UserRequest(user, request, messagesApi)) 
+        } yield {
+          result
+        }
+      }
     }
   }
 }

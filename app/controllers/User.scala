@@ -29,29 +29,6 @@ class UserController @Inject()(
 
   def index() = authAction.async {implicit request =>
     Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
-    /*
-    val userToken = request.cookies.get("user").map(_.value)    
-    val boolean = userToken match {
-        case Some(_) => true
-        case None    => false
-      }
-    val eitherU = Either.cond(boolean, authRepo.filterByToken(userToken.get), Future(None))
-
-    for {
-      getUserId <- eitherU.getOrElse(Future(None))
-
-      userId <- getUserId match { 
-        case Some(user) => userRepo.filterById(user.userId.get)
-        case None       => Future(None)
-      }
-    } yield {
-      userId match {
-        case Some(u) => Ok(views.html.site.user.List(ViewValueUserList(user = Some(u))))
-        case None    => NotFound(views.html.site.index(new ViewValueHome))
-      }
-      
-    }
-    */
   }
 
   def showSignupForm() = Action {implicit request =>

@@ -1,19 +1,16 @@
 @(vv: model.ViewValueUserList)(implicit 
-  //request: MessagesRequestHeader
   messages: Messages,
-  request: RequestHeader
- //request: UserRequestHeader
+  request:  RequestHeader
 )
 
 @common.main(vv) {
-<div>@vv.user</div>
-@*
+
 @for(user <- vv.user){
   <div>@user.id.get</div>
   <div>@user.name</div>
   <div>@user.mail</div>
 }
-*@
+
 @helper.form(action = routes.UserController.logout()) {
   @helper.CSRF.formField
     <button>ログアウト</button>
