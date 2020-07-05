@@ -23,12 +23,12 @@ class UserController @Inject()(
   passRepo:   UserPassRepository,
   authRepo:   AuthTokenRepository,
   authAction: AuthAction,
-  cc:       MessagesControllerComponents
+  cc:         MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
-  extends MessagesAbstractController(cc){
+  extends MessagesAbstractController(cc) with I18nSupport {
 
   def index() = authAction.async {implicit request =>
-    Future(Ok(views.html.site.user.List(new ViewValueUserList)))
+    Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
     /*
     val userToken = request.cookies.get("user").map(_.value)    
     val boolean = userToken match {
