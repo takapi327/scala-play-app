@@ -13,9 +13,6 @@ import play.mvc.Results._
 import java.lang.ProcessBuilder.Redirect
 import controllers.routes
 
-
-class UserRequest[A](val user: Option[User], request: Request[A], messagesApi: MessagesApi) extends WrappedRequest[A](request)
-
 @Singleton
 class AuthAction @Inject()(
   userRepo:        UserRepository,
