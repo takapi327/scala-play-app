@@ -38,7 +38,7 @@ class AuthActionBuilderImpl(
       block:   UserRequest[A] => Future[Result]
     ): Future[Result] = auth(request) flatMap { optUser =>
       optUser match {
-        case Some(user) => block(new UserRequest(Some(user), request, messagesApi))
+        case Some(user) => block(new UserRequest(user, request, messagesApi))
         case None       => Future(Results.BadRequest(views.html.error.page404(new ViewValueError)))
       }
     }
