@@ -4,7 +4,8 @@ import lib.model._
 import lib.persistence._
 import model._
 import auth._
-import action.auth.{AuthAction, IsAlreadyLoginAction}
+import auth.{AuthActionHelpers, IsAlreadyLoginAction}
+import services.AuthActionService
 
 import scala.concurrent._
 import javax.inject._
@@ -22,13 +23,15 @@ class UserController @Inject()(
   userRepo:             UserRepository,
   passRepo:             UserPassRepository,
   authRepo:             AuthTokenRepository,
-  AuthAction:           AuthAction,
+  authService:          AuthActionService,
   IsAlreadyLoginAction: IsAlreadyLoginAction,
   cc:                   MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
-  extends MessagesAbstractController(cc) with I18nSupport {
+  extends MessagesAbstractController(cc)
+  with    I18nSupport
+  with    AuthActionHelpers {
 
-  def index() = AuthAction.async {implicit request =>
+  def index() = AuthAction(authService.authenticate).async {implicit request =>
     Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
   }
 

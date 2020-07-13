@@ -1,4 +1,4 @@
-package action.auth
+package auth
 
 import lib.model.User
 
