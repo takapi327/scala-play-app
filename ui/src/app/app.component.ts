@@ -1,6 +1,5 @@
 import { Component }  from '@angular/core';
-import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector:    'app-root',
@@ -9,10 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
-  constructor(
-    private http:    HttpClient,
-    private builder: FormBuilder
-  ) {}
+  constructor() {}
 
   mail = new FormControl('', [
     Validators.required,
@@ -24,13 +20,9 @@ export class AppComponent {
     Validators.minLength(3)
   ]);
   
-  myForm = this.builder.group({
+  loginForm = new FormGroup({
     mail: this.mail,
     pass: this.pass
   });
 
-  ngSubmit() {
-    this.http.post('http://localhost:9000/auth/loginForm').subscribe(
-    );
-    }
-}
+ }
