@@ -11,15 +11,19 @@ import { User } from './interface/user';
 
 export class UserService {
 
-  private userUrl = 'http://localhost:9000/api/auth'
+  constructor(private http: HttpClient) { }
+
+  private authUrl = 'http://localhost:9000/api/auth';
     
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      'Content-Type':    'application/json',
+      'withCredentials': 'true'
+    })
   };
 
-  loginUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.userUrl}/loginForm`, user)
+  login(user: User): Observable<User> {
+    return this.http.post<User>(`${this.authUrl}/login`, user, this.httpOptions);
   }
 
-  constructor(private http: HttpClient) { }
 }
