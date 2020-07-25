@@ -1,7 +1,7 @@
 {
-  "/app": {
+  "/": {
     "target": "http://localhost:9000",
     "secure": false,
-    "pathRewrite": {"^/app": ""}
+    "pathRewrite": {"^/": ""}
   }
 }

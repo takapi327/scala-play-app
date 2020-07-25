@@ -1,18 +1,20 @@
 package controllers.api.user
 
 import javax.inject.Inject
-
-import play.api.mvc._
-import play.api.libs.json._
-import play.api.i18n.I18nSupport
 import scala.concurrent.{Future, ExecutionContext}
 
 import json.reads.JsValueReadsUser
 import json.writes.JsValueWritesUser
+
 import lib.persistence.{UserRepository, UserPassRepository, AuthTokenRepository}
-import play.api.libs.json.JsPath.json
 import lib.model.User
+
 import auth.TokenGenerator
+
+import play.api.mvc._
+import play.api.libs.json._
+import play.api.i18n.I18nSupport
+import play.api.libs.json.JsPath.json
 
 class UserLoginController @Inject()(
   userRepo: UserRepository,
@@ -20,11 +22,11 @@ class UserLoginController @Inject()(
   authRepo: AuthTokenRepository,
   cc:       MessagesControllerComponents
 )(implicit ec: ExecutionContext)
-  extends MessagesAbstractController(cc) with I18nSupport {
+  extends MessagesAbstractController(cc)
+  with    I18nSupport {
 
-    def login() = Action async {implicit request =>
-      val params = request.body.asJson
-      val json   = params.get
+    def login() = Action(parse.json) async {implicit request =>
+      val json   = request.body
       val result = json.validate[JsValueReadsUser]
       val user   = result.get
       for {
@@ -43,10 +45,7 @@ class UserLoginController @Inject()(
           case None    => authRepo.updateToken(userMailId, None)
           case Some(_) => authRepo.updateToken(userMailId, newToken)
         }
-        println(newToken)
-        val newCookie = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"))
-        println(newCookie)
-        println(Ok.withCookies(newCookie))
+        val newCookie    = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"), domain = Some("localhost"))
         val jsWritesAuth = JsValueWritesUser.toWrites(
           mail     = user.mail,
           password = user.password
