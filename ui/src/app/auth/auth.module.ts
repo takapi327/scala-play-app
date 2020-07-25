@@ -20,8 +20,7 @@ import { LoginComponent } from './login/login.component';
   exports: [
     LoginComponent
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: []
 })
 export class AuthModule { }

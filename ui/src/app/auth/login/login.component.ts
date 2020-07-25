@@ -1,6 +1,9 @@
+// ---- [ @angular ] ------------------------------------------------
 import { Component, OnInit }                  from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router }                             from '@angular/router';
 
+// ---- [ AuthFunctin ] ---------------------------------------------
 import { User }                               from '../../interface/user';
 import { AuthService }                        from '../../service/auth.service'
 
@@ -12,10 +15,12 @@ import { AuthService }                        from '../../service/auth.service'
 })
 export class LoginComponent implements OnInit {
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private routes:      Router
+  ) {}
 
   mail = new FormControl('', [
     Validators.required,
@@ -36,4 +41,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(user).subscribe()
   }
   
+  onSubmit() {
+    this.login(this.loginForm.value);
+    this.routes.navigate(['/']);
+  }
 }
