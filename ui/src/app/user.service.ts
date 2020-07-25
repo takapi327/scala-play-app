@@ -11,8 +11,27 @@ import { User } from './interface/user';
 
 export class UserService {
 
+  /**
+   * コンストラクタ. HttpClientService のインスタンスを生成する
+   *
+   * @param {Http} Httpサービスを DI する
+   * @memberof HttpClientService
+   */
   constructor(private http: HttpClient) {}
 
+  /**
+   * RST-API 実行時に指定する URL
+   *
+   * バックエンドは PlayFramework で実装し、ポート番号「9000」で待ち受けているため、
+   * そのまま指定すると CORS でエラーになる
+   * それを回避するため、ここではフロントエンドのポート番号「4200」を指定し、
+   * Angular CLI のリバースプロキシを利用してバックエンドとの通信を実現させる
+   *
+   * 認証専用の URL を設定、バックエンドのapi/がフロントエンドとの連携用に設定してある
+   *
+   * @private
+   * @memberof HttpClientService
+   */
   private authUrl = 'http://localhost:4200/api/auth';
     
   httpOptions = {
