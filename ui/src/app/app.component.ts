@@ -2,6 +2,7 @@ import { Component }  from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { User } from './interface/user';
 import { UserService } from './user.service'
+import { AuthService } from './service/auth.service'
 
 @Component({
   selector:    'app-root',
@@ -10,7 +11,7 @@ import { UserService } from './user.service'
 })
 export class AppComponent {
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {}
 
   mail = new FormControl('', [
     Validators.required,
@@ -28,6 +29,6 @@ export class AppComponent {
   });
 
   login(user: User): void {
-    this.userService.login(user).subscribe()
+    this.authService.login(user).subscribe()
   }
 }

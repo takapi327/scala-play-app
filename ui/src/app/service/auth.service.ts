@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { User } from './interface/user';
+import { User } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class UserService {
+export class AuthService {
 
   /**
    * コンストラクタ. HttpClientService のインスタンスを生成する
@@ -52,3 +52,5 @@ export class UserService {
     return this.http.post<User>(`${this.authUrl}/login`, user, this.httpOptions);
   }
 }
+
+
