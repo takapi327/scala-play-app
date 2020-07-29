@@ -4,12 +4,9 @@
 )
 
 @common.main(vv) {
-
-@for(user <- vv.user){
-  <div>@user.id.get</div>
-  <div>@user.name</div>
-  <div>@user.mail</div>
-}
+  <div>@vv.user.id.get</div>
+  <div>@vv.user.name</div>
+  <div>@vv.user.mail</div>
 
 @*
 @helper.form(action = routes.UserController.logout()) {

@@ -8,7 +8,7 @@ case class ViewValueUserList(
   title:  String       = "マイページ",
   cssSrc: Seq[String]  = Seq("main.css"),
   jsSrc:  Seq[String]  = Seq("main.js"),
-  user:   Option[User]
+  user:   User
 ) extends ViewValueCommon
 
 case class ViewValueUserAdd(
