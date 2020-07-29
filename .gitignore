@@ -17,4 +17,6 @@ project/metals.sbt
 project/.bloop/play-scala-app-build.json
 .bloop/root-test.json
 .bloop/root.json
+ui/package.json
+ui/package-lock.json
 /RUNNING_PID
