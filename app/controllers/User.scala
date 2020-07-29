@@ -4,7 +4,8 @@ import lib.model._
 import lib.persistence._
 import model._
 import auth._
-import action.auth.AuthAction
+import auth.{AuthActionHelpers, IsAlreadyLoginAction}
+import services.AuthActionService
 
 import scala.concurrent._
 import javax.inject._
@@ -19,42 +20,22 @@ import play.api.i18n.I18nSupport
 
 @Singleton
 class UserController @Inject()(
-  userRepo:   UserRepository,
-  passRepo:   UserPassRepository,
-  authRepo:   AuthTokenRepository,
-  authAction: AuthAction,
-  cc:       MessagesControllerComponents
+  userRepo:             UserRepository,
+  passRepo:             UserPassRepository,
+  authRepo:             AuthTokenRepository,
+  authService:          AuthActionService,
+  IsAlreadyLoginAction: IsAlreadyLoginAction,
+  cc:                   MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
-  extends MessagesAbstractController(cc){
+  extends MessagesAbstractController(cc)
+  with    I18nSupport
+  with    AuthActionHelpers {
 
-  def index() = authAction.async {implicit request =>
-    Future(Ok(views.html.site.user.List(new ViewValueUserList)))
-    /*
-    val userToken = request.cookies.get("user").map(_.value)    
-    val boolean = userToken match {
-        case Some(_) => true
-        case None    => false
-      }
-    val eitherU = Either.cond(boolean, authRepo.filterByToken(userToken.get), Future(None))
-
-    for {
-      getUserId <- eitherU.getOrElse(Future(None))
-
-      userId <- getUserId match { 
-        case Some(user) => userRepo.filterById(user.userId.get)
-        case None       => Future(None)
-      }
-    } yield {
-      userId match {
-        case Some(u) => Ok(views.html.site.user.List(ViewValueUserList(user = Some(u))))
-        case None    => NotFound(views.html.site.index(new ViewValueHome))
-      }
-      
-    }
-    */
+  def index() = AuthAction(authService.authenticate).async {implicit request =>
+    Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
   }
 
-  def showSignupForm() = Action {implicit request =>
+  def showSignupForm() = IsAlreadyLoginAction {implicit request =>
     Ok(views.html.site.user.Add(new ViewValueUserAdd))
   }
 
@@ -103,7 +84,7 @@ class UserController @Inject()(
     )
   }
 
-  def showLoginForm() = Action {implicit request =>
+  def showLoginForm() = IsAlreadyLoginAction {implicit request =>
     Ok(views.html.site.user.Login(new ViewValueUserLogin))
   }
 

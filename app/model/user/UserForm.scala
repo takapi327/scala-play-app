@@ -9,20 +9,6 @@ case class LoginForm(mail: String, password: String)
 
 object StatusValue {
 // formの作成
-/*
-  val userForm: Form[User.FormValue] = Form (
-    mapping(
-      "name"   ->   nonEmptyText,
-      "mail"   ->   nonEmptyText
-    )(User.FormValue.apply)(User.FormValue.unapply)
-  )
-
-  val passForm: Form[UserPassword.FormValue] = Form (
-    mapping(
-      "password"     ->   nonEmptyText
-    )(UserPassword.FormValue.apply)(UserPassword.FormValue.unapply)
-  )
-*/
   val signupForm = Form(
     mapping(
       "name"         ->   nonEmptyText,

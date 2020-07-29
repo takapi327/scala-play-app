@@ -1,6 +1,8 @@
-package action.auth
+package auth
 
 import model._
+import lib.model._
+import lib.persistence._
 
 import javax.inject._
 import scala.concurrent.{ ExecutionContext, Future }
@@ -8,26 +10,17 @@ import scala.concurrent.{ ExecutionContext, Future }
 import play.api.mvc._
 import play.api.i18n.MessagesApi
 import play.mvc.Results._
+import java.lang.ProcessBuilder.Redirect
+import controllers.routes
 
-//class UserRequest[A](val userCookies: Cookie, request: Request[A], val messagesApi: MessagesApi) extends WrappedRequest[A](request)
-
-@Singleton
-class AuthAction @Inject()(
-  playBodyParsers: PlayBodyParsers,
-  messagesApi:     MessagesApi
-)(implicit val executionContext: ExecutionContext)
-  extends ActionBuilder[MessagesRequest, AnyContent] {
-
-  override def parser: BodyParser[AnyContent] = playBodyParsers.anyContent
-
-  override def invokeBlock[A](
-    request: Request[A], 
-    block:   MessagesRequest[A] => Future[Result]
-  ): Future[Result] = {
-    request.cookies.get("user") match {
-      case Some(username) => block(new MessagesRequest(request, messagesApi))
-      case None => Future(Results.Status(404))
-    }
-  }
+trait AuthHelpers {
+  val COOKIES_NAME = "user"
 }
 
+trait AuthActionHelpers {
+  self: BaseControllerHelpers =>
+
+  def AuthAction(authenticate: RequestHeader => Future[Option[User]])(implicit ec: ExecutionContext) = {
+    AuthActionBuilder(authenticate, parse.default, messagesApi)
+  }
+}
