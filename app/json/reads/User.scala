@@ -10,14 +10,4 @@ case class JsValueReadsUser(
 
 object  JsValueReadsUser {
   implicit val userReads = Json.reads[JsValueReadsUser]
-/*
-  def login(user: JsValueReadsUser): User = {
-  
-    User(
-      id    = user.id,
-      name  = user.name,
-      mail  = user.mail
-    )
-  }
-  */
 }
