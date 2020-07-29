@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-field">
+
+  <div class="form-field__mail">
+    <label for="mail">メールアドレス</label>
+    <input id="mail" name="mail" type="email" [formControl]="mail" />
+    <span *ngIf="mail.errors?.required && (mail.dirty || mail.touched)">
+      メールアドレスは必須項目です
+    </span>
+    <span *ngIf="mail.errors?.email">
+      メールアドレスは正しい形式で入力してください
+    </span>
+  </div>
+
+  <div class="form-field__pass">
+    <label for="password">パスワード</label>
+    <input id="password" name="password" type="password" [formControl]="password" />
+    <span *ngIf="password.errors?.required && (password.dirty || password.touched)">
+      パスワードは必須項目です
+    </span>
+    <span *ngIf="password.errors?.minlength">
+      パスワードは3文字以上入力してください
+    </span>
+  </div>
+
+  <div class="form-field__submit">
+    <input type="submit" value="ログイン" [disabled]="loginForm.invalid" />
+  </div>
+</form>
+

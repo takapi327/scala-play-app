@@ -8,11 +8,12 @@
   <div>@vv.user.name</div>
   <div>@vv.user.mail</div>
 
+@*
 @helper.form(action = routes.UserController.logout()) {
   @helper.CSRF.formField
     <button>ログアウト</button>
 }
-
+*@
   <a href="/">Home</a>
 }
 
