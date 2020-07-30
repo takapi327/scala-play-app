@@ -14,7 +14,7 @@ import java.lang.ProcessBuilder.Redirect
 import controllers.routes
 
 trait AuthHelpers {
-  val COOKIES_NAME = "user"
+  val COOKIES_NAME = "My-Xsrf-Cookie"
 }
 
 trait AuthActionHelpers {

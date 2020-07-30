@@ -32,11 +32,17 @@ class UserController @Inject()(
   with    AuthActionHelpers {
 
   def index() = AuthAction(authService.authenticate).async {implicit request =>
-    Future(Ok(views.html.site.user.List(ViewValueUserList(user = request.user))))
+    request.user match {
+      case Some(user) => Future(Ok(views.html.site.user.List(ViewValueUserList(user = user))))
+      case None       => Future(BadRequest(views.html.site.index(new ViewValueHome)))
+    }
   }
 
-  def showSignupForm() = IsAlreadyLoginAction {implicit request =>
-    Ok(views.html.site.user.Add(new ViewValueUserAdd))
+  def showSignupForm() = AuthAction(authService.authenticate).async {implicit request =>
+    request.user match {
+      case None    => Future(Ok(views.html.site.user.Add(new ViewValueUserAdd)))
+      case Some(_) => Future(BadRequest(views.html.site.index(new ViewValueHome)))
+    }
   }
 
   def signup() = Action.async {implicit request =>
@@ -72,7 +78,7 @@ class UserController @Inject()(
             case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
             case true  =>
               val token: String = TokenGenerator().next(30)
-              val newCookie     = Cookie("user", token)
+              val newCookie     = Cookie("My-Xsrf-Cookie", token)
               authRepo.add(Some(userDate), Some(token))
               Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
           }
@@ -117,7 +123,7 @@ class UserController @Inject()(
             case Some(_) => authRepo.updateToken(userMailId, newToken)
             case None    => authRepo.updateToken(userMailId, None)
           }
-          val newCookie = Cookie("user", newToken.getOrElse("No-Cookie"))
+          val newCookie = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"))
           newToken match {
             case Some(_) => Redirect(routes.UserController.index).withCookies(newCookie)
             case None    => BadRequest(views.html.site.user.Login(new ViewValueUserLogin))
@@ -128,14 +134,14 @@ class UserController @Inject()(
   }
 
    def logout() = Action.async {implicit request =>
-     val userCookies = request.cookies.get("user").map(_.value)
+     val userCookies = request.cookies.get("My-Xsrf-Cookie").map(_.value)
      userCookies match {
        case None        => Future.successful(BadRequest(views.html.site.index(new ViewValueHome)))
        case Some(token) => {
          for {
            _ <- authRepo.deleteToken(token)
          } yield {
-           Redirect(routes.HomeController.index).discardingCookies(DiscardingCookie("user"))
+           Redirect(routes.HomeController.index).discardingCookies(DiscardingCookie("My-Xsrf-Cookie"))
          }
        }
      }

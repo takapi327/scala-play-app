@@ -8,17 +8,16 @@
 
 @userLogin() = {
   @helper.form(action = routes.UserController.login()){
-    @helper.CSRF.formField
-      <div class="">
-        @helper.inputText(
-          vv.form("mail")
-        )
-      </div>
-      <div class="">
-        @helper.inputPassword(
-          vv.form("password")
-        )
-      </div>
-      <button class="todo_btn">ログイン</button>
+    <div class="">
+      @helper.inputText(
+        vv.form("mail")
+      )
+    </div>
+    <div class="">
+      @helper.inputPassword(
+        vv.form("password")
+      )
+    </div>
+    <button class="todo_btn">ログイン</button>
   }
 }
