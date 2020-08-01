@@ -54,11 +54,7 @@ class UserRepository @Inject()
     def mail          = column[String]           ("mail")
     //def updatedAt     = column[LocalDateTime]    ("updated_at")
     //def createdAt     = column[LocalDateTime]    ("created_at")
-/*
-    def * = (id, passId, name, mail, updatedAt, createdAt) <> (
-      (User.apply _).tupled, User.unapply
-    )
-*/
+
     type TableElementTuple = (
       Option[User.Id], String, String
     )
@@ -68,7 +64,6 @@ class UserRepository @Inject()
         x._1, x._2 ,x._3
       ),
       (v: User) => User.unapply(v).map {t => (
-        //Some((user.id, user.passId, user.name, user.mail, user.updateAt, user.createdAt))
         t._1, t._2 , t._3
       )}
     )

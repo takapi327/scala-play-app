@@ -26,5 +26,4 @@ object User {
     )
   }
   
-  //case class FormValue (name: String, mail: String)
 }

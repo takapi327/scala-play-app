@@ -14,5 +14,4 @@ case class UserPassword (
 
 object UserPassword {
 
-  //case class FormValue (password: String)
 }
