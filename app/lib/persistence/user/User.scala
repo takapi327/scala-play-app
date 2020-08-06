@@ -30,7 +30,7 @@ class UserRepository @Inject()
 
   def filterByMail(umail: String): Future[Option[User]] =
     db.run {
-      user.filter(_.mail === umail)
+      user.filter(_.email === umail)
       .result.headOption
     }
 
@@ -52,7 +52,7 @@ class UserRepository @Inject()
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
     def firstName     = column[String]           ("first_name")
     def lastName      = column[String]           ("last_name")
-    def mail          = column[String]           ("mail")
+    def email         = column[String]           ("email")
     //def updatedAt     = column[LocalDateTime]    ("updated_at")
     //def createdAt     = column[LocalDateTime]    ("created_at")
 
@@ -60,7 +60,7 @@ class UserRepository @Inject()
       Option[User.Id], String, String, String
     )
 
-    def * = (id.?, firstName, lastName, mail) <> (
+    def * = (id.?, firstName, lastName, email) <> (
       (x: TableElementTuple) => User(
         x._1, UserName(x._2, x._3), x._4
       ),
