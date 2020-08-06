@@ -6,7 +6,7 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
-import lib.model.{User, UserPassword => Pass}
+import lib.model.{UserId, UserName, User, UserPassword => Pass}
 
 @Singleton
 class UserRepository @Inject()
@@ -47,24 +47,25 @@ class UserRepository @Inject()
     }
   }
 
-  /******** 定義 ********/ 
+  /******** 定義 ********/
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
-    def name          = column[String]           ("name")
+    def firstName     = column[String]           ("first_name")
+    def lastName      = column[String]           ("last_name")
     def mail          = column[String]           ("mail")
     //def updatedAt     = column[LocalDateTime]    ("updated_at")
     //def createdAt     = column[LocalDateTime]    ("created_at")
 
     type TableElementTuple = (
-      Option[User.Id], String, String
+      Option[User.Id], String, String, String
     )
 
-    def * = (id.?, name, mail) <> (
+    def * = (id.?, firstName, lastName, mail) <> (
       (x: TableElementTuple) => User(
-        x._1, x._2 ,x._3
+        x._1, UserName(x._2, x._3), x._4
       ),
       (v: User) => User.unapply(v).map {t => (
-        t._1, t._2 , t._3
+        t._1, t._2.firstName, t._2.lastName, t._3
       )}
     )
   }
