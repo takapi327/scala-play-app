@@ -4,7 +4,7 @@ import play.api.libs.json._
 import lib.model._
 
 case class JsValueReadsUser(
-  mail:     String,
+  email:    String,
   password: String
 )
 

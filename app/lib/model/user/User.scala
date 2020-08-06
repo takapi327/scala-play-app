@@ -17,7 +17,7 @@ case class UserName (
 case class User (
   id:       Option[User.Id],
   nameInfo: UserName,
-  mail:     String
+  email:    String
 )
 
 object User {
@@ -26,11 +26,11 @@ object User {
   type name = String
   type mail = String
   
-  def apply(firstName: String, lastName: String, mail: String): User = {
+  def buildEntity(firstName: String, lastName: String, email: String): User = {
     new User(
       id       = None,
       nameInfo = UserName(firstName, lastName),
-      mail     = mail
+      email    = email
     )
   }
   

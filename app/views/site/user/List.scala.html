@@ -5,8 +5,8 @@
 
 @common.main(vv) {
   <div>@vv.user.id.get</div>
-  <div>@vv.user.name</div>
-  <div>@vv.user.mail</div>
+  <div>@vv.user.nameInfo.fullName</div>
+  <div>@vv.user.email</div>
 
 
 @helper.form(action = routes.UserController.logout()) {

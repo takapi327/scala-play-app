@@ -23,9 +23,9 @@ class UserRepository @Inject()
       user.result
     }
 
-  def add(name: String, mail: String): Future[Long] =
+  def add(newUser: User): Future[Long] =
     db.run {
-      (user returning user.map(_.id)) += User(Some(0), name, mail)
+      (user returning user.map(_.id)) += newUser
     }
 
   def filterByMail(umail: String): Future[Option[User]] =
@@ -40,9 +40,9 @@ class UserRepository @Inject()
       .result.headOption
     }
 
-  def signup(uid: Option[User.Id], name: User.name, mail: User.mail): Either[String, User] = {
-    uid match {
-      case Some(_) => Right(User(uid, name, mail))
+  def signup(user: User): Either[String, User] = {
+    user.id match {
+      case Some(_) => Right(user)
       case None    => Left("Not Found")
     }
   }

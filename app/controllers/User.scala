@@ -51,9 +51,11 @@ class UserController @Inject()(
         Future.successful(BadRequest(views.html.site.user.Add(new ViewValueUserAdd(form = errorForm))))
       },
       userForm => {
-        val pass     = userForm.password
-        val userMail = userRepo.filterByMail(userForm.mail)
-        val uName    = userForm.name
+        val pass         = userForm.password
+        val userMail     = userRepo.filterByMail(userForm.email)
+        val firstName    = userForm.firstName
+        val lastName     = userForm.lastName
+        val withNoIdUser = User.buildEntity(firstName, lastName, userForm.email)
         for {
           /* メールが重複していないかどうか */
           mailFil <- userMail.map(user =>
@@ -64,7 +66,7 @@ class UserController @Inject()(
 
           /* user登録 */
           userDate <- mailFil match {
-            case true  => userRepo.add(uName, userForm.mail)
+            case true  => userRepo.add(withNoIdUser)
             case false => Future.successful(0L)
           }
 
@@ -105,7 +107,7 @@ class UserController @Inject()(
       },
       loginSucces => {
         val pass = loginSucces.password
-        val mail = loginSucces.mail
+        val mail = loginSucces.email
         for {
           mailUser <- userRepo.filterByMail(mail)
           passUser <- passRepo.filterByPass(pass)

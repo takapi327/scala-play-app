@@ -11,12 +11,17 @@
   @helper.form(action = routes.UserController.signup()){
     <div class="">
       @helper.inputText(
-        vv.form("name")
+        vv.form("firstName")
       )
     </div>
     <div class="">
       @helper.inputText(
-        vv.form("mail")
+        vv.form("lastName")
+      )
+    </div>
+    <div class="">
+      @helper.inputText(
+        vv.form("email")
       )
     </div>
     <div class="">
