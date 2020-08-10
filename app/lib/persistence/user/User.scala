@@ -34,7 +34,7 @@ class UserRepository @Inject()
       .result.headOption
     }
 
-  def filterById(uid:Long): Future[Option[User]] =
+  def filterById(uid: Long): Future[Option[User]] =
     db.run {
       user.filter(_.id === uid)
       .result.headOption
