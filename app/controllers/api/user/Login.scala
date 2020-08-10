@@ -30,11 +30,11 @@ class UserLoginController @Inject()(
       val result = json.validate[JsValueReadsUser]
       val user   = result.get
       for {
-        mailUser <- userRepo.filterByMail(user.mail)
+        mailUser <- userRepo.filterByMail(user.email)
         passUser <- passRepo.filterByPass(user.password)
       } yield {
         val userMailId = mailUser.map(x => x.id.get)
-        val userPassId = passUser.map(y => y.user_id).getOrElse(0)
+        val userPassId = passUser.map(y => y.userId).getOrElse(0)
         val newToken   =
           userMailId match {
             case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
@@ -42,12 +42,12 @@ class UserLoginController @Inject()(
             case None                                            => None
           }
         newToken match {
-          case None    => authRepo.updateToken(userMailId, None)
-          case Some(_) => authRepo.updateToken(userMailId, newToken)
+          case None    => authRepo.updateToken(None, userMailId)
+          case Some(_) => authRepo.updateToken(newToken, userMailId)
         }
         val newCookie    = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"), domain = Some("localhost"))
         val jsWritesAuth = JsValueWritesUser.toWrites(
-          mail     = user.mail,
+          email    = user.email,
           password = user.password
         )
         newToken match {

@@ -4,12 +4,20 @@ import java.time.LocalDateTime
 
 import User._
 
+case class UserId (id: Long)
+
+case class UserName (
+  firstName: String,
+  lastName:  String
+) {
+  lazy val fullName =
+	s"${firstName} ${lastName}"
+}
+
 case class User (
-  id:          Option[Id],
-  name:        String,
-  mail:        String
-  //updateAt:    LocalDateTime,
-  //createdAt:   LocalDateTime
+  id:       Option[User.Id],
+  nameInfo: UserName,
+  email:    String
 )
 
 object User {
@@ -18,13 +26,12 @@ object User {
   type name = String
   type mail = String
   
-  def apply(id: Option[Id], name: String, mail: String): User = {
+  def buildEntity(firstName: String, lastName: String, email: String): User = {
     new User(
-      id   = id,
-      name = name,
-      mail = mail
+      id       = None,
+      nameInfo = UserName(firstName, lastName),
+      email    = email
     )
   }
   
-  //case class FormValue (name: String, mail: String)
 }

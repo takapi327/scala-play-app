@@ -2,7 +2,7 @@ package lib.model
 
 import java.time.LocalDateTime
 
-case class UserSession (
-  userId:      Option[User.Id],
-  token:       Option[String]
+case class AuthToken (
+  id:     Option[String],
+  userId: Option[User.Id]
 )

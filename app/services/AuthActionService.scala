@@ -33,7 +33,5 @@ class AuthActionService @Inject()(
       }
     }
   }
-
-  def isAreadyAuthenticate(request: RequestHeader)(implicit ec: ExecutionContext) = ???
 }
 

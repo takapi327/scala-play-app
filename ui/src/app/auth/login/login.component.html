@@ -1,12 +1,12 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-field">
 
   <div class="form-field__mail">
-    <label for="mail">メールアドレス</label>
-    <input id="mail" name="mail" type="email" [formControl]="mail" />
-    <span *ngIf="mail.errors?.required && (mail.dirty || mail.touched)">
+    <label for="email">メールアドレス</label>
+    <input id="email" name="email" type="email" [formControl]="email" />
+    <span *ngIf="email.errors?.required && (email.dirty || email.touched)">
       メールアドレスは必須項目です
     </span>
-    <span *ngIf="mail.errors?.email">
+    <span *ngIf="email.errors?.email">
       メールアドレスは正しい形式で入力してください
     </span>
   </div>

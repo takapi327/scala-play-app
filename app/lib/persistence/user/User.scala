@@ -6,7 +6,7 @@ import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
-import lib.model.{User, UserPassword => Pass}
+import lib.model.{UserId, UserName, User, UserPassword => Pass}
 
 @Singleton
 class UserRepository @Inject()
@@ -23,53 +23,49 @@ class UserRepository @Inject()
       user.result
     }
 
-  def add(name: String, mail: String): Future[Long] =
+  def add(newUser: User): Future[Long] =
     db.run {
-      (user returning user.map(_.id)) += User(Some(0), name, mail)
+      (user returning user.map(_.id)) += newUser
     }
 
   def filterByMail(umail: String): Future[Option[User]] =
     db.run {
-      user.filter(_.mail === umail)
+      user.filter(_.email === umail)
       .result.headOption
     }
 
-  def filterById(uid:Long): Future[Option[User]] =
+  def filterById(uid: Long): Future[Option[User]] =
     db.run {
       user.filter(_.id === uid)
       .result.headOption
     }
 
-  def signup(uid: Option[User.Id], name: User.name, mail: User.mail): Either[String, User] = {
-    uid match {
-      case Some(_) => Right(User(uid, name, mail))
+  def signup(user: User): Either[String, User] = {
+    user.id match {
+      case Some(_) => Right(user)
       case None    => Left("Not Found")
     }
   }
 
-  /******** 定義 ********/ 
+  /******** 定義 ********/
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
-    def name          = column[String]           ("name")
-    def mail          = column[String]           ("mail")
+    def firstName     = column[String]           ("first_name")
+    def lastName      = column[String]           ("last_name")
+    def email         = column[String]           ("email")
     //def updatedAt     = column[LocalDateTime]    ("updated_at")
     //def createdAt     = column[LocalDateTime]    ("created_at")
-/*
-    def * = (id, passId, name, mail, updatedAt, createdAt) <> (
-      (User.apply _).tupled, User.unapply
-    )
-*/
+
     type TableElementTuple = (
-      Option[User.Id], String, String
+      Option[User.Id], String, String, String
     )
 
-    def * = (id.?, name, mail) <> (
+    def * = (id.?, firstName, lastName, email) <> (
       (x: TableElementTuple) => User(
-        x._1, x._2 ,x._3
+        x._1, UserName(x._2, x._3), x._4
       ),
       (v: User) => User.unapply(v).map {t => (
-        //Some((user.id, user.passId, user.name, user.mail, user.updateAt, user.createdAt))
-        t._1, t._2 , t._3
+        t._1, t._2.firstName, t._2.lastName, t._3
       )}
     )
   }

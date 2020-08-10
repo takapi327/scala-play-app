@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private routes:      Router
   ) {}
 
-  mail = new FormControl('', [
+  email = new FormControl('', [
     Validators.required,
     Validators.email
   ]);
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   ]);
   
   loginForm = new FormGroup({
-    mail:     this.mail,
+    email:    this.email,
     password: this.password
   });
 
