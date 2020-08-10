@@ -113,7 +113,7 @@ class UserController @Inject()(
           passUser <- passRepo.filterByPass(pass)
         } yield {
           val userMailId = mailUser.map(x => x.id.get)
-          val userPassId = passUser.map(y => y.user_id).getOrElse(0)
+          val userPassId = passUser.map(y => y.userId).getOrElse(0)
           val newToken   = 
             userMailId match {
               case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
