@@ -81,7 +81,7 @@ class UserController @Inject()(
             case true  =>
               val token: String = TokenGenerator().next(30)
               val newCookie     = Cookie("My-Xsrf-Cookie", token)
-              authRepo.add(Some(userDate), Some(token))
+              authRepo.add(Some(token), Some(userDate))
               Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
           }
           
@@ -122,8 +122,8 @@ class UserController @Inject()(
             }
           
           newToken match {
-            case Some(_) => authRepo.updateToken(userMailId, newToken)
-            case None    => authRepo.updateToken(userMailId, None)
+            case Some(_) => authRepo.updateToken(newToken, userMailId)
+            case None    => authRepo.updateToken(None, userMailId)
           }
           val newCookie = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"))
           newToken match {

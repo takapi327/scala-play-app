@@ -18,43 +18,43 @@ class AuthTokenRepository @Inject()
   import dbConfig._
   import profile.api._
 
-  def add(uid: Option[User.Id], token: Option[String]): Future[Int] =
+  def add(id: Option[String], uid: Option[User.Id]): Future[Int] =
     db.run {
-      userAuthToken += UserSession(uid, token)
+      userAuthToken += AuthToken(id, uid)
     }
 
-  def filterByToken(token: String): Future[Option[UserSession]] =
+  def filterByToken(id: String): Future[Option[AuthToken]] =
     db.run {
-      userAuthToken.filter(_.token === token)
+      userAuthToken.filter(_.id === id)
       .result.headOption
     }
 
-  def updateToken(uid: Option[User.Id], newToken: Option[String]): Future[Int] = 
+  def updateToken(id: Option[String], uid: Option[User.Id]): Future[Int] =
     db.run {
-      userAuthToken.insertOrUpdate(UserSession(uid, newToken))
+      userAuthToken.insertOrUpdate(AuthToken(id, uid))
     }
 
-  def deleteToken(userToken: String): Future[Int] =
+  def deleteToken(id: String): Future[Int] =
     db.run {
-      userAuthToken.filter(_.token === userToken).delete
+      userAuthToken.filter(_.id === id).delete
     }
 
   /******** 定義 ********/ 
-  private class AuthTokenTable(tag: Tag) extends Table[UserSession](tag, "userAuthToken"){
-    def userId     = column[User.Id]          ("user_id", O.PrimaryKey)
-    def token      = column[String]           ("token")
+  private class AuthTokenTable(tag: Tag) extends Table[AuthToken](tag, "userAuthToken"){
+    def id      = column[String]   ("id")
+    def userId  = column[User.Id]  ("user_id", O.PrimaryKey)
     //def updatedAt     = column[LocalDateTime]    ("updatedAt")
     //def createdAt     = column[LocalDateTime]    ("createdAt")
 
     type TableElementTuple = (
-      Option[User.Id], Option[String]
+      Option[String], Option[User.Id]
     )
 
-    def * = (userId.?, token.?) <> (
-      (x: TableElementTuple) => UserSession(
+    def * = (id.?, userId.?) <> (
+      (x: TableElementTuple) => AuthToken(
         x._1, x._2
       ),
-      (v: UserSession) => UserSession.unapply(v).map {t => (
+      (v: AuthToken) => AuthToken.unapply(v).map {t => (
         t._1, t._2
       )}
     )

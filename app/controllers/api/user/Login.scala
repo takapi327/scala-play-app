@@ -42,8 +42,8 @@ class UserLoginController @Inject()(
             case None                                            => None
           }
         newToken match {
-          case None    => authRepo.updateToken(userMailId, None)
-          case Some(_) => authRepo.updateToken(userMailId, newToken)
+          case None    => authRepo.updateToken(None, userMailId)
+          case Some(_) => authRepo.updateToken(newToken, userMailId)
         }
         val newCookie    = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"), domain = Some("localhost"))
         val jsWritesAuth = JsValueWritesUser.toWrites(
