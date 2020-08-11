@@ -29,6 +29,13 @@ class UserSignupController @Inject()(
       val json   = request.body
       val result = json.validate[JsValueReadsSignup]
       val user   = result.get
+      val withNoIdUser =
+        User.buildEntity(
+          user.firstName,
+          user.lastName,
+          user.email
+        )
+
       ???
     }
 }
