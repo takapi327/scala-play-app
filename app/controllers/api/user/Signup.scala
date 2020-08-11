@@ -4,10 +4,10 @@ import javax.inject.Inject
 import scala.concurrent.{Future, ExecutionContext}
 
 import json.reads.JsValueReadsSignup
-import json.writes.JsValueWritesUser
+import json.writes.JsValueWritesSignup
 
 import lib.persistence.{UserRepository, UserPassRepository, AuthTokenRepository}
-import lib.model.User
+import lib.model.{User, UserPassword => Pass}
 
 import auth.TokenGenerator
 
@@ -35,7 +35,22 @@ class UserSignupController @Inject()(
           user.lastName,
           user.email
         )
-
-      ???
+      val hashPass = Pass.hash(user.password)
+      for {
+        newUser <- userRepo.add(withNoIdUser)
+        newPass <- passRepo.add(newUser, hashPass)
+        token     = TokenGenerator().next(30)
+        newCookie = Cookie("My-Xsrf-Cookie", token)
+        result  <- authRepo.add(Some(token), Some(newUser))
+      } yield {
+        val jsWritesAuth =
+          JsValueWritesSignup.toWrites(
+            firstName = user.firstName,
+            lastName  = user.lastName,
+            email     = user.email,
+            password  = user.password
+          )
+      Ok(Json.toJson(jsWritesAuth)).withCookies(newCookie)
+      }
     }
 }
