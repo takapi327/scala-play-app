@@ -1,15 +1,59 @@
-import { Component, OnInit } from '@angular/core';
+// ---- [ @angular ] ------------------------------------------------
+import { Component, OnInit }                  from '@angular/core';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router }                             from '@angular/router';
+
+// ---- [ AuthFunctin ] ---------------------------------------------
+import { Signup }                             from '../../interface/user';
+import { AuthService }                        from '../../service/auth.service'
 
 @Component({
-  selector: 'app-signup',
+  selector:    'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls:   ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private routes:      Router
+  ) {}
 
   ngOnInit(): void {
   }
 
+
+  firstName = new FormControl('', [
+    Validators.required
+  ]);
+
+  lastName = new FormControl('', [
+    Validators.required
+  ]);
+
+  email = new FormControl('', [
+    Validators.required,
+    Validators.email
+  ]);
+
+  password = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3)
+  ]);
+
+  signupForm = new FormGroup({
+    firstName: this.firstName,
+    lastName:  this.lastName,
+    email:     this.email,
+    password:  this.password
+  });
+
+  signup(signup: Signup): void {
+    this.authService.signup(signup).subscribe()
+  }
+
+  onSubmit() {
+    this.signup(this.signupForm.value);
+    this.routes.navigate(['/']);
+  }
 }
