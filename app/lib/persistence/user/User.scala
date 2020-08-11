@@ -40,13 +40,6 @@ class UserRepository @Inject()
       .result.headOption
     }
 
-  def signup(user: User): Either[String, User] = {
-    user.id match {
-      case Some(_) => Right(user)
-      case None    => Left("Not Found")
-    }
-  }
-
   /******** 定義 ********/
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
