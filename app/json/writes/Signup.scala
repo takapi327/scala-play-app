@@ -4,26 +4,20 @@ import play.api.libs.json._
 import lib.model._
 
 case class JsValueWritesSignup(
-  firstName: String,
-  lastName:  String,
-  email:     String,
-  password:  String
+  fullName: String,
+  email:    String
 )
 
 object  JsValueWritesSignup {
   implicit val userWrites = Json.writes[JsValueWritesSignup]
 
   def toWrites(
-    firstName: String,
-    lastName:  String,
-    email:     String,
-    password:  String
+    fullName: String,
+    email:    String
   ): JsValueWritesSignup = {
     JsValueWritesSignup(
-      firstName = firstName,
-      lastName  = lastName,      
-      email     = email,
-      password  = password
+      fullName = fullName,
+      email    = email
     )
   }
 }

@@ -45,10 +45,8 @@ class UserSignupController @Inject()(
       } yield {
         val jsWritesAuth =
           JsValueWritesSignup.toWrites(
-            firstName = user.firstName,
-            lastName  = user.lastName,
-            email     = user.email,
-            password  = user.password
+            fullName = withNoIdUser.nameInfo.fullName,
+            email    = withNoIdUser.email
           )
       Ok(Json.toJson(jsWritesAuth)).withCookies(newCookie)
       }
