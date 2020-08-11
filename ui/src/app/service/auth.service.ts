@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { User } from '../interface/user';
+import { User, Signup } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +50,17 @@ export class AuthService {
    */
   login(user: User): Observable<User> {
     return this.http.post<User>(`${this.authUrl}/login`, user, this.httpOptions);
+  }
+
+  /**
+   * HTTP POST メソッドを実行する
+   * (認証機能、会員登録をする場合のコード)
+   *
+   * @returns {Observable<Signup>}
+   * @memberof HttpClientService
+   */
+  signup(signup: Signup): Observable<Signup> {
+    return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
   }
 }
 
