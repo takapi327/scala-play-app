@@ -62,6 +62,5 @@ export class AuthService {
   signup(signup: Signup): Observable<Signup> {
     return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
   }
+
 }
-
-

@@ -6,12 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 // ---- [ Component ] --------------------------------------
 import { AppComponent }     from './app.component';
-import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LogoutComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

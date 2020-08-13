@@ -1,29 +1,40 @@
 // ---- [ Module ] -----------------------------------------------
 import { CommonModule }     from '@angular/common';
 import { NgModule }         from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // ---- [ Component ] -----------------------------------------------
 import { LoginComponent }  from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { LogoutComponent } from './logout/logout.component';
+
+// ---- [ Cookie ] -----------------------------------------------
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'My-Xsrf-Cookie'
+    }),
   ],
   exports: [
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LogoutComponent
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: []
 })
 export class AuthModule { }
