@@ -10,7 +10,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 const routes: Routes = [
   { path: 'api/auth/loginForm',  component:  LoginComponent  },
   { path: 'api/auth/signupForm', component:  SignupComponent },
-  { path: 'api/auth/logoutForm', component:  LogoutComponent, canActivate: [AuthGuard] },
+  { path: 'api/auth/logoutForm', component:  LogoutComponent },
   { path: '**',                  redirectTo: '/'             }
 ];
 

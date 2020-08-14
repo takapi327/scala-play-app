@@ -62,6 +62,17 @@ export class AuthService {
     return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
   }
 
+  /**
+   * HTTP DELETE メソッドを実行する
+   * (認証機能、ログアウトをする場合のコード)
+   *
+   * @returns {Observable<any>}
+   * @memberof HttpClientService
+   */
+  logout(): Observable<any> {
+    return this.http.delete(`${this.authUrl}/logout`, this.httpOptions);
+  }
+
   authenticate(): Observable<boolean> {
     return this.http.get<boolean>(`${this.authUrl}/list`, this.httpOptions)
   }
