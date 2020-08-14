@@ -6,3 +6,4 @@
 #GET    /auth/user     controllers.api.user.UserLoginController.index
 POST   /auth/login    controllers.api.user.UserLoginController.login
 POST   /auth/signup   controllers.api.user.UserSignupController.signup
+GET    /auth/list     controllers.api.user.UserSignupController.list

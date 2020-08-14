@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next:    HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    console.log(request.headers.get("My-Xsrf-Cookie"))
     return next.handle(request);
   }
 }

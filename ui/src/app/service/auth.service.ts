@@ -1,6 +1,5 @@
 import { Injectable }              from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
 
 import { User, Signup } from '../interface/user';
@@ -61,6 +60,10 @@ export class AuthService {
    */
   signup(signup: Signup): Observable<Signup> {
     return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
+  }
+
+  authenticate(): Observable<boolean> {
+    return this.http.get<boolean>(`${this.authUrl}/list`, this.httpOptions)
   }
 
 }
