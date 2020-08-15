@@ -31,7 +31,7 @@ export class AuthService {
    * @private
    * @memberof HttpClientService
    */
-  private authUrl = 'http://localhost:4200/api/auth';
+  private authUrl = 'http://localhost:4200/api/v1/auth';
 
   /**
    *
@@ -81,7 +81,16 @@ export class AuthService {
   logout(): Observable<Auth> {
     return this.http.delete<Auth>(`${this.authUrl}/logout`, this.httpOptions);
   }
-  authenticate(): Observable<{ isAuth: boolean }> {
-    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/list`, this.httpOptions)
+
+  /**
+   * HTTP GET メソッドを実行する
+   * (認証,認可用のコード)
+   *
+   * @return    An `Observable` of the response body as a `{ isAuth: boolean }`.
+   * @param url 認証、認可用のエンドポイント
+   * @memberof  HttpClientService
+   */
+  isAuthenticate(): Observable<{ isAuth: boolean }> {
+    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/isAuthenticate`, this.httpOptions)
   }
 }

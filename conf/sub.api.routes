@@ -3,8 +3,7 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-#GET    /auth/user     controllers.api.user.UserLoginController.index
-POST   /auth/login    controllers.api.user.UserLoginController.login
-POST   /auth/signup   controllers.api.user.UserSignupController.signup
-DELETE /auth/logout   controllers.api.user.UserLogoutController.logout
-GET    /auth/list     controllers.api.user.UserSignupController.list
+POST   /auth/login            controllers.api.user.UserLoginController.login
+POST   /auth/signup           controllers.api.user.UserSignupController.signup
+DELETE /auth/logout           controllers.api.user.UserLogoutController.logout
+GET    /auth/isAuthenticate   controllers.api.user.UserSignupController.isAuthenticate

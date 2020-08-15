@@ -13,9 +13,8 @@ GET     /auth/loginForm             controllers.UserController.showLoginForm
 POST    /auth/login                 controllers.UserController.login
 POST    /auth/logout                controllers.UserController.logout
 
-#POST    /api/auth/login             controllers.api.user.UserLoginController.login()
-# For v1 RestAPI
-->      /api                        sub.api.Routes
+# For v1 REST API
+->      /api/v1                     sub.api.Routes
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

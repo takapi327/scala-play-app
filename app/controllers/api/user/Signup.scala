@@ -56,7 +56,7 @@ class UserSignupController @Inject()(
       }
     }
 
-    def list() = Action {implicit request =>
+    def isAuthenticate() = Action {implicit request =>
       val cookies = request.cookies.get("My-Xsrf-Cookie")
       val jsWritesAuth = JsValueWritesIsAuth.toWrites(
         isAuth = cookies match {
