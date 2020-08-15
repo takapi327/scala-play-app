@@ -7,7 +7,7 @@ import json.reads.JsValueReadsUser
 import json.writes.JsValueWritesUser
 
 import lib.persistence.{UserRepository, UserPassRepository, AuthTokenRepository}
-import lib.model.User
+import lib.model.{User, UserPassword}
 
 import auth.TokenGenerator
 
@@ -25,25 +25,32 @@ class UserLoginController @Inject()(
   extends MessagesAbstractController(cc)
   with    I18nSupport {
 
+    /**
+     *
+     * ※要修正
+     * EitherT等を使ってもっと短く書きたい
+     */
     def login() = Action(parse.json) async {implicit request =>
       val json   = request.body
       val result = json.validate[JsValueReadsUser]
       val user   = result.get
       for {
-        mailUser <- userRepo.filterByMail(user.email)
-        passUser <- passRepo.filterByPass(user.password)
+        userId   <- userRepo.getUserId(user.email)
+        passUser <- passRepo.filterById(userId)
       } yield {
-        val userMailId = mailUser.map(x => x.id.get)
-        val userPassId = passUser.map(y => y.userId).getOrElse(0)
+        val isMatchPass = passUser match {
+          case Some(pass) => UserPassword.verify(user.password, pass.hash)
+          case None       => false
+        }
         val newToken   =
-          userMailId match {
-            case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
-            case Some(_)  if userPassId == 0                     => None
-            case None                                            => None
+          isMatchPass match {
+            case true  => Some(TokenGenerator().next(30))
+            case false => None
           }
+
         newToken match {
           case None    => authRepo.updateToken(None, None)
-          case Some(_) => authRepo.updateToken(newToken, userMailId)
+          case Some(_) => authRepo.updateToken(newToken, Some(userId))
         }
         val newCookie    = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"), domain = Some("localhost"))
         val jsWritesAuth = JsValueWritesUser.toWrites(
