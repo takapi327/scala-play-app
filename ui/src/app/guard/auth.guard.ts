@@ -3,41 +3,43 @@ import { CanActivate, ActivatedRouteSnapshot,
          RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable }                           from 'rxjs';
 
-import { AuthService } from '../service/auth.service'
+import { AuthService } from '../service/auth.service';
+import { Auth } from '../interface/user'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  isAuth: boolean = false;
-
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router:      Router
   ) { }
 
-  getAuth(): void {
-    this.authService.authenticate().subscribe(
-      res => this.isAuth = res
-    );
-  }
-
+  isAuth: Auth;
+  /**
+   *
+   * @param next 遷移先の Route の状態を表すイミュータブルオブジェクト
+   *             URLのセグメント情報やクエリパラメータ、フラグメントパラメータを取得
+   * @param state 遷移先の Router の状態を表すイミュータブルオブジェクト
+   * @return Observable<boolean> | Promise<boolean> | boolean
+   */
   canActivate(
     next:  ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-/*
     this.authService.authenticate().subscribe(
-      res => console.log(res)
+      auth => {
+        this.isAuth = auth
+      }
     );
-*/
-    this.getAuth()
+
     if (this.isAuth) {
-      this.router.navigate(['/']);
-      return false;
+      return true
     }
-    return true;
+    alert("ログインしていません")
+    this.router.navigate(['/']);
+    return false;
   }
 }

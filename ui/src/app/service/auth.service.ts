@@ -2,7 +2,7 @@ import { Injectable }              from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User, Signup } from '../interface/user';
+import { User, Signup, Auth } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -78,12 +78,10 @@ export class AuthService {
    * @param url ログアウト用のエンドポイント
    * @memberof  HttpClientService
    */
-  logout(): Observable<any> {
-    return this.http.delete(`${this.authUrl}/logout`, this.httpOptions);
+  logout(): Observable<Auth> {
+    return this.http.delete<Auth>(`${this.authUrl}/logout`, this.httpOptions);
   }
-
-  authenticate(): Observable<boolean> {
-    return this.http.get<boolean>(`${this.authUrl}/list`, this.httpOptions)
+  authenticate(): Observable<{ isAuth: boolean }> {
+    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/list`, this.httpOptions)
   }
-
 }

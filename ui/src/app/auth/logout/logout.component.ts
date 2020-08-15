@@ -20,5 +20,6 @@ export class LogoutComponent implements OnInit {
   onClick(): void {
     this.authService.logout().subscribe()
     this.router.navigate(['/']);
+    alert("ログアウトしました")
   }
 }
