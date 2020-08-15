@@ -1,10 +1,8 @@
 import { Injectable }                           from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot,
-         RouterStateSnapshot, UrlTree, Router } from '@angular/router';
-import { Observable }                           from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 
 import { AuthService } from '../service/auth.service';
-import { Auth } from '../interface/user'
+import { Auth }        from '../interface/user'
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +14,24 @@ export class AuthGuard implements CanActivate {
     private router:      Router
   ) { }
 
+  /**
+   * @Auth boolean
+   */
   isAuth: Auth;
   /**
    *
-   * @param next 遷移先の Route の状態を表すイミュータブルオブジェクト
-   *             URLのセグメント情報やクエリパラメータ、フラグメントパラメータを取得
-   * @param state 遷移先の Router の状態を表すイミュータブルオブジェクト
-   * @return Observable<boolean> | Promise<boolean> | boolean
+   *
+   * ActivatedRouteSnapshotをimportして使用することも可能
+   * -> 遷移先の Route の状態を表すイミュータブルオブジェクト
+   *    URLのセグメント情報やクエリパラメータ、フラグメントパラメータを取得
+   *
+   * RouterStateSnapshotをimportして使用することも可能
+   * -> 遷移先の Router の状態を表すイミュータブルオブジェクト
+   *
+   * @return boolean
+   *
    */
-  canActivate(
-    next:  ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  canActivate(): boolean{
 
     this.authService.authenticate().subscribe(
       auth => {
@@ -38,8 +42,8 @@ export class AuthGuard implements CanActivate {
     if (this.isAuth) {
       return true
     }
-    alert("ログインしていません")
-    this.router.navigate(['/']);
-    return false;
+      alert("ログインしていません")
+      this.router.navigate(['/']);
+      return false;
   }
 }
