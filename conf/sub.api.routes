@@ -5,5 +5,5 @@
 
 POST   /auth/login            controllers.api.authenticate.UserLoginController.login
 POST   /auth/signup           controllers.api.authenticate.UserSignupController.signup
-DELETE /auth/logout           controllers.api.user.UserLogoutController.logout
+DELETE /auth/logout           controllers.api.authenticate.UserLogoutController.logout
 GET    /auth/isAuthenticate   controllers.api.authenticate.UserSignupController.isAuthenticate
