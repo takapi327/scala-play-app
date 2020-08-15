@@ -9,3 +9,9 @@ export interface Signup {
   email:     string;
   password:  string;
 }
+
+export class Auth {
+  constructor(
+    public isAuth: boolean
+  ){}
+}
