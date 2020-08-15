@@ -66,8 +66,8 @@ export class AuthService {
    * @return       An `Observable` of the response body as a `Signup`.
    * @memberof     HttpClientService
    */
-  signup(signup: Signup): Observable<Signup> {
-    return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
+  signup(signup: Signup): Observable<{ fullName: string, email: string }> {
+    return this.http.post<{ fullName: string, email: string }>(`${this.authUrl}/signup`, signup, this.httpOptions);
   }
 
   /**

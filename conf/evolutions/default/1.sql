@@ -9,7 +9,7 @@ CREATE TABLE user (
   UNIQUE KEY (email)
 );
 
-INSERT INTO user (id, first_name, last_name, email) VALUES (1, "TEST", "test", "test@111");
+INSERT INTO user (id, first_name, last_name, email) VALUES (1, "hogehoge", "hugahuga", "hogehoge@hugahuga");
 
 --- !Downs
 DROP TABLE user

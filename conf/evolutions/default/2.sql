@@ -6,7 +6,7 @@ CREATE TABLE userPassword (
   PRIMARY KEY (user_id)
 );
 
-INSERT INTO userPassword (user_id, password) VALUES (1, "TEST");
+INSERT INTO userPassword (user_id, password) VALUES (1, "hogehogehuahuga");
 
 --- !Downs
 DROP TABLE userPassword
