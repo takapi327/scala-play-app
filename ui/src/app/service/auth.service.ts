@@ -19,7 +19,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   /**
-   * RST-API 実行時に指定する URL
+   * REST-API 実行時に指定する URL
    *
    * バックエンドは PlayFramework で実装し、ポート番号「9000」で待ち受けているため、
    * そのまま指定すると CORS でエラーになる
@@ -32,7 +32,11 @@ export class AuthService {
    * @memberof HttpClientService
    */
   private authUrl = 'http://localhost:4200/api/auth';
-    
+
+  /**
+   *
+   *
+   */
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':    'application/json',
@@ -44,8 +48,10 @@ export class AuthService {
    * HTTP POST メソッドを実行する
    * (認証機能、ログインをする場合のコード)
    *
-   * @returns {Observable<User>}
-   * @memberof HttpClientService
+   * @param url    ログインのエンドポイント
+   * @param User   ログイン用の入力データ
+   * @return        An `Observable` of the response body as a `User`.
+   * @memberof     HttpClientService
    */
   login(user: User): Observable<User> {
     return this.http.post<User>(`${this.authUrl}/login`, user, this.httpOptions);
@@ -55,8 +61,10 @@ export class AuthService {
    * HTTP POST メソッドを実行する
    * (認証機能、会員登録をする場合のコード)
    *
-   * @returns {Observable<Signup>}
-   * @memberof HttpClientService
+   * @param url    会員登録用のエンドポイント
+   * @param Signup 会員登録用の入力データ
+   * @return       An `Observable` of the response body as a `Signup`.
+   * @memberof     HttpClientService
    */
   signup(signup: Signup): Observable<Signup> {
     return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
@@ -66,8 +74,9 @@ export class AuthService {
    * HTTP DELETE メソッドを実行する
    * (認証機能、ログアウトをする場合のコード)
    *
-   * @returns {Observable<any>}
-   * @memberof HttpClientService
+   * @return    An `Observable` of the response body as a `any`.
+   * @param url ログアウト用のエンドポイント
+   * @memberof  HttpClientService
    */
   logout(): Observable<any> {
     return this.http.delete(`${this.authUrl}/logout`, this.httpOptions);
