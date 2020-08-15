@@ -1,4 +1,4 @@
-package controllers.api.user
+package controllers.api.authenticate
 
 import javax.inject.Inject
 import scala.concurrent.{Future, ExecutionContext}
