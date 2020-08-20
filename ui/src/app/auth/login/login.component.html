@@ -13,14 +13,12 @@
   <div class="form-field__pass">
     <label for="password">パスワード</label>
     <input id="password" name="password" type="password" [formControl]="password" />
-    <span *ngIf="password.errors?.required && (password.dirty || password.touched)">
-      パスワードは必須項目です
-    </span>
-    <span *ngIf="password.errors?.minlength">
-      パスワードは3文字以上入力してください
-    </span>
+    <ng-container *ngFor="let validation of validationMessages.password">
+      <span *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
   </div>
-
   <div class="form-field__submit">
     <input type="submit" value="ログイン" [disabled]="loginForm.invalid" />
   </div>
