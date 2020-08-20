@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
 
   password = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(8)
   ]);
 
   signupForm = new FormGroup({
