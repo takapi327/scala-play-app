@@ -41,9 +41,10 @@ export class AuthGuard implements CanActivate {
 
     if (this.isAuth) {
       return true
-    }
+    } else {
       alert("ログインしていません")
       this.router.navigate(['/']);
       return false;
+    }
   }
 }

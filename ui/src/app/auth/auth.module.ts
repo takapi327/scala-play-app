@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent }  from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { LogoutComponent } from './logout/logout.component';
-import { EmailComponent }  from './email/email.component';
 
 // ---- [ Cookie ] -----------------------------------------------
 import { CookieService } from 'ngx-cookie-service';
@@ -17,8 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
   declarations: [
     LoginComponent,
     SignupComponent,
-    LogoutComponent,
-    EmailComponent
+    LogoutComponent
   ],
   imports: [
     CommonModule,
@@ -32,8 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
   exports: [
     LoginComponent,
     SignupComponent,
-    LogoutComponent,
-    EmailComponent
+    LogoutComponent
   ],
   providers: [
     CookieService
