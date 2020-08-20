@@ -19,12 +19,11 @@
   <div class="form-field__mail">
     <label for="email">メールアドレス</label>
     <input id="email" name="email" type="email" [formControl]="email" />
-    <span *ngIf="email.errors?.required && (email.dirty || email.touched)">
-      メールアドレスは必須項目です
-    </span>
-    <span *ngIf="email.errors?.email">
-      メールアドレスは正しい形式で入力してください
-    </span>
+    <ng-container *ngFor="let validation of validationMessages.email">
+      <span *ngIf="email.hasError(validation.type) && (email.dirty || email.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
   </div>
 
   <div class="form-field__pass">

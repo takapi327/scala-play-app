@@ -6,6 +6,7 @@ import { Router }                             from '@angular/router';
 // ---- [ AuthFunctin ] ---------------------------------------------
 import { Signup }                             from '../../interface/user';
 import { AuthService }                        from '../../service/auth.service'
+import { ValidationMessages }                 from '../validation-messages'
 
 @Component({
   selector:    'app-signup',
@@ -15,8 +16,9 @@ import { AuthService }                        from '../../service/auth.service'
 export class SignupComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
-    private routes:      Router
+    private authService:        AuthService,
+    private routes:             Router,
+    public  validationMessages: ValidationMessages
   ) {}
 
   ngOnInit(): void {
