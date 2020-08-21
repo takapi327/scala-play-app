@@ -1,7 +1,7 @@
 // ---- [ @angular ] ------------------------------------------------
-import { Component, OnInit }         from '@angular/core';
-import { Router }                    from '@angular/router';
-import { FormControl, Validators, FormGroup }  from '@angular/forms';
+import { Component, OnInit }  from '@angular/core';
+import { Router }             from '@angular/router';
+import { FormGroup }          from '@angular/forms';
 
 // ---- [ Interface ] -----------------------------------------------
 import { User }                 from '../../interface/user';

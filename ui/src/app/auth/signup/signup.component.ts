@@ -3,10 +3,13 @@ import { Component, OnInit }                  from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router }                             from '@angular/router';
 
-// ---- [ AuthFunctin ] ---------------------------------------------
-import { Signup }                             from '../../interface/user';
-import { AuthService }                        from '../../service/auth.service'
-import { ValidationMessages }                 from '../validation-messages'
+// ---- [ Interface ] -----------------------------------------------
+import { Signup }               from '../../interface/user';
+
+// ---- [ Service ] -------------------------------------------------
+import { AuthService }          from '../../service/auth.service';
+import { ValidationService }    from '../../service/validation.service'
+import { ValidationMessages }   from '../validation-messages';
 
 @Component({
   selector:    'app-signup',
@@ -17,6 +20,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private authService:        AuthService,
+    private validationService:  ValidationService,
     private routes:             Router,
     public  validationMessages: ValidationMessages
   ) {}
@@ -33,11 +37,6 @@ export class SignupComponent implements OnInit {
     Validators.required
   ]);
 
-  email = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
-
   password = new FormControl('', [
     Validators.required,
     Validators.minLength(8)
@@ -46,7 +45,7 @@ export class SignupComponent implements OnInit {
   signupForm = new FormGroup({
     firstName: this.firstName,
     lastName:  this.lastName,
-    email:     this.email,
+    email:     this.validationService.validateEmail(),
     password:  this.password
   });
 
