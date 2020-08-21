@@ -9,13 +9,5 @@ case class JsValueWritesIsAuth(
 
 object  JsValueWritesIsAuth {
   implicit val isAuthWrites = Json.writes[JsValueWritesIsAuth]
-
-  def toWrites(
-    isAuth: Boolean
-  ): JsValueWritesIsAuth = {
-    JsValueWritesIsAuth(
-      isAuth = isAuth
-    )
-  }
 }
 

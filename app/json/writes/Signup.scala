@@ -10,14 +10,4 @@ case class JsValueWritesSignup(
 
 object  JsValueWritesSignup {
   implicit val userWrites = Json.writes[JsValueWritesSignup]
-
-  def toWrites(
-    fullName: String,
-    email:    String
-  ): JsValueWritesSignup = {
-    JsValueWritesSignup(
-      fullName = fullName,
-      email    = email
-    )
-  }
 }

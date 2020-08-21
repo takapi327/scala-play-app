@@ -19,11 +19,11 @@ import play.api.i18n.I18nSupport
 import play.api.libs.json.JsPath.json
 
 class UserSignupController @Inject()(
-  userRepo: UserRepository,
-  passRepo: UserPassRepository,
-  authRepo: AuthTokenRepository,
+  userRepo:    UserRepository,
+  passRepo:    UserPassRepository,
+  authRepo:    AuthTokenRepository,
   authService: AuthActionService,
-  cc:       MessagesControllerComponents
+  cc:          MessagesControllerComponents
 )(implicit ec: ExecutionContext)
   extends MessagesAbstractController(cc)
   with    I18nSupport
@@ -48,7 +48,7 @@ class UserSignupController @Inject()(
         result  <- authRepo.add(Some(token), Some(newUser))
       } yield {
         val jsWritesAuth =
-          JsValueWritesSignup.toWrites(
+          JsValueWritesSignup(
             fullName = withNoIdUser.nameInfo.fullName,
             email    = withNoIdUser.email
           )
@@ -58,7 +58,7 @@ class UserSignupController @Inject()(
 
     def isAuthenticate() = Action {implicit request =>
       val cookies = request.cookies.get("My-Xsrf-Cookie")
-      val jsWritesAuth = JsValueWritesIsAuth.toWrites(
+      val jsWritesAuth = JsValueWritesIsAuth(
         isAuth = cookies match {
           case Some(_) => true
           case None    => false
