@@ -27,14 +27,9 @@ export class LoginComponent implements OnInit {
     public  validationMessages: ValidationMessages
   ) {}
 
-  password = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8)
-  ]);
-
   loginForm = new FormGroup({
-    email:    this.validationService.isEmailValidation(),
-    password: this.password
+    email:    this.validationService.validateEmail(),
+    password: this.validationService.validatePassword()
   });
 
   login(user: User): void {

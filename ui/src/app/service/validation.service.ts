@@ -30,11 +30,11 @@ export class ValidationService {
   ]);
 
   // ---- [ method ] ----------------
-  isEmailValidation(): FormControl {
+  validateEmail(): FormControl {
     return this.email
   }
   
-  isPasswordValidation(): FormControl {
+  validatePassword(): FormControl {
     return this.password
   }
 }

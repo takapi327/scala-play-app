@@ -18,5 +18,5 @@ export class EmailComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  email = this.validationService.isEmailValidation()
+  email = this.validationService.validateEmail()
 }
