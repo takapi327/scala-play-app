@@ -18,15 +18,7 @@
 
   <app-email></app-email>
 
-  <div class="form-field__pass">
-    <label for="password">パスワード</label>
-    <input id="password" name="password" type="password" [formControl]="password" />
-    <ng-container *ngFor="let validation of validationMessages.password">
-      <span *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">
-        {{validation.message}}
-      </span>
-    </ng-container>
-  </div>
+  <app-password></app-password>
 
   <div class="form-field__submit">
     <input type="submit" value="会員登録" [disabled]="signupForm.invalid" />

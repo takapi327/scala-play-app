@@ -28,7 +28,6 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   firstName = new FormControl('', [
     Validators.required
   ]);
@@ -37,16 +36,11 @@ export class SignupComponent implements OnInit {
     Validators.required
   ]);
 
-  password = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8)
-  ]);
-
   signupForm = new FormGroup({
     firstName: this.firstName,
     lastName:  this.lastName,
     email:     this.validationService.validateEmail(),
-    password:  this.password
+    password:  this.validationService.validatePassword()
   });
 
   signup(signup: Signup): void {
