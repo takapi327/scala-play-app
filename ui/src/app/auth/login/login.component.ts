@@ -3,11 +3,13 @@ import { Component, OnInit }         from '@angular/core';
 import { Router }                    from '@angular/router';
 import { FormControl, Validators, FormGroup }  from '@angular/forms';
 
-// ---- [ AuthFunctin ] ---------------------------------------------
-import { User }                      from '../../interface/user';
-import { AuthService }               from '../../service/auth.service'
-import { ValidationMessages }        from '../validation-messages'
+// ---- [ Interface ] -----------------------------------------------
+import { User }                 from '../../interface/user';
 
+// ---- [ Service ] -------------------------------------------------
+import { AuthService }          from '../../service/auth.service';
+import { ValidationService }    from '../../service/validation.service'
+import { ValidationMessages }   from '../validation-messages';
 
 @Component({
   selector:    'app-login',
@@ -20,14 +22,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService:        AuthService,
+    private validationService:  ValidationService,
     private routes:             Router,
     public  validationMessages: ValidationMessages
   ) {}
-
-  email = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
 
   password = new FormControl('', [
     Validators.required,
@@ -35,7 +33,7 @@ export class LoginComponent implements OnInit {
   ]);
 
   loginForm = new FormGroup({
-    email:    this.email,
+    email:    this.validationService.isEmailValidation(),
     password: this.password
   });
 
