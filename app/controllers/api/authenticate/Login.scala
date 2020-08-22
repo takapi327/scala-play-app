@@ -6,6 +6,9 @@ import scala.concurrent.{Future, ExecutionContext}
 import json.reads.JsValueReadsUser
 import json.writes.JsValueWritesUser
 
+import cats.data.EitherT
+import cats.implicits._
+
 import lib.persistence.{UserRepository, UserPassRepository, AuthTokenRepository}
 import lib.model.{User, UserPassword}
 
@@ -25,48 +28,28 @@ class UserLoginController @Inject()(
   extends MessagesAbstractController(cc)
   with    I18nSupport {
 
-    /**
-     *
-     * ※要修正
-     * EitherT等を使ってもっと短く書きたい
-     */
-    def login() = Action(parse.json) async {implicit request =>
-      val json     = request.body
-      val result   = json.validate[JsValueReadsUser]
-      val jsonUser = result.get
+  def login() = Action(parse.json) async {implicit request =>
+    val jsonUser = request.body.validate[JsValueReadsUser].get
+    val result: EitherT[Future, Result, Result] =
       for {
-        user     <- userRepo.filterByMail(jsonUser.email)
-        /**
-         * ※要修正
-         * IdにgetOrElseはNG
-         */
-        passUser <- passRepo.filterById(user.flatMap(v => v.id).getOrElse(0))
+        user     <- EitherT(userRepo.filterByMail(jsonUser.email).map(_.toRight(NotFound("Not Foumd Email"))))
+        passUser <- EitherT(passRepo.filterById(user.id.get).map(_.toRight(NotFound("Not Found Id"))))
       } yield {
-        val isMatchPass = passUser match {
-          case Some(pass) => UserPassword.verify(jsonUser.password, pass.hash)
-          case None       => false
+        val newToken    = TokenGenerator().next(30)
+        val updateToken = UserPassword.verify(jsonUser.password, passUser.hash) match {
+          case true  => Some(authRepo.updateToken(Some(newToken), user.id))
+          case false => None
         }
-        val newToken   =
-          isMatchPass match {
-            case true  => Some(TokenGenerator().next(30))
-            case false => None
-          }
-
-        newToken match {
-          case None    => authRepo.updateToken(None, None)
-          case Some(_) => authRepo.updateToken(newToken, user.flatMap(v => v.id))
-        }
-        val newCookie    = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"), domain = Some("localhost"))
-        val jsWritesAuth = JsValueWritesUser(
-          fullname = user match {
-            case Some(v) => v.nameInfo.fullName
-            case None    => "Not Found User Name"
-          }
-        )
-        newToken match {
+        updateToken match {
           case None    => BadRequest
-          case Some(_) => Ok(Json.toJson(jsWritesAuth)).withCookies(newCookie)
+          case Some(_) => Ok(
+            Json.toJson(JsValueWritesUser(user.nameInfo.fullName))
+          ).withCookies(Cookie("My-Xsrf-Cookie", newToken))
         }
       }
+    result.value.map{
+      case Right(sucess) => sucess
+      case Left(bad)     => bad
     }
   }
+}

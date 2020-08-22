@@ -4,9 +4,6 @@ import java.time.LocalDateTime
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
-import cats.data.EitherT
-import cats.implicits._
-
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 
