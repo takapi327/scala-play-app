@@ -24,7 +24,7 @@ class UserRepository @Inject()
       user.result
     }
 
-  def add(newUser: User): Future[Long] =
+  def add(newUser: User): Future[User.Id] =
     db.run {
       (user returning user.map(_.id)) += newUser
     }
