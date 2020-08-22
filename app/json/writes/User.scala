@@ -4,8 +4,7 @@ import play.api.libs.json._
 import lib.model._
 
 case class JsValueWritesUser(
-  email:    String,
-  password: String
+  fullname: String,
 )
 
 object  JsValueWritesUser {
