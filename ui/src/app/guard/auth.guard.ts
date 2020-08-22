@@ -1,4 +1,4 @@
-import { Injectable }                           from '@angular/core';
+import { Injectable }          from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 
 import { AuthService } from '../service/auth.service';
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
    */
   canActivate(): boolean{
 
-    this.authService.authenticate().subscribe(
+    this.authService.isAuthenticate().subscribe(
       auth => {
         this.isAuth = auth
       }
@@ -41,9 +41,10 @@ export class AuthGuard implements CanActivate {
 
     if (this.isAuth) {
       return true
-    }
+    } else {
       alert("ログインしていません")
       this.router.navigate(['/']);
       return false;
+    }
   }
 }

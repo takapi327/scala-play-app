@@ -31,7 +31,7 @@ export class AuthService {
    * @private
    * @memberof HttpClientService
    */
-  private authUrl = 'http://localhost:4200/api/auth';
+  private authUrl = 'http://localhost:4200/api/v1/auth';
 
   /**
    *
@@ -50,11 +50,11 @@ export class AuthService {
    *
    * @param url    ログインのエンドポイント
    * @param User   ログイン用の入力データ
-   * @return        An `Observable` of the response body as a `User`.
+   * @return        An `Observable` of the response body as a `string`.
    * @memberof     HttpClientService
    */
-  login(user: User): Observable<User> {
-    return this.http.post<User>(`${this.authUrl}/login`, user, this.httpOptions);
+  login(user: User): Observable<{ fullName: string }> {
+    return this.http.post<{ fullName: string }>(`${this.authUrl}/login`, user, this.httpOptions);
   }
 
   /**
@@ -63,25 +63,34 @@ export class AuthService {
    *
    * @param url    会員登録用のエンドポイント
    * @param Signup 会員登録用の入力データ
-   * @return       An `Observable` of the response body as a `Signup`.
+   * @return       An `Observable` of the response body as a `{string, string}`.
    * @memberof     HttpClientService
    */
-  signup(signup: Signup): Observable<Signup> {
-    return this.http.post<Signup>(`${this.authUrl}/signup`, signup, this.httpOptions);
+  signup(signup: Signup): Observable<{ fullName: string, email: string }> {
+    return this.http.post<{ fullName: string, email: string }>(`${this.authUrl}/signup`, signup, this.httpOptions);
   }
 
   /**
    * HTTP DELETE メソッドを実行する
    * (認証機能、ログアウトをする場合のコード)
    *
-   * @return    An `Observable` of the response body as a `any`.
-   * @param url ログアウト用のエンドポイント
+   * @return     An `Observable` of the response body as a `any`.
+   * @param url  ログアウト用のエンドポイント
+   * @memberof   HttpClientService
+   */
+  logout(): Observable<any> {
+    return this.http.delete<any>(`${this.authUrl}/logout`, this.httpOptions);
+  }
+
+  /**
+   * HTTP GET メソッドを実行する
+   * (認証,認可用のコード)
+   *
+   * @return    An `Observable` of the response body as a `{ isAuth: boolean }`.
+   * @param url 認証、認可用のエンドポイント
    * @memberof  HttpClientService
    */
-  logout(): Observable<Auth> {
-    return this.http.delete<Auth>(`${this.authUrl}/logout`, this.httpOptions);
-  }
-  authenticate(): Observable<{ isAuth: boolean }> {
-    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/list`, this.httpOptions)
+  isAuthenticate(): Observable<{ isAuth: boolean }> {
+    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/isAuthenticate`, this.httpOptions)
   }
 }

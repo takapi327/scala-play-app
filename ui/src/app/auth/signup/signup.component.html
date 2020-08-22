@@ -16,27 +16,9 @@
     </span>
   </div>
 
-  <div class="form-field__mail">
-    <label for="email">メールアドレス</label>
-    <input id="email" name="email" type="email" [formControl]="email" />
-    <span *ngIf="email.errors?.required && (email.dirty || email.touched)">
-      メールアドレスは必須項目です
-    </span>
-    <span *ngIf="email.errors?.email">
-      メールアドレスは正しい形式で入力してください
-    </span>
-  </div>
+  <app-email></app-email>
 
-  <div class="form-field__pass">
-    <label for="password">パスワード</label>
-    <input id="password" name="password" type="password" [formControl]="password" />
-    <span *ngIf="password.errors?.required && (password.dirty || password.touched)">
-      パスワードは必須項目です
-    </span>
-    <span *ngIf="password.errors?.minlength">
-      パスワードは3文字以上入力してください
-    </span>
-  </div>
+  <app-password></app-password>
 
   <div class="form-field__submit">
     <input type="submit" value="会員登録" [disabled]="signupForm.invalid" />

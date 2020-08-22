@@ -1,12 +1,15 @@
 // ---- [ @angular ] ------------------------------------------------
-import { Component, OnInit }                  from '@angular/core';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { Router }                             from '@angular/router';
+import { Component, OnInit }  from '@angular/core';
+import { Router }             from '@angular/router';
+import { FormGroup }          from '@angular/forms';
 
-// ---- [ AuthFunctin ] ---------------------------------------------
-import { User }                               from '../../interface/user';
-import { AuthService }                        from '../../service/auth.service'
+// ---- [ Interface ] -----------------------------------------------
+import { User }                 from '../../interface/user';
 
+// ---- [ Service ] -------------------------------------------------
+import { AuthService }          from '../../service/auth.service';
+import { ValidationService }    from '../../service/validation.service'
+import { ValidationMessages }   from '../validation-messages';
 
 @Component({
   selector:    'app-login',
@@ -18,23 +21,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   constructor(
-    private authService: AuthService,
-    private routes:      Router
+    private authService:        AuthService,
+    private validationService:  ValidationService,
+    private routes:             Router,
+    public  validationMessages: ValidationMessages
   ) {}
 
-  email = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
-
-  password = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3)
-  ]);
-  
   loginForm = new FormGroup({
-    email:    this.email,
-    password: this.password
+    email:    this.validationService.validateEmail(),
+    password: this.validationService.validatePassword()
   });
 
   login(user: User): void {

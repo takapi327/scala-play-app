@@ -34,6 +34,18 @@ class UserRepository @Inject()
       .result.headOption
     }
 
+  /**
+   *
+   * ※要修正
+   * 戻り値をIDにするためgetしているが、Option型のIDにgetとgetOrelseを
+   * 使うのは避けたい
+   */
+  def getUserId(umail: String): Future[Long] =
+    db.run {
+      user.filter(_.email === umail)
+      .result.head.map(_.id.get)
+    }
+
   def filterById(uid: Long): Future[Option[User]] =
     db.run {
       user.filter(_.id === uid)
