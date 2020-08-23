@@ -11,3 +11,11 @@ case class JsValueReadsUser(
 object  JsValueReadsUser {
   implicit val userReads = Json.reads[JsValueReadsUser]
 }
+
+case class JsValueReadsEmail(
+  email: String
+)
+
+object  JsValueReadsEmail {
+  implicit val emailReads = Json.reads[JsValueReadsEmail]
+}
