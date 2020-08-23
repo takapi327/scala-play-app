@@ -2,7 +2,7 @@ import { Injectable }              from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { User, Signup, Auth } from '../interface/user';
+import { User, Signup, Email } from '../interface/user';
 
 @Injectable({
   providedIn: 'root'
@@ -86,11 +86,23 @@ export class AuthService {
    * HTTP GET メソッドを実行する
    * (認証,認可用のコード)
    *
-   * @return    An `Observable` of the response body as a `{ isAuth: boolean }`.
+   * @return    An `Observable` of the respon:se body as a `{ isAuth: boolean }`.
    * @param url 認証、認可用のエンドポイント
    * @memberof  HttpClientService
    */
   isAuthenticate(): Observable<{ isAuth: boolean }> {
-    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/isAuthenticate`, this.httpOptions)
+    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/isAuthenticate`, this.httpOptions);
+  }
+
+  /**
+   * HTTP POST メソッドを実行する
+   * (Emailが登録済みかどうかを確認するコード)
+   *
+   * @return    An `Observable` of the response body as a `{ isRegistered: boolean }`.
+   * @param url Emailが登録済みかどうかを確認するエンドポイント
+   * @memberof  HttpClientService
+   */
+  isEmailRegistered(payload: {email: string}): Observable<{ isRegistered: boolean }> {
+    return this.http.post<{ isRegistered: boolean }>(`${this.authUrl}/isEmailRegistered`, payload, this.httpOptions);
   }
 }
