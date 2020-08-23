@@ -1,7 +1,7 @@
 // ---- [ @angular ] ------------------------------------------------
 import { Component, OnInit }  from '@angular/core';
 import { Router }             from '@angular/router';
-import { FormGroup }          from '@angular/forms';
+import { FormGroup, FormControl, Validators }          from '@angular/forms';
 
 // ---- [ Interface ] -----------------------------------------------
 import { User }                 from '../../interface/user';
@@ -27,8 +27,16 @@ export class LoginComponent implements OnInit {
     public  validationMessages: ValidationMessages
   ) {}
 
+  email = new FormControl('',
+    [
+      Validators.required,
+      Validators.email,
+    ],
+    this.validationService.emailRegisteredNone()
+  );
+
   loginForm = new FormGroup({
-    email:    this.validationService.validateEmail(),
+    email:    this.email,
     password: this.validationService.validatePassword()
   });
 
