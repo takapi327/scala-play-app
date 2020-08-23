@@ -2,9 +2,10 @@ package lib.persistence
 
 import java.time.LocalDateTime
 import javax.inject.{Inject, Singleton}
+import scala.concurrent.{ExecutionContext, Future}
+
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
-import scala.concurrent.{ExecutionContext, Future}
 
 import lib.model.{UserId, UserName, User, UserPassword => Pass}
 
@@ -23,7 +24,7 @@ class UserRepository @Inject()
       user.result
     }
 
-  def add(newUser: User): Future[Long] =
+  def add(newUser: User): Future[User.Id] =
     db.run {
       (user returning user.map(_.id)) += newUser
     }

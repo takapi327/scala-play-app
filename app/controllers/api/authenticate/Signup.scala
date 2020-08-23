@@ -6,6 +6,9 @@ import scala.concurrent.{Future, ExecutionContext}
 import json.reads.JsValueReadsSignup
 import json.writes.{JsValueWritesSignup, JsValueWritesIsAuth}
 
+import cats.data.EitherT
+import cats.implicits._
+
 import lib.persistence.{UserRepository, UserPassRepository, AuthTokenRepository}
 import lib.model.{User, UserPassword => Pass}
 
@@ -29,44 +32,46 @@ class UserSignupController @Inject()(
   with    I18nSupport
   with    AuthActionHelpers {
 
-    def signup() = Action(parse.json) async {implicit request =>
-      val json   = request.body
-      val result = json.validate[JsValueReadsSignup]
-      val user   = result.get
-      val withNoIdUser =
-        User.buildEntity(
-          user.firstName,
-          user.lastName,
-          user.email
-        )
-      val hashPass = Pass.hash(user.password)
-      for {
-        newUser <- userRepo.add(withNoIdUser)
-        newPass <- passRepo.add(newUser, hashPass)
-        token     = TokenGenerator().next(30)
-        newCookie = Cookie("My-Xsrf-Cookie", token)
-        result  <- authRepo.add(Some(token), Some(newUser))
-      } yield {
-        val jsWritesAuth =
-          JsValueWritesSignup(
-            fullName = withNoIdUser.nameInfo.fullName,
-            email    = withNoIdUser.email
-          )
-      Ok(Json.toJson(jsWritesAuth)).withCookies(newCookie)
-      }
-    }
-
-    def isAuthenticate() = Action {implicit request =>
-      val cookies = request.cookies.get("My-Xsrf-Cookie")
-      val jsWritesAuth = JsValueWritesIsAuth(
-        isAuth = cookies match {
-          case Some(_) => true
-          case None    => false
-        }
+  def signup() = Action(parse.json) async {implicit request =>
+    val jsonUser = request.body.validate[JsValueReadsSignup].get
+    val withNoIdUser =
+      User.buildEntity(
+        jsonUser.firstName,
+        jsonUser.lastName,
+        jsonUser.email
       )
-      cookies match {
-        case Some(_) => Ok(Json.toJson(jsWritesAuth))
-        case None    => BadRequest
+    val hashPass = Pass.hash(jsonUser.password)
+    val result: EitherT[Future, Result, Result] =
+      for {
+        newUser <- EitherT(userRepo.add(withNoIdUser).map(Either.right(_)))
+        newPass <- EitherT(passRepo.add(newUser, hashPass).map(Either.right((_))))
+        newToken = TokenGenerator().next(30)
+        _       <- EitherT(authRepo.add(Some(newToken), Some(newUser)).map(Either.right(_)))
+      } yield {
+        Ok(Json.toJson(
+          JsValueWritesSignup(
+            withNoIdUser.nameInfo.fullName,
+            withNoIdUser.email
+          )
+        )).withCookies(Cookie("My-Xsrf-Cookie", newToken))
       }
+      result.value.map{
+        case Left(bad)      => bad
+        case Right(success) => success
+      }
+  }
+
+  def isAuthenticate() = Action {implicit request =>
+    val cookies = request.cookies.get("My-Xsrf-Cookie")
+    val jsWritesAuth = JsValueWritesIsAuth(
+      isAuth = cookies match {
+        case Some(_) => true
+        case None    => false
+      }
+    )
+    cookies match {
+      case Some(_) => Ok(Json.toJson(jsWritesAuth))
+      case None    => BadRequest
     }
+  }
 }
