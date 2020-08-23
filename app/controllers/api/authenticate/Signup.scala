@@ -60,18 +60,4 @@ class UserSignupController @Inject()(
         case Right(success) => success
       }
   }
-
-  def isAuthenticate() = Action {implicit request =>
-    val cookies = request.cookies.get("My-Xsrf-Cookie")
-    val jsWritesAuth = JsValueWritesIsAuth(
-      isAuth = cookies match {
-        case Some(_) => true
-        case None    => false
-      }
-    )
-    cookies match {
-      case Some(_) => Ok(Json.toJson(jsWritesAuth))
-      case None    => BadRequest
-    }
-  }
 }
