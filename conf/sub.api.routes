@@ -9,4 +9,5 @@ POST   /auth/signup           controllers.api.authenticate.UserSignupController.
 DELETE /auth/logout           controllers.api.authenticate.UserLogoutController.logout
 
 # validation API
-GET    /auth/isAuthenticate   controllers.api.service.ValidationController.isAuthenticate
+GET    /auth/isAuthenticate      controllers.api.service.ValidationController.isAuthenticate
+POST   /auth/isEmailRegistered   controllers.api.service.ValidationController.isEmailRegistered
