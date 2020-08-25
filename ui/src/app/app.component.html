@@ -1,4 +1,18 @@
-<a routerLink="/api/auth/loginForm">ログイン</a>
-<a routerLink="/api/auth/signupForm">会員登録</a>
-<a routerLink="/api/auth/logoutForm">ログアウト</a>
+<header class="header">
+  <a routerLink="/api/auth/loginForm">
+    <div class="auth-button">
+      ログイン
+    </div>
+  </a>
+  <a routerLink="/api/auth/signupForm">
+    <div class="auth-button">
+      会員登録
+    </div>
+  </a>
+  <a routerLink="/api/auth/logoutForm">
+    <div class="auth-button">
+      ログアウト
+    </div>
+  </a>
 <router-outlet></router-outlet>
+</header>
