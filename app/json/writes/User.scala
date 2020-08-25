@@ -7,6 +7,14 @@ case class JsValueWritesUser(
   fullname: String,
 )
 
-object  JsValueWritesUser {
+object JsValueWritesUser {
   implicit val userWrites = Json.writes[JsValueWritesUser]
+}
+
+case class JsValueWritesEmailValid(
+  isRegistered: Boolean,
+)
+
+object JsValueWritesEmailValid {
+  implicit val emaliValidWrites = Json.writes[JsValueWritesEmailValid]
 }

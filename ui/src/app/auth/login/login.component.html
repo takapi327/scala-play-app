@@ -1,6 +1,14 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-field">
 
-  <app-email></app-email>
+  <div class="form-field__mail">
+    <label for="email">メールアドレス</label>
+    <input id="email" name="email" type="email" [formControl]="email" />
+    <ng-container *ngFor="let validation of validationMessages.email">
+      <span *ngIf="email.hasError(validation.type) && (email.dirty || email.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
+  </div>
 
   <app-password></app-password>
 

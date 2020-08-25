@@ -35,6 +35,12 @@ class UserRepository @Inject()
       .result.headOption
     }
 
+  def getEmail(email: String): Future[String] =
+    db.run {
+      user.filter(_.email === email)
+        .result.head.map(_.email)
+    }
+
   /**
    *
    * ※要修正

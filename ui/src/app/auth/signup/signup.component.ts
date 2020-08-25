@@ -25,8 +25,7 @@ export class SignupComponent implements OnInit {
     public  validationMessages: ValidationMessages
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   firstName = new FormControl('', [
     Validators.required
@@ -36,10 +35,18 @@ export class SignupComponent implements OnInit {
     Validators.required
   ]);
 
+  email = new FormControl('',
+    [
+      Validators.required,
+      Validators.email,
+    ],
+    this.validationService.emailRegisteredSome()
+  );
+
   signupForm = new FormGroup({
     firstName: this.firstName,
     lastName:  this.lastName,
-    email:     this.validationService.validateEmail(),
+    email:     this.email,
     password:  this.validationService.validatePassword()
   });
 
