@@ -1,6 +1,6 @@
 package controllers
 
-import lib.model._
+import lib.model.{User, UserPassword => Pass}
 import lib.persistence._
 import model._
 import auth._
@@ -10,13 +10,15 @@ import services.AuthActionService
 import scala.concurrent._
 import javax.inject._
 
+import cats.data.EitherT
+import cats.implicits._
+
 import play.api.mvc._
 import play.api.data.Form
 import play.api.data.Forms._
 // CSRF対策
 import play.filters.csrf.CSRF
 import play.api.i18n.I18nSupport
-
 
 @Singleton
 class UserController @Inject()(
@@ -50,43 +52,29 @@ class UserController @Inject()(
         Future.successful(BadRequest(views.html.site.user.Add(new ViewValueUserAdd(form = errorForm))))
       },
       userForm => {
-        val pass         = userForm.password
-        val userMail     = userRepo.filterByMail(userForm.email)
-        val firstName    = userForm.firstName
-        val lastName     = userForm.lastName
-        val withNoIdUser = User.buildEntity(firstName, lastName, userForm.email)
-        for {
-          /* メールが重複していないかどうか */
-          mailFil <- userMail.map(user =>
-            user match {
-              case Some(_) => false
-              case None    => true
-            })
-
-          /* user登録 */
-          userDate <- mailFil match {
-            case true  => userRepo.add(withNoIdUser)
-            case false => Future.successful(0L)
+        val withNoIdUser = User.buildEntity(
+          userForm.firstName,
+          userForm.lastName,
+          userForm.email
+        )
+        val hashPass = Pass.hash(userForm.password)
+        val newToken = TokenGenerator().next(30)
+        val result: EitherT[Future, Result, Result] =
+          for {
+            isMailRegistered <- EitherT(userRepo.filterByMail(userForm.email).map(_.toRight(BadRequest("Aleady Registered Email"))))
+            newUser          <- EitherT(userRepo.add(withNoIdUser).map(Either.right(_)))
+            newPass          <- EitherT(passRepo.add(newUser, hashPass).map(Either.right((_))))
+            _                <- EitherT(authRepo.add(Some(newToken), Some(newUser)).map(Either.right(_)))
+          } yield {
+            isMailRegistered match {
+              case Right => BadRequest
+              case Left  => Redirect(routes.UserController.index).withCookies(Cookie("My-Xsrf-Cookie", newToken))
+            }
           }
-
-          /* password登録 */
-          _  <- mailFil match {
-            case true  => passRepo.add(userDate, pass)
-            case false => Future.successful(0)
+          result.value.map{
+            case Right(successful) => successful
+            case Left(badrequest)  => badrequest
           }
-          
-          result <- mailFil match {
-            case false => Future.successful(NotFound(views.html.error.page404(new ViewValueError)))
-            case true  =>
-              val token: String = TokenGenerator().next(30)
-              val newCookie     = Cookie("My-Xsrf-Cookie", token)
-              authRepo.add(Some(token), Some(userDate))
-              Future.successful(Redirect(routes.UserController.index).withCookies(newCookie))
-          }
-          
-        } yield {
-          result
-        }
       }
     )
   }
