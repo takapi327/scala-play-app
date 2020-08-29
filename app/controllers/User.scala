@@ -20,26 +20,25 @@ import play.api.i18n.I18nSupport
 
 @Singleton
 class UserController @Inject()(
-  userRepo:             UserRepository,
-  passRepo:             UserPassRepository,
-  authRepo:             AuthTokenRepository,
-  authService:          AuthActionService,
-  IsAlreadyLoginAction: IsAlreadyLoginAction,
-  cc:                   MessagesControllerComponents
+  userRepo:    UserRepository,
+  passRepo:    UserPassRepository,
+  authRepo:    AuthTokenRepository,
+  authService: AuthActionService,
+  cc:          MessagesControllerComponents
 )(implicit ec: ExecutionContext) 
   extends MessagesAbstractController(cc)
   with    I18nSupport
   with    AuthActionHelpers {
 
   def index() = AuthAction(authService.authenticate).async {implicit request =>
-    request.user match {
+    request.attrs.get(Attr.KEY).map(_.user) match {
       case Some(user) => Future(Ok(views.html.site.user.List(ViewValueUserList(user = user))))
       case None       => Future(BadRequest(views.html.site.index(new ViewValueHome)))
     }
   }
 
   def showSignupForm() = AuthAction(authService.authenticate).async {implicit request =>
-    request.user match {
+    request.attrs.get(Attr.KEY).map(_.user) match {
       case None    => Future(Ok(views.html.site.user.Add(new ViewValueUserAdd)))
       case Some(_) => Future(BadRequest(views.html.site.index(new ViewValueHome)))
     }
@@ -92,8 +91,11 @@ class UserController @Inject()(
     )
   }
 
-  def showLoginForm() = IsAlreadyLoginAction {implicit request =>
-    Ok(views.html.site.user.Login(new ViewValueUserLogin))
+  def showLoginForm() = AuthAction(authService.authenticate) async {implicit request =>
+    request.attrs.get(Attr.KEY).map(_.user) match {
+      case Some(_) => Future(BadRequest(views.html.site.index(new ViewValueHome)))
+      case None    => Future(Ok(views.html.site.user.Login(new ViewValueUserLogin)))
+    }
   }
 
   def login() = Action.async {implicit request =>

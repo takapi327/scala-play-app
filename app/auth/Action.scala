@@ -12,7 +12,7 @@ import java.lang.ProcessBuilder.Redirect
 import controllers.routes
 
 
-trait AuthActionBuilder extends ActionBuilder[UserRequest, AnyContent]
+trait AuthActionBuilder extends ActionBuilder[Request, AnyContent]
 object AuthActionBuilder {
   def apply(
     auth:        RequestHeader => Future[Option[User]],
@@ -29,17 +29,18 @@ class AuthActionBuilderImpl(
   messagesApi: MessagesApi
 )(implicit ec: ExecutionContext)
   extends AuthActionBuilder
-  with    Results {
+  with    Results
+  with    AuthHelpers {
 
     override def executionContext: ExecutionContext = ec
 
     def invokeBlock[A](
       request: Request[A],
-      block:   UserRequest[A] => Future[Result]
+      block:   Request[A] => Future[Result]
     ): Future[Result] = auth(request) flatMap { optUser =>
       optUser match {
-        case Some(user) => block(new UserRequest(Some(user), request, messagesApi))
-        case None       => block(new UserRequest(None, request, messagesApi))
+        case Some(user) => block(request.addAttr(Attr.KEY, Attr(user)))
+        case None       => block(request)
       }
     }
   }
