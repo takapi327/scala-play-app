@@ -26,7 +26,6 @@ trait AuthActionHelpers {
   }
 }
 
-
 case class Attr(user: User)
 object Attr {
   val KEY = TypedKey[Attr]
