@@ -96,30 +96,26 @@ class UserController @Inject()(
         )
       },
       loginSucces => {
-        val pass = loginSucces.password
-        val mail = loginSucces.email
-        for {
-          mailUser <- userRepo.filterByMail(mail)
-          passUser <- passRepo.filterByPass(pass)
-        } yield {
-          val userMailId = mailUser.map(x => x.id.get)
-          val userPassId = passUser.map(y => y.userId).getOrElse(0)
-          val newToken   = 
-            userMailId match {
-              case Some(id) if id == userPassId || userPassId != 0 => Some(TokenGenerator().next(30))
-              case Some(_)  if userPassId == 0                     => None
-              case None                                            => None
+        val result: EitherT[Future, Result, Result] =
+          for {
+            mailUser <- EitherT(userRepo.filterByMail(loginSucces.email).map(_.toRight(NotFound("NotFound User"))))
+            passUser <- EitherT(passRepo.filterById(mailUser.id.get).map(_.toRight(NotFound("NotFound User"))))
+          } yield {
+            val newToken    = TokenGenerator().next(30)
+            val updateToken = Pass.verify(loginSucces.password, passUser.hash) match {
+              case true  => Some(authRepo.updateToken(Some(newToken), mailUser.id))
+              case false => None
             }
-          
-          newToken match {
-            case Some(_) => authRepo.updateToken(newToken, userMailId)
-            case None    => authRepo.updateToken(None, userMailId)
+            updateToken match {
+              case None    => BadRequest
+              case Some(_) => Redirect(
+                routes.UserController.index
+              ).withCookies(Cookie("My-Xsrf-Cookie", newToken))
+            }
           }
-          val newCookie = Cookie("My-Xsrf-Cookie", newToken.getOrElse("No-Cookie"))
-          newToken match {
-            case Some(_) => Redirect(routes.UserController.index).withCookies(newCookie)
-            case None    => BadRequest(views.html.site.user.Login(new ViewValueUserLogin))
-          }
+        result.value.map{
+          case Right(successful) => successful
+          case Left(badrequest)  => badrequest
         }
       }
     )
