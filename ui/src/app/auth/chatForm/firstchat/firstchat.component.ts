@@ -47,10 +47,10 @@ export class FirstchatComponent implements OnInit {
   })
 
   onSubmit() {
-    console.log(this.firstName.value)
-    console.log(this.lastName.value)
-    console.log(this.phoneticFirst.value)
-    console.log(this.phoneticLast.value)
-    console.log(this.birthday.value)
+    localStorage.setItem('firstName',     this.firstName.value);
+    localStorage.setItem('lastName',      this.lastName.value);
+    localStorage.setItem('phoneticFirst', this.phoneticFirst.value);
+    localStorage.setItem('phoneticLast',  this.phoneticLast.value);
+    localStorage.setItem('birthday',      this.birthday.value);
   }
 }

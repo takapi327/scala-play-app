@@ -2,21 +2,23 @@
 
   <h1>会員登録</h1>
   <div class="form__name-field">
-    <label for="firstName">名字</label>
+    <h3>氏名</h3>
+    <label for="firstName">姓</label>
     <input id="firstName" name="firstName" type="text" [formControl]="firstName" />
     <span *ngIf="firstName.errors?.required && (firstName.dirty || firstName.touched)">
-      名字は必須項目です
+      姓は必須項目です
     </span>
 
-    <label for="lastName">名前</label>
+    <label for="lastName">名</label>
     <input id="lastName" name="lastName" type="text" [formControl]="lastName" />
     <span *ngIf="lastName.errors?.required && (lastName.dirty || lastName.touched)">
-      名前は必須項目です
+      名は必須項目です
     </span>
   </div>
 
+  <h3>氏名 フリガナ</h3>
   <div class="form__phonetic-field">
-    <label for="phoneticFirst">名字(フリガナ)</label>
+    <label for="phoneticFirst">セイ</label>
     <input id="phoneticFirst" name="phoneticFirst" type="text" [formControl]="phoneticFirst" />
     <ng-container *ngFor="let validation of validationMessages.phoneticFirst">
       <span *ngIf="phoneticFirst.hasError(validation.type) && (phoneticFirst.dirty || phoneticFirst.touched)">
@@ -24,7 +26,7 @@
       </span>
     </ng-container>
 
-    <label for="phoneticLast">名前(フリガナ)</label>
+    <label for="phoneticLast">メイ</label>
     <input id="phoneticLast" name="phoneticLast" type="text" [formControl]="phoneticLast" />
     <ng-container *ngFor="let validation of validationMessages.phoneticLast">
       <span *ngIf="phoneticLast.hasError(validation.type) && (phoneticLast.dirty || phoneticLast.touched)">
@@ -33,8 +35,8 @@
     </ng-container>
   </div>
 
+  <h3>誕生日</h3>
   <div class="form__birthday-field">
-    <label for="birthday">生年月日</label>
     <input id="birthday" name="birthday" type="date" [formControl]="birthday" />
     <span *ngIf="birthday.errors?.required && (birthday.dirty || birthday.touched)">
       生年月日は必須項目です

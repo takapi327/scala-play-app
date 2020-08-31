@@ -7,12 +7,12 @@ import {Injectable} from '@angular/core';
 export class ValidationMessages {
 
   phoneticFirst = [
-    { type: 'required', message: '名字(フリガナ)は必須項目です'},
+    { type: 'required', message: '姓をフリガナで入力してください'},
     { type: 'pattern',  message: 'カタカナで入力してください'}
   ];
 
   phoneticLast = [
-    { type: 'required', message: '名前(フリガナ)は必須項目です'},
+    { type: 'required', message: '名をフリガナで入力してください'},
     { type: 'pattern',  message: 'カタカナで入力してください'}
   ];
 
