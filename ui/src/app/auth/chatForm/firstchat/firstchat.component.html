@@ -1,4 +1,4 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form-field">
+<form [formGroup]="firstChatForm" (ngSubmit)="onSubmit()" class="form">
 
   <h1>会員登録</h1>
   <div class="form__name-field">
@@ -18,15 +18,19 @@
   <div class="form__phonetic-field">
     <label for="phoneticFirst">名字(フリガナ)</label>
     <input id="phoneticFirst" name="phoneticFirst" type="text" [formControl]="phoneticFirst" />
-    <span *ngIf="phoneticFirst.errors?.required && (phoneticFirst.dirty || phoneticFirst.touched)">
-      名字(フリガナ)は必須項目です
-    </span>
+    <ng-container *ngFor="let validation of validationMessages.phoneticFirst">
+      <span *ngIf="phoneticFirst.hasError(validation.type) && (phoneticFirst.dirty || phoneticFirst.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
 
     <label for="phoneticLast">名前(フリガナ)</label>
     <input id="phoneticLast" name="phoneticLast" type="text" [formControl]="phoneticLast" />
-    <span *ngIf="phoneticLast.errors?.required && (phoneticLast.dirty || phoneticLast.touched)">
-      名前(フリガナ)は必須項目です
-    </span>
+    <ng-container *ngFor="let validation of validationMessages.phoneticLast">
+      <span *ngIf="phoneticLast.hasError(validation.type) && (phoneticLast.dirty || phoneticLast.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
   </div>
 
   <div class="form__birthday-field">
@@ -37,7 +41,7 @@
     </span>
   </div>
 
-  <div class="form-field__submit">
+  <div class="form__next-field">
     <input type="submit" value="次へ進む" [disabled]="nextForm.invalid" />
   </div>
 </form>
