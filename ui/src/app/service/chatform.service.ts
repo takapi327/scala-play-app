@@ -6,4 +6,6 @@ import { Injectable } from '@angular/core';
 export class ChatformService {
 
   constructor() { }
+
+  isSecondChat: boolean = false;
 }

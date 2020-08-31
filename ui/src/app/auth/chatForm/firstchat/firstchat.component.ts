@@ -2,6 +2,7 @@ import { Component, OnInit }                  from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 import { ValidationMessages }   from '../../validation-messages';
+import { ChatformService }      from '../../../service/chatform.service'
 
 @Component({
   selector:    'app-firstchat',
@@ -11,7 +12,8 @@ import { ValidationMessages }   from '../../validation-messages';
 export class FirstchatComponent implements OnInit {
 
   constructor(
-    public validationMessages: ValidationMessages
+    public  validationMessages: ValidationMessages,
+    private chatformService:    ChatformService
   ) {}
 
   ngOnInit(): void {}
@@ -52,5 +54,6 @@ export class FirstchatComponent implements OnInit {
     localStorage.setItem('phoneticFirst', this.phoneticFirst.value);
     localStorage.setItem('phoneticLast',  this.phoneticLast.value);
     localStorage.setItem('birthday',      this.birthday.value);
+    this.chatformService.isSecondChat = true;
   }
 }
