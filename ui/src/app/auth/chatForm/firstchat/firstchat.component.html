@@ -1,15 +1,13 @@
 <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form-field">
 
   <h1>会員登録</h1>
-  <div class="form-field__firstName">
+  <div class="form__name-field">
     <label for="firstName">名字</label>
     <input id="firstName" name="firstName" type="text" [formControl]="firstName" />
     <span *ngIf="firstName.errors?.required && (firstName.dirty || firstName.touched)">
       名字は必須項目です
     </span>
-  </div>
 
-  <div class="form-field__lastName">
     <label for="lastName">名前</label>
     <input id="lastName" name="lastName" type="text" [formControl]="lastName" />
     <span *ngIf="lastName.errors?.required && (lastName.dirty || lastName.touched)">
@@ -17,19 +15,25 @@
     </span>
   </div>
 
-  <div class="form-field__firstName">
+  <div class="form__phonetic-field">
     <label for="phoneticFirst">名字(フリガナ)</label>
     <input id="phoneticFirst" name="phoneticFirst" type="text" [formControl]="phoneticFirst" />
     <span *ngIf="phoneticFirst.errors?.required && (phoneticFirst.dirty || phoneticFirst.touched)">
       名字(フリガナ)は必須項目です
     </span>
-  </div>
 
-  <div class="form-field__lastName">
     <label for="phoneticLast">名前(フリガナ)</label>
     <input id="phoneticLast" name="phoneticLast" type="text" [formControl]="phoneticLast" />
     <span *ngIf="phoneticLast.errors?.required && (phoneticLast.dirty || phoneticLast.touched)">
       名前(フリガナ)は必須項目です
+    </span>
+  </div>
+
+  <div class="form__birthday-field">
+    <label for="birthday">生年月日</label>
+    <input id="birthday" name="birthday" type="date" [formControl]="birthday" />
+    <span *ngIf="birthday.errors?.required && (birthday.dirty || birthday.touched)">
+      生年月日は必須項目です
     </span>
   </div>
 
