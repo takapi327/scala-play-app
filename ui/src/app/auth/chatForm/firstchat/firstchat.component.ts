@@ -1,6 +1,8 @@
 import { Component, OnInit }                  from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 
+import { ValidationMessages }   from '../../validation-messages';
+
 @Component({
   selector:    'app-firstchat',
   templateUrl: './firstchat.component.html',
@@ -8,7 +10,9 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 })
 export class FirstchatComponent implements OnInit {
 
-  constructor() {}
+  constructor(
+    public validationMessages: ValidationMessages
+  ) {}
 
   ngOnInit(): void {}
 
@@ -22,12 +26,12 @@ export class FirstchatComponent implements OnInit {
 
   phoneticFirst = new FormControl('', [
     Validators.required,
-    Validators.pattern('/^[ア-ン゛゜ァ-ォャ-ョー「」、]+$/')
+    Validators.pattern('^[ア-ン゛゜ァ-ォャ-ョー「」、]+$')
   ]);
 
   phoneticLast = new FormControl('', [
     Validators.required,
-    Validators.pattern('/^[ア-ン゛゜ァ-ォャ-ョー「」、]+$/')
+    Validators.pattern('^[ア-ン゛゜ァ-ォャ-ョー「」、]+$')
   ]);
 
   birthday = new FormControl('',[
@@ -41,4 +45,12 @@ export class FirstchatComponent implements OnInit {
     phoneticLast:  this.phoneticLast,
     birthday:      this.birthday
   })
+
+  onSubmit() {
+    console.log(this.firstName.value)
+    console.log(this.lastName.value)
+    console.log(this.phoneticFirst.value)
+    console.log(this.phoneticLast.value)
+    console.log(this.birthday.value)
+  }
 }

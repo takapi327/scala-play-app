@@ -38,7 +38,8 @@ import { CookieService } from 'ngx-cookie-service';
     SignupComponent,
     LogoutComponent,
     EmailComponent,
-    PasswordComponent
+    PasswordComponent,
+    FirstchatComponent
   ],
   providers: [
     CookieService
