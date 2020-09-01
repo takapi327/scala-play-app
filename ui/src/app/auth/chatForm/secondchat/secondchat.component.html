@@ -1,1 +1,37 @@
-<p>secondchat works!</p>
+<form [@openClose]="showForm ? 'open' : 'closed'" (ngSubmit)="onSubmit()" class="example-form" ybAddress (submit)="false">
+  <div class="form-group">
+    <label for="postalCodeInput">郵便番号</label>
+    <div class="form-row">
+      <div class="col">
+        <input id="postalCodeInput" class="form-control" placeholder="郵便番号" maxlength="3" ybPostalCode>
+      </div>
+      <div class="col">
+        <input class="form-control" placeholder="郵便番号" maxlength="4" ybPostalCode>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="prefectures">都道府県</label>
+    <input #prefectures id="prefectures" class="form-control" placeholder="都道府県" (input)="prefecturesInput(prefectures.value)" ybRegion>
+  </div>
+
+  <div class="form-group">
+    <label for="city">市区町村</label>
+    <input #city id="city" class="form-control" placeholder="市区町村" (input)="cityInput(city.value)" ybLocality>
+  </div>
+
+  <div class="form-group">
+    <label for="town_name">町名</label>
+    <input #town id="town_name" class="form-control" placeholder="町名" (input)="townInput(town.value)" ybStreet>
+  </div>
+
+  <div class="form-group">
+    <label for="extended">その他</label>
+    <input #extended id="extended" class="form-control" placeholder="その他" (input)="extendedInput(extended.value)" ybExtended>
+  </div>
+
+  <div class="form__next-field">
+    <input type="submit" value="次へ進む" />
+  </div>
+</form>
