@@ -50,6 +50,6 @@ export class SecondchatComponent implements OnInit {
   }
 
   onSubmit() {
-    this.chatFormService.isTherdChat = true;
+    this.chatFormService.isThirdChat = true;
   }
 }
