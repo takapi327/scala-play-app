@@ -3,6 +3,8 @@ import { CommonModule }     from '@angular/common';
 import { NgModule }         from '@angular/core';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxYubinBangoModule } from 'ngx-yubinbango';
 
 // ---- [ Component ] -----------------------------------------------
 import { LoginComponent }      from './login/login.component';
@@ -30,6 +32,8 @@ import { CookieService } from 'ngx-cookie-service';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    BrowserAnimationsModule,
+    NgxYubinBangoModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'My-Xsrf-Cookie'
