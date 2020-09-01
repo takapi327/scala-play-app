@@ -14,6 +14,7 @@ import { EmailComponent }      from './email/email.component';
 import { PasswordComponent }   from './password/password.component';
 import { FirstchatComponent }  from '../auth/chatForm/firstchat/firstchat.component';
 import { SecondchatComponent } from '../auth/chatForm/secondchat/secondchat.component';
+import { ThirdchatComponent }  from './thirdchat/thirdchat.component';
 
 // ---- [ Cookie ] -----------------------------------------------
 import { CookieService } from 'ngx-cookie-service';
@@ -26,7 +27,8 @@ import { CookieService } from 'ngx-cookie-service';
     EmailComponent,
     PasswordComponent,
     FirstchatComponent,
-    SecondchatComponent
+    SecondchatComponent,
+    ThirdchatComponent
   ],
   imports: [
     CommonModule,
