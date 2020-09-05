@@ -2,7 +2,7 @@
   <div class="checkbox-wrapper" *ngFor="let option of checkBoxOptions; index as i" [class.full]="fulls.includes(i)">
     <div class="checkbox">
       <!--
-        TODO: 下記inputはatomosとしてさらに切り分ける
+        TODO: 下記inputはatomosとしてさらに切り分ける予定
       -->
       <label for="option{{i}}" >
         <input type="checkbox" value="{{option.number}}" id="option{{i}}" class="hidden">
