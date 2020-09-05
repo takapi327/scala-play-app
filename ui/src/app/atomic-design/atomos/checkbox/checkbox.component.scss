@@ -1,11 +1,33 @@
-.full {
-  color: red;
+.hidden {
+  display: none;
+}
+
+.checkbox-group {
+ display:         flex;
+ flex-wrap:       wrap;
+ justify-content: center;
+
+ .checkbox-wrapper {
+   width: 45%;
+ }
+ .full {
+   width: 90%;
+ }
+}
+
+.checkbox-item {
+  margin:        5px;
+  height:        60px;
+  line-height:   60px;
+  border:        solid 2px #66CCFF;
+  border-radius: 10px;
+  text-align:    center;
+  color:         #0099FF;
+  font-size:     24px;
+  font-family:   monospace;
 }
 
 .selected {
-  background-color: red;
-}
-
-.hidden {
-  display: none;
+  background-color: #66CCFF;
+  color:            white;
 }
