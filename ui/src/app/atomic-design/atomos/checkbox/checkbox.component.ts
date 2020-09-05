@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { checkBoxOptions } from '../../../interface/checkOptions'
 
@@ -9,14 +9,14 @@ import { checkBoxOptions } from '../../../interface/checkOptions'
 })
 export class CheckboxComponent implements OnInit {
 
+  @Input() fulls: number[];
+
   constructor(
     public checkBoxOptions: checkBoxOptions
   ) { }
 
   ngOnInit(): void {
   }
-
-  fulls: number[] = []
 
   /**
    * TODO: eventを全て取得しているのを修正したい
