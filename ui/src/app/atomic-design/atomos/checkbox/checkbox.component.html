@@ -4,7 +4,12 @@
       <!--
         TODO: 下記inputはatomosとしてさらに切り分ける
       -->
-      {{option.number}}{{option.value}}{{i === 0}}
+      <label for="option{{i}}" >
+        <input type="checkbox" value="{{option.number}}" id="option{{i}}" class="hidden">
+          <div class="test" (click)="click($event)">
+            {{option.value}}
+          </div>
+      </label>
     </div>
   </div>
 </div>

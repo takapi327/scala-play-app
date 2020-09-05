@@ -16,5 +16,17 @@ export class CheckboxComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fulls: number[] = [0]
+  fulls: number[] = []
+
+  /**
+   * TODO: eventを全て取得しているのを修正したい
+   * inputのcheckeedイベントのbooleanで処理わけする方が本当はいい
+   */
+  click(event: any){
+    if(event.target.classList.value.includes('selected')){
+      event.target.classList.remove('selected')
+    } else {
+      event.target.classList.add('selected')
+    }
+  }
 }
