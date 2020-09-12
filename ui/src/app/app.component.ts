@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { area } from './interface/checkOptions'
+import { area } from './interface/area'
 
 @Component({
   selector:    'app-root',
