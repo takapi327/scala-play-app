@@ -1,17 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule }          from '@angular/core';
+import { CommonModule }      from '@angular/common';
 
 import { CheckboxComponent } from './atomos/checkbox/checkbox.component'
+import { RadioComponent }    from './atomos/radio/radio.component'
 
 @NgModule({
   declarations: [
-    CheckboxComponent
+    CheckboxComponent,
+    RadioComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    CheckboxComponent
+    CheckboxComponent,
+    RadioComponent
   ]
 })
 export class AtomicModule { }
