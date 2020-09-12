@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 
-export class area {
+export class areatest {
   area = [
     { number: 1, value: "関東"},
     { number: 2, value: "近畿"},
