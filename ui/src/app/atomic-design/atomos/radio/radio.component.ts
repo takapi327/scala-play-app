@@ -7,11 +7,17 @@ import { Component, Input } from '@angular/core';
 })
 export class RadioComponent {
 
-  selected: string;
+  selected:   string;
+  prefecture: object[];
 
-  @Input() fulls:           number[];
-  @Input() checkBoxOptions: object[];
+  @Input() fulls:       number[];
+  @Input() area:        object[];
+  @Input() prefectures: {key: string[]};
 
   constructor() {}
+
+  show(i: number, area: string) {
+    this.prefecture = this.prefectures[i][area]
+  }
 
 }
