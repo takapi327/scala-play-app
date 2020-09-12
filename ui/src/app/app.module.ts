@@ -8,18 +8,17 @@ import { AtomicModule }     from './atomic-design/atomic.module'
 // ---- [ Component ] --------------------------------------
 import { AppComponent }     from './app.component';
 
+const MODULES = [
+  BrowserModule,
+  AuthModule,
+  AtomicModule,
+  AppRoutingModule
+]
+
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AuthModule,
-    AtomicModule,
-    AppRoutingModule
-  ],
-  providers: [
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports:       MODULES,
+  providers:    [],
+  bootstrap:    [AppComponent]
 })
 export class AppModule { }
