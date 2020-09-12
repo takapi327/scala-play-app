@@ -1,14 +1,14 @@
-<div class="radio-group">
-  <ng-container *ngFor="let item of areaOptions; index as i">
+<div class="radio-area">
+  <ng-container *ngFor="let area of areaOptions; index as i">
     <label>
-      <input type="radio" name="area" id= "{{item.value}}" class="hidden"
-        [(ngModel)] = "selected"
-        [value]     = "item.url"
-        [checked]   = "selected == item.url"
-        (change)    = "showPref(i, item.url)"
+      <input type="radio" name="area"
+        [(ngModel)] = "selectedArea"
+        [value]     = "area.url"
+        [checked]   = "selectedArea == area.url"
+        (change)    = "showPref(i, area.url)"
       >
-      <div [class.selected]="selected == item.url">
-        {{item.value}}
+      <div [class.selected]="selectedArea == area.url">
+        {{area.value}}
       </div>
     </label>
   </ng-container>
@@ -17,13 +17,13 @@
 <div class="radio-prefecture">
   <ng-container *ngFor="let pref of prefecture; index as i">
     <label>
-      <input type="radio" name="pref" id="{{pref.value}}"
-        [(ngModel)] = "selected"
+      <input type="radio" name="pref"
+        [(ngModel)] = "selectedPref"
         [value]     = "pref.url"
-        [checked]   = "selected == pref.url"
+        [checked]   = "selectedPref == pref.url"
         (change)    = "showCity(i, pref.url)"
       >
-      <div [class.selected]="selected == pref.url">
+      <div [class.selected]="selectedPref == pref.url">
         {{pref.value}}
       </div>
     </label>
@@ -33,12 +33,12 @@
 <div class="radio-municipality">
   <ng-container *ngFor="let city of municipality; index as i">
     <label>
-      <input type="radio" name="city" id="{{city.value}}"
-        [(ngModel)] = "selected"
+      <input type="radio" name="city"
+        [(ngModel)] = "selectedCity"
         [value]     = "city.url"
-        [checked]   = "selected == city.url"
+        [checked]   = "selectedCity == city.url"
       >
-      <div [class.selected]="selected == city.url">
+      <div [class.selected]="selectedCity == city.url">
         {{city.value}}
       </div>
     </label>

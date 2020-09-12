@@ -7,9 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class RadioComponent {
 
-  selected:     string;
-  prefecture:   object[];
-  municipality: object[]
+  selectedArea:     string;
+  selectedPref:     string;
+  selectedCity:     string;
+  prefecture:       object[];
+  municipality:     object[];
 
   @Input() fulls:               number[];
   @Input() areaOptions:         object[];
