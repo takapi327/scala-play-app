@@ -1,7 +1,8 @@
-import { Component }   from '@angular/core';
+import { Component }    from '@angular/core';
 
-import { area }        from './interface/area';
-import { prefectures } from './interface/prefecture';
+import { area }         from './interface/area';
+import { prefectures }  from './interface/prefecture';
+import { municipality } from './interface/municipality';
 
 @Component({
   selector:    'app-root',
@@ -11,8 +12,9 @@ import { prefectures } from './interface/prefecture';
 export class AppComponent {
 
   constructor(
-    public area:        area,
-    public prefectures: prefectures
+    public areaOptions:         area,
+    public prefectureOptions:   prefectures,
+    public municipalityOptions: municipality
   ) {}
 
 }
