@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { checkBoxOptions } from './interface/checkOptions'
+import { area } from './interface/checkOptions'
 
 @Component({
   selector:    'app-root',
@@ -10,7 +10,7 @@ import { checkBoxOptions } from './interface/checkOptions'
 export class AppComponent {
 
   constructor(
-    public checkBoxOptions: checkBoxOptions
+    public checkBoxOptions: area
   ) {}
 
 }

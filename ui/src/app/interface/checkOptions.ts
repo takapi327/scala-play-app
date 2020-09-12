@@ -4,25 +4,14 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 
-export class checkBoxOptions {
-  checkBox = [
-    { number: 1, value: "test1"},
-    { number: 2, value: "test2"},
-    { number: 3, value: "test3"},
-    { number: 4, value: "test4"},
-    { number: 5, value: "test5"}
+export class area {
+  area = [
+    { number: 1, value: "関東"},
+    { number: 2, value: "近畿"},
+    { number: 3, value: "東北・北海道"},
+    { number: 4, value: "中部"},
+    { number: 5, value: "四国・中国"},
+    { number: 6, value: "九州・沖縄"}
   ];
 
-  checkBox1 = [
-    { number: 1, value: "hogehoge1"},
-    { number: 2, value: "hogehoge2"},
-    { number: 3, value: "hogehoge3"},
-    { number: 4, value: "hogehoge4"},
-    { number: 5, value: "hogehoge5"},
-    { number: 6, value: "hogehoge6"},
-    { number: 7, value: "hogehoge7"},
-    { number: 8, value: "hogehoge8"},
-    { number: 9, value: "hogehoge9"},
-    { number: 10, value: "hogehoge10"}
-  ];
 }
