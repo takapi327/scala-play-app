@@ -1,0 +1,14 @@
+<div class="radio-group">
+  <ng-container *ngFor="let item of checkBoxOptions; index as i">
+    <label>
+      <input type="radio" name="area" id= "{{item.value}}"
+        [(ngModel)] = "selected"
+        [value]     = "item.url"
+        [checked]   = "selected == item.url"
+      >
+        <div [class.selected]="selected == item.url">
+          {{item.value}}
+        </div>
+    </label>
+  </ng-container>
+</div>
