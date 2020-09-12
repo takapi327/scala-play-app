@@ -7,17 +7,23 @@ import { Component, Input } from '@angular/core';
 })
 export class RadioComponent {
 
-  selected:   string;
-  prefecture: object[];
+  selected:     string;
+  prefecture:   object[];
+  municipality: object[]
 
-  @Input() fulls:       number[];
-  @Input() area:        object[];
-  @Input() prefectures: {key: string[]};
+  @Input() fulls:               number[];
+  @Input() areaOptions:         object[];
+  @Input() prefectureOptions:   {key: string[]};
+  @Input() municipalityOptions: {key: string[]};
 
   constructor() {}
 
-  show(i: number, area: string) {
-    this.prefecture = this.prefectures[i][area]
+  showPref(i: number, area: string) {
+    this.prefecture = this.prefectureOptions[i][area]
+  }
+
+  showCity(i: number, city: string) {
+    this.municipality = this.municipalityOptions[i][city]
   }
 
 }
