@@ -18,12 +18,14 @@
 </header>
 <router-outlet></router-outlet>
 -->
+<!--
 <app-checkbox
-  [checkBoxOptions]=this.checkBoxOptions.area
+  [checkBoxOptions]=this.area.area
   fulls=[]
 ></app-checkbox>
-
+-->
 <app-radio
-  [checkBoxOptions]=this.checkBoxOptions.area
+  [area]        = this.area.area
+  [prefectures] = this.prefectures.prefecture
   fulls=[]
 ></app-radio>

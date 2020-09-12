@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component }   from '@angular/core';
 
-import { area } from './interface/area'
+import { area }        from './interface/area';
+import { prefectures } from './interface/prefecture';
 
 @Component({
   selector:    'app-root',
@@ -10,7 +11,8 @@ import { area } from './interface/area'
 export class AppComponent {
 
   constructor(
-    public checkBoxOptions: area
+    public area:        area,
+    public prefectures: prefectures
   ) {}
 
 }
