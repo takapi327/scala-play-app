@@ -1,0 +1,14 @@
+<label>
+  <input type="radio" name={{inputName}} class="hidden"
+    [(ngModel)] = "selected"
+    [value]     = "valueOptions.url"
+    [checked]   = "selected == valueOptions.url"
+    (change)    = "showValue(index, valueOptions.url)"
+  >
+  <div
+    [class.selected] = "selected == valueOptions.url"
+    class            = {{classs}}
+  >
+    {{valueOptions.value}}
+  </div>
+</label>
