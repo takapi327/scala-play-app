@@ -1,0 +1,11 @@
+<div class="radio-area">
+  <ng-container *ngFor="let valueOption of valueOptions; index as num">
+    <app-radiobutton
+      inputName      = area
+      classs         = "box"
+      [valueOptions] = valueOption
+      [index]        = num
+      (eventValue)   = "exportValue($event)"
+    ></app-radiobutton>
+  </ng-container>
+</div>
