@@ -3,7 +3,10 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector:    'app-radiobutton',
   templateUrl: './radiobutton.component.html',
-  styleUrls:   ['./radiobutton.component.scss']
+  styleUrls:   [
+    './radiobutton.component.scss',
+    '../../molecules/radio/radio.component.scss'
+  ],
 })
 export class RadiobuttonComponent {
 
@@ -16,8 +19,7 @@ export class RadiobuttonComponent {
 
   @Output() eventValue = new EventEmitter();
 
-  constructor() {
-  }
+  constructor() {}
 
   showValue(index: number, value: string) {
     this.eventValue.emit({index, value});
