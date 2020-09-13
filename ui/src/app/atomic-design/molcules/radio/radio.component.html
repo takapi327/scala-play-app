@@ -2,23 +2,11 @@
   <ng-container *ngFor="let areaOption of areaOptions; index as num">
     <app-radiobutton
       inputName      = area
+      classs         = ""
       [valueOptions] = areaOption
       [index]        = num
       (eventValue)   = "showPref($event)"
     ></app-radiobutton>
-    <!--
-    <label>
-      <input type="radio" name="area"
-        [(ngModel)] = "selectedArea"
-        [value]     = "area.url"
-        [checked]   = "selectedArea == area.url"
-        (change)    = "showPref(i, area.url)"
-      >
-      <div [class.selected]="selectedArea == area.url">
-        {{area.value}}
-      </div>
-    </label>
-    -->
   </ng-container>
 </div>
 
@@ -30,19 +18,6 @@
       [index]        = num
       (eventValue)   = "showCity($event)"
     ></app-radiobutton>    
-    <!--
-    <label>
-      <input type="radio" name="pref"
-        [(ngModel)] = "selectedPref"
-        [value]     = "pref.url"
-        [checked]   = "selectedPref == pref.url"
-        (change)    = "showCity(i, pref.url)"
-      >
-      <div [class.selected]="selectedPref == pref.url">
-        {{pref.value}}
-      </div>
-    </label>
-    -->
   </ng-container>
 </div>
 
@@ -54,17 +29,5 @@
       [index]        = num
       (eventValue)   = "test($event)"
     ></app-radiobutton>    
-    <!--
-    <label>
-      <input type="radio" name="city"
-        [(ngModel)] = "selectedCity"
-        [value]     = "city.url"
-        [checked]   = "selectedCity == city.url"
-      >
-      <div [class.selected]="selectedCity == city.url">
-        {{city.value}}
-      </div>
-    </label>
-    -->
   </ng-container>
 </div>
