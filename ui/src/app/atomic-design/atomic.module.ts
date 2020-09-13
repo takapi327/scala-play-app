@@ -1,20 +1,24 @@
 import { NgModule }             from '@angular/core';
 import { CommonModule }         from '@angular/common';
 import { FormsModule }          from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CheckboxComponent }    from './molcules/checkbox/checkbox.component';
-import { RadioComponent }       from './molcules/radio/radio.component';
+import { CheckboxComponent }    from './molecules/checkbox/checkbox.component';
+import { RadioComponent }       from './molecules/radio/radio.component';
 import { RadiobuttonComponent } from './atomos/radiobutton/radiobutton.component';
+import { RadiolistComponent }   from './organisms/radiolist/radiolist.component';
 
 const COMPONENTS = [
   CheckboxComponent,
   RadioComponent,
-  RadiobuttonComponent
+  RadiobuttonComponent,
+  RadiolistComponent
 ]
 
 const MODULES = [
   CommonModule,
-  FormsModule
+  FormsModule,
+  BrowserAnimationsModule
 ]
 
 @NgModule({
