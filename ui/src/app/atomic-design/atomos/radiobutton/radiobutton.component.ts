@@ -10,7 +10,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class RadiobuttonComponent {
 
-  selected: string;
+  select: string;
 
   @Input() inputName:    string;
   @Input() classs:       string[];

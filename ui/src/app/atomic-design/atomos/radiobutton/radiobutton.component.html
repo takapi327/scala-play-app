@@ -1,12 +1,12 @@
 <label>
   <input type="radio" name={{inputName}} class="hidden"
-    [(ngModel)] = "selected"
+    [(ngModel)] = "select"
     [value]     = "valueOptions.url"
-    [checked]   = "selected == valueOptions.url"
+    [checked]   = "select == valueOptions.url"
     (change)    = "showValue(index, valueOptions.url)"
   >
   <div
-    [class.selected] = "selected == valueOptions.url"
+    [class.selected] = "select == valueOptions.url"
     class            = {{classs}}
   >
     {{valueOptions.value}}
