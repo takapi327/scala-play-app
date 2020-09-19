@@ -1,11 +1,41 @@
-<div class="radio-area">
-  <ng-container *ngFor="let valueOption of valueOptions; index as num">
+<form [formGroup]="locationSearchForm" (ngSubmit)="onSubmit()" class="form-field">
+  <div class="selected-location">
     <app-radiobutton
-      inputName      = area
-      classs         = "box"
-      [valueOptions] = valueOption
-      [index]        = num
-      (eventValue)   = "exportValue($event)"
+      radioName        = "area"
+      formCotrolName   = "area"
+      [radioOptions]   = areaOptions.area
+      (selectLocation) = selectedArea($event)
+      class            = "selected-location__radiobox"
     ></app-radiobutton>
-  </ng-container>
-</div>
+  </div>
+
+  <div class="modal-shadow" [@openClose]="isOpenPref ? 'open' :'closed'" (click)="isShow()"></div>
+  <div class="selected-location modal-pref" [@openClose]="isOpenPref ? 'open' :'closed'">
+    <app-radiobutton
+      radioName        = "pref"
+      formCotrolName   = "pref"
+      [radioOptions]   = prefecture
+      (selectLocation) = selectedPref($event)
+      class            = "selected-location__radiobox modal-pref__radiobox"
+    ></app-radiobutton>
+  </div>
+  <!--
+  <div class="selected-location modal-city" [@openClose]="isOpenCity ? 'open' :'closed'">
+    <geo-radio-municipality
+      radioName            = "city"
+      formCotrolName       = "city"
+      [fulls]              = [0]
+      [radioOptions]       = cityOptions
+      (selectMunicipality) = selectedCity($event)
+      class                = "selected-location__radiobox"
+    ></geo-radio-municipality>
+  </div>
+  -->
+  <input
+    type         = "submit"
+    value        = "検索する"
+    class        = "selected-search"
+    [disabled]   = "locationSearchForm.invalid"
+    [@openClose] = "isOpenCity ? 'open' :'closed'"
+  >
+</form>

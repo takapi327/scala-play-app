@@ -1,36 +1,15 @@
-.radio-area {
- display:         flex;
- flex-wrap:       wrap;
- justify-content: center;
+.selected-location__radiobox {
+   display:         flex;
+   flex-wrap:       wrap;
+   justify-content: center;
 }
 
-.radio-item {
-  margin:        5px;
-  height:        40px;
-  line-height:   40px;
-  border:        solid 1px #66CCFF;
-  border-radius: 5px;
-  text-align:    center;
-  color:         #0099FF;
-  font-size:     16px;
-  font-family:   monospace;
-}
-
-.box {
-  width:            116px;
-  height:           48px;
-  line-height:      48px;
-  text-align:       center;
-  margin:           4px;
-  background-color: #DDDDDD;
-  border:           solid 1px #DDDDDD;
-  border-radius:    8px;
-  color:            #0099FF;
-  font-size:        16px;
-  font-family:      monospace;
-}
-
-.selected {
-  background-color: #66CCFF;
-  color:            white;
+.selected-search {
+  position:      fixed;
+  top:           90%;
+  width:         90%;
+  height:        48px;
+  margin:        16px;
+  border:        none;
+  border-radius: 8px;
 }
