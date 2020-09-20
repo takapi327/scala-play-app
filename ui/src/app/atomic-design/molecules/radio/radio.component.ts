@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { area }         from '../../../interface/area';
 import { prefectures }  from '../../../interface/prefecture';
@@ -36,11 +36,20 @@ import { municipality } from '../../../interface/municipality';
 })
 export class RadioComponent {
   
+  //areaControl: FormControl;
+  //prefControl: FormControl;
+  //cityControl: FormControl;
+
   constructor(
-    public areaOptions:         area,
-    public prefectureOptions:   prefectures,
-    public municipalityOptions: municipality
-  ) {}
+    public  areaOptions:         area,
+    public  prefectureOptions:   prefectures,
+    public  municipalityOptions: municipality,
+    private formBuilder:         FormBuilder
+  ) {
+  //  this.areaControl = new FormControl('', [Validators.required]);
+  //  this.prefControl = new FormControl('', [Validators.required]);
+    //this.cityControl = new FormControl('');
+  }
 
   /**
     * ===== Variable =====
@@ -53,22 +62,35 @@ export class RadioComponent {
    /**
      * ===== ReactiveForm Variable =====
      */
-    area = new FormControl('', [
+
+    areaControl = new FormControl('', [
+      Validators.required
+    ])
+    prefControl = new FormControl('', [
       Validators.required
     ])
 
-    pref = new FormControl('', [
-      Validators.required
-    ])
-
+    /*
     city = new FormControl('', [
       Validators.required
     ])
+    */
+    get area(){
+      return this.areaControl;
+    }
 
-    locationSearchForm = new FormGroup({
-      area: this.area,
-      pref: this.pref,
-      city: this.city
+    get pref(){
+      return this.prefControl;
+    }
+
+    locationSearchForm = this.formBuilder.group({
+      areaControl: this.areaControl,
+      prefControl: this.prefControl
+      /*
+      area: this.area.errors.required,
+      pref: this.pref
+      */
+      //city: this.city
     })
 
   /**
@@ -78,13 +100,11 @@ export class RadioComponent {
    selectedArea(location: {index: number, value: string}): void {
    //  this.prefOptions = location.rows
      this.prefecture = this.prefectureOptions.prefecture[location.index][location.value]
-     this.isOpenPref  = true
-     console.log(location)
+     this.isOpenPref = true
    }
 
    // TODO: 以下命名に反して処理をさせ過ぎているから綺麗にしたい
    selectedPref(location: {index: number, url: string}): void {
-     console.log(location)
      /*
      this.municipalitySearchService.searchCityByPrefId(location.value)
        .subscribe(res => {
