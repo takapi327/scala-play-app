@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component }                                  from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, Validators, FormBuilder }       from '@angular/forms';
 
 import { area }         from '../../../interface/area';
 import { prefectures }  from '../../../interface/prefecture';
@@ -36,20 +36,12 @@ import { municipality } from '../../../interface/municipality';
 })
 export class RadioComponent {
   
-  //areaControl: FormControl;
-  //prefControl: FormControl;
-  //cityControl: FormControl;
-
   constructor(
     public  areaOptions:         area,
     public  prefectureOptions:   prefectures,
     public  municipalityOptions: municipality,
     private formBuilder:         FormBuilder
-  ) {
-  //  this.areaControl = new FormControl('', [Validators.required]);
-  //  this.prefControl = new FormControl('', [Validators.required]);
-    //this.cityControl = new FormControl('');
-  }
+  ) {}
 
   /**
     * ===== Variable =====
@@ -60,37 +52,19 @@ export class RadioComponent {
    prefecture:  {key: string[]};
 
    /**
-     * ===== ReactiveForm Variable =====
-     */
-
+    * ===== ReactiveForm Variable =====
+    */
     areaControl = new FormControl('', [
       Validators.required
     ])
+
     prefControl = new FormControl('', [
       Validators.required
     ])
 
-    /*
-    city = new FormControl('', [
-      Validators.required
-    ])
-    */
-    get area(){
-      return this.areaControl;
-    }
-
-    get pref(){
-      return this.prefControl;
-    }
-
     locationSearchForm = this.formBuilder.group({
       areaControl: this.areaControl,
       prefControl: this.prefControl
-      /*
-      area: this.area.errors.required,
-      pref: this.pref
-      */
-      //city: this.city
     })
 
   /**
@@ -98,20 +72,12 @@ export class RadioComponent {
     */
    // TODO: 以下命名に反して処理をさせ過ぎているから綺麗にしたい
    selectedArea(location: {index: number, value: string}): void {
-   //  this.prefOptions = location.rows
      this.prefecture = this.prefectureOptions.prefecture[location.index][location.value]
      this.isOpenPref = true
    }
 
    // TODO: 以下命名に反して処理をさせ過ぎているから綺麗にしたい
    selectedPref(location: {index: number, url: string}): void {
-     /*
-     this.municipalitySearchService.searchCityByPrefId(location.value)
-       .subscribe(res => {
-         res.unshift({label: '(都道府県名)すべて', urn: 'all'})
-         this.cityOptions = res
-       })
-     */
      this.isOpenCity = true
    }
 
@@ -127,9 +93,6 @@ export class RadioComponent {
     */
    searchAction(location: {index: number, url: string}): void {
      console.log(location)
-     /*
-     window.location.href = this.municipalitySearchService.ACTION_URL_LOCATION({prefUrl: value.pref, cityUrl: value.city})
-     */
    }
 
    onSubmit(): void {
