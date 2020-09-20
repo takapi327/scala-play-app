@@ -1,22 +1,3 @@
-<!--
-<ng-container *ngFor="let item of radioOptions; index as num">
-  <label>
-    <input type="radio" name="{{radioName}}" id= "{{item.url}}" class="hidden"
-      [(ngModel)]   = "selected"
-      [value]       = "item.url"
-      [checked]     = "selected == item.url"
-      (change)      = "onChange(num)"
-      [formControl] = "control"
-    #input>
-    <div
-      [class.selected] = "selected == item.url"
-      class            = "radio-button"
-    >
-      {{item.value}}
-    </div>
-  </label>
-</ng-container>
--->
 <ng-container *ngFor="let item of radioOptions; index as num">
   <label>
     <input type="radio" name="{{radioName}}" id= "{{item.url}}" class="hidden"
