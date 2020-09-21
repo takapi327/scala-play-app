@@ -1,0 +1,15 @@
+.selected-location__radiobox {
+   display:         flex;
+   flex-wrap:       wrap;
+   justify-content: center;
+}
+
+.selected-search {
+  position:      fixed;
+  top:           90%;
+  width:         90%;
+  height:        48px;
+  margin:        16px;
+  border:        none;
+  border-radius: 8px;
+}
