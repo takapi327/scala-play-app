@@ -4,7 +4,7 @@ import { Router }                             from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // ---- [ Interface ] -----------------------------------------------
-import { User }                 from '../../../interface/user';
+import { User }                 from '../../../modules/model/user';
 
 // ---- [ Service ] -------------------------------------------------
 import { AuthService }          from '../../service/auth.service';
