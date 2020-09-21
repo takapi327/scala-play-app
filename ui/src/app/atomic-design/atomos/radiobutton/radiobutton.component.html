@@ -1,0 +1,18 @@
+<ng-container *ngFor="let item of radioOptions; index as num">
+  <label>
+    <input type="radio" name="{{radioName}}" id= "{{item.url}}" class="hidden"
+      [(ngModel)] = "selected"
+      [value]     = "item.url"
+      [checked]   = "selected == item.url"
+      (change)    = "onChange(num, item.url)"
+      (blur)      = "onTouched()"
+      [disabled]  = "disabled"
+    #input>
+    <div
+      [class.selected] = "selected == item.url"
+      class            = "radio-button"
+    >
+      {{item.value}}
+    </div>
+  </label>
+</ng-container>

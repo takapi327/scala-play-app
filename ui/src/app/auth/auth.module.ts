@@ -14,34 +14,30 @@ import { PasswordComponent } from './password/password.component';
 // ---- [ Cookie ] -----------------------------------------------
 import { CookieService } from 'ngx-cookie-service';
 
+const COMPONENTS = [
+  LoginComponent,
+  SignupComponent,
+  LogoutComponent,
+  EmailComponent,
+  PasswordComponent
+]
+
+const MODULES = [
+  CommonModule,
+  ReactiveFormsModule,
+  FormsModule,
+  HttpClientModule,
+  HttpClientXsrfModule.withOptions({
+    cookieName: 'My-Xsrf-Cookie'
+  })
+]
+
 @NgModule({
-  declarations: [
-    LoginComponent,
-    SignupComponent,
-    LogoutComponent,
-    EmailComponent,
-    PasswordComponent
-  ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    HttpClientXsrfModule.withOptions({
-      cookieName: 'My-Xsrf-Cookie'
-    }),
-  ],
-  exports: [
-    LoginComponent,
-    SignupComponent,
-    LogoutComponent,
-    EmailComponent,
-    PasswordComponent
-  ],
-  providers: [
-    CookieService
-  ],
-  bootstrap: []
+  declarations: COMPONENTS,
+  imports:      MODULES,
+  exports:      COMPONENTS,
+  providers:    [CookieService],
+  bootstrap:    []
 })
 export class AuthModule { }
 
