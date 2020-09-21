@@ -1,8 +1,6 @@
 // ---- [ Module ] -----------------------------------------
 import { BrowserModule }    from '@angular/platform-browser';
 import { NgModule }         from '@angular/core';
-//import { AuthModule }       from './auth/auth.module'
-//import { AppRoutingModule } from './app-routing.module';
 import { ElementModule }    from './elements/element.module';
 
 // ---- [ Component ] --------------------------------------

@@ -4,11 +4,11 @@ import { Router }                             from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // ---- [ Interface ] -----------------------------------------------
-import { User }                 from '../../../modules/model/user';
+import { User }                 from '@modules/model/user';
 
 // ---- [ Service ] -------------------------------------------------
-import { AuthService }          from '../../service/auth.service';
-import { ValidationService }    from '../../service/validation.service';
+import { AuthService }          from '@elements/service/auth.service';
+import { ValidationService }    from '@elements/service/validation.service';
 import { ValidationMessages }   from '../validation-messages';
 
 @Component({

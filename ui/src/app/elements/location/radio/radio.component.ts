@@ -2,9 +2,9 @@ import { Component }                                  from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FormControl, Validators, FormBuilder }       from '@angular/forms';
 
-import { area }         from '../../../modules/model/area';
-import { prefectures }  from '../../../modules/model/prefecture';
-import { municipality } from '../../../modules/model/municipality';
+import { area }         from '@modules/model/area';
+import { prefectures }  from '@modules/model/prefecture';
+import { municipality } from '@modules/model/municipality';
 
 @Component({
   selector:    'app-radio',

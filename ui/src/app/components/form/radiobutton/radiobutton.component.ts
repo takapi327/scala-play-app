@@ -3,7 +3,7 @@ import { Component, Input, Output, EventEmitter, Injector } from '@angular/core'
 import { NG_VALUE_ACCESSOR }                                from '@angular/forms'
 
 /* this project import */
-import { ControlValueAccessorConnector } from '../../../modules/control-value-accessor-connector';
+import { ControlValueAccessorConnector } from '@modules/control-value-accessor-connector';
 
 @Component({
   selector:    'app-radiobutton',
