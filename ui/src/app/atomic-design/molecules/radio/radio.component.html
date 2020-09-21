@@ -1,22 +1,22 @@
 <form [formGroup]="locationSearchForm" (ngSubmit)="onSubmit()" class="form-field">
   <div class="selected-location">
     <app-radiobutton
-      radioName        = "area"
-      formCotrolName   = "area"
-      [radioOptions]   = areaOptions.area
-      (selectLocation) = selectedArea($event)
-      class            = "selected-location__radiobox"
+      radioName         = "areaControl"
+      [formControlName] = "'areaControl'"
+      [radioOptions]    = areaOptions.area
+      (selectLocation)  = selectedArea($event)
+      class             = "selected-location__radiobox"
     ></app-radiobutton>
   </div>
 
   <div class="modal-shadow" [@openClose]="isOpenPref ? 'open' :'closed'" (click)="isShow()"></div>
   <div class="selected-location modal-pref" [@openClose]="isOpenPref ? 'open' :'closed'">
     <app-radiobutton
-      radioName        = "pref"
-      formCotrolName   = "pref"
-      [radioOptions]   = prefecture
-      (selectLocation) = selectedPref($event)
-      class            = "selected-location__radiobox modal-pref__radiobox"
+      radioName         = "prefControl"
+      [formControlName] = "'prefControl'"
+      [radioOptions]    = prefecture
+      (selectLocation)  = selectedPref($event)
+      class             = "selected-location__radiobox modal-pref__radiobox"
     ></app-radiobutton>
   </div>
   <!--
@@ -36,6 +36,6 @@
     value        = "検索する"
     class        = "selected-search"
     [disabled]   = "locationSearchForm.invalid"
-    [@openClose] = "isOpenCity ? 'open' :'closed'"
+    [@openClose] = "isOpenPref ? 'open' :'closed'"
   >
 </form>
