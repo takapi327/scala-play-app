@@ -7,8 +7,8 @@ import { Router }                             from '@angular/router';
 import { Signup }               from '../../../interface/user';
 
 // ---- [ Service ] -------------------------------------------------
-import { AuthService }          from '../../../service/auth.service';
-import { ValidationService }    from '../../../service/validation.service'
+import { AuthService }          from '../../service/auth.service';
+import { ValidationService }    from '../../service/validation.service'
 import { ValidationMessages }   from '../validation-messages';
 
 @Component({
