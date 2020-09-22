@@ -9,7 +9,8 @@
     "test:coverage": "ng test --watch=true --code-coverage=true",
     "test:coverage:ci": "ng test --watch=false --code-coverage=true --browsers ChromeHeadless",
     "build:dev": "ng build --progress --output-path ../public",
-    "build:prod": "ng build --progress --prod --output-path ../public"
+    "build:prod": "ng build --progress --prod --output-path ../public",
+    "build:elements": "ng build --prod --output-hashing=none && cat dist/ui/{runtime,polyfills,main}.js > ../public/javascripts/ng-element.js"
   },
   "private": true,
   "dependencies": {
