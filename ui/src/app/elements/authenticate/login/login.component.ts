@@ -1,6 +1,5 @@
 // ---- [ @angular ] ------------------------------------------------
 import { Component, OnInit }                  from '@angular/core';
-import { Router }                             from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 // ---- [ Interface ] -----------------------------------------------
@@ -12,7 +11,7 @@ import { ValidationService }    from '@elements/service/validation.service';
 import { ValidationMessages }   from '../validation-messages';
 
 @Component({
-  selector:    'app-login',
+  selector:    'login-form',
   templateUrl: './login.component.html',
   styleUrls:   ['./login.component.scss']
 })
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService:        AuthService,
     private validationService:  ValidationService,
-    private routes:             Router,
     public  validationMessages: ValidationMessages
   ) {}
 
@@ -48,6 +46,5 @@ export class LoginComponent implements OnInit {
   
   onSubmit() {
     this.login(this.loginForm.value);
-    this.routes.navigate(['/']);
   }
 }

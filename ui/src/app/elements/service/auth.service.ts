@@ -31,7 +31,7 @@ export class AuthService {
    * @private
    * @memberof HttpClientService
    */
-  private authUrl = 'http://localhost:4200/api/v1/auth';
+  private authUrl = 'api/v1/auth';
 
   /**
    *
