@@ -5,6 +5,7 @@ import { ElementModule }    from './elements/element.module';
 
 // ---- [ Component ] --------------------------------------
 import { AppComponent }     from './app.component';
+import { ElementComponent } from '@elements/element';
 
 const MODULES = [
   BrowserModule,
@@ -12,9 +13,10 @@ const MODULES = [
 ]
 
 @NgModule({
-  declarations: [AppComponent],
-  imports:       MODULES,
-  providers:    [],
-  bootstrap:    [AppComponent]
+  declarations:    [AppComponent],
+  imports:         MODULES,
+  providers:       [],
+  bootstrap:       [ElementComponent],
+  entryComponents: [ElementComponent]
 })
 export class AppModule { }
