@@ -1,24 +1,22 @@
 // ---- [ Module ] -----------------------------------------
 import { BrowserModule }    from '@angular/platform-browser';
 import { NgModule }         from '@angular/core';
-import { AuthModule }       from './auth/auth.module'
-import { AppRoutingModule } from './app-routing.module';
-import { AtomicModule }     from './atomic-design/atomic.module'
+import { ElementModule }    from './elements/element.module';
 
 // ---- [ Component ] --------------------------------------
 import { AppComponent }     from './app.component';
+import { ElementComponent } from '@elements/element';
 
 const MODULES = [
   BrowserModule,
-  AuthModule,
-  AtomicModule,
-  AppRoutingModule
+  ElementModule
 ]
 
 @NgModule({
-  declarations: [AppComponent],
-  imports:       MODULES,
-  providers:    [],
-  bootstrap:    [AppComponent]
+  declarations:    [AppComponent],
+  imports:         MODULES,
+  providers:       [],
+  bootstrap:       [ElementComponent],
+  entryComponents: [ElementComponent]
 })
 export class AppModule { }

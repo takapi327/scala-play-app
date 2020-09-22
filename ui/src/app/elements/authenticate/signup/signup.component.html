@@ -1,0 +1,43 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="form-field">
+
+  <h1>会員登録</h1>
+  <div class="form-field__firstName">
+    <label for="firstName">名字</label>
+    <input id="firstName" name="firstName" type="text" [formControl]="firstName" />
+    <span *ngIf="firstName.errors?.required && (firstName.dirty || firstName.touched)">
+      名字は必須項目です
+    </span>
+  </div>
+
+  <div class="form-field__lastName">
+    <label for="lastName">名前</label>
+    <input id="lastName" name="lastName" type="text" [formControl]="lastName" />
+    <span *ngIf="lastName.errors?.required && (lastName.dirty || lastName.touched)">
+      名前は必須項目です
+    </span>
+  </div>
+
+  <div class="form-field__mail">
+    <label for="email">メールアドレス</label>
+    <input id="email" name="email" type="email" [formControl]="email" />
+    <ng-container *ngFor="let validation of validationMessages.email">
+      <span *ngIf="email.hasError(validation.type) && (email.dirty || email.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
+  </div>
+
+  <div class="form-field__pass">
+    <label for="password">パスワード</label>
+    <input id="password" name="password" type="password" [formControl]="password" />
+    <ng-container *ngFor="let validation of validationMessages.password">
+      <span *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
+  </div>
+
+  <div class="form-field__submit">
+    <input type="submit" value="会員登録" [disabled]="signupForm.invalid" />
+  </div>
+</form>
