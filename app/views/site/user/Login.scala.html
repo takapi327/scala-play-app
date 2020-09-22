@@ -4,21 +4,5 @@
 )
 
 @common.main(vv) {
-  @userLogin()
-}
-
-@userLogin() = {
-  @helper.form(action = routes.UserController.login()){
-    <div class="">
-      @helper.inputText(
-        vv.form("email")
-      )
-    </div>
-    <div class="">
-      @helper.inputPassword(
-        vv.form("password")
-      )
-    </div>
-    <button class="todo_btn">ログイン</button>
-  }
+  <login-form></login-form>
 }
