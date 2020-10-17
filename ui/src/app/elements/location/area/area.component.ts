@@ -1,15 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component}            from '@angular/core';
+import { NG_VALUE_ACCESSOR }   from '@angular/forms'
+
+import { Location, LocationArea } from '@modules/model/location';
+/* this project import */
+import { nnector } from '@modules/control-value-accessor-connector';
 
 @Component({
-  selector: 'app-area',
+  selector:    'app-area',
   templateUrl: './area.component.html',
-  styleUrls: ['./area.component.scss']
+  styleUrls:   ['./area.component.scss']
 })
-export class AreaComponent implements OnInit {
+export class AreaComponent extends ControlValueAccessorConnector {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    public areaOptions: LocationArea[] = Location.AREA_WITH_PREF,
+    injector: Injector
+  ) {
+    super(injector);
   }
 
+  /**
+   * ===== Method =====
+   */
+  onClick() {
+    const value = this.control.value
+    this.selectLocation.emit(value);
+  }
 }

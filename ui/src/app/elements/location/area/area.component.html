@@ -1,1 +1,15 @@
-<p>area works!</p>
+<ng-container *ngFor="let area of areaOptions.area">
+  <label>
+    <input type="radio" name="area" id= "{{area.url}}" class="hidden"
+      [value]       = "area.url"
+      (click)       = "onClick()"
+      [formControl] = "control"
+    #input >
+    <div
+      [class.selected] = "control.value == pref.url"
+      class            = "radio-button"
+    >
+      {{area.value}}
+    </div>
+  </label>
+</ng-container>

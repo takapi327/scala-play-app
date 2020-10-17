@@ -1,1 +1,15 @@
-<p>pref works!</p>
+<ng-container *ngFor="let pref of prefOptions">
+  <label>
+    <input type="radio" name="pref" id= "{{pref.url}}" class="hidden"
+      [value]       = "pref.url"
+      (click)       = "onClick()"
+      [formControl] = "control"
+    #input >
+    <div
+      [class.selected] = "control.value == pref.url"
+      class            = "radio-button"
+    >
+      {{pref.value}}
+    </div>
+  </label>
+</ng-container>
