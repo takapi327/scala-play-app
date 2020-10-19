@@ -1,8 +1,23 @@
 import { Injectable }              from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable }              from 'rxjs';
 
-import { User, Signup, Email } from '@modules/model/user';
+import { User, Signup } from '@modules/model/user';
+
+/**
+ * REST-API 実行時に指定する URL
+ *
+ * バックエンドは PlayFramework で実装し、ポート番号「9000」で待ち受けているため、
+ * そのまま指定すると CORS でエラーになる
+ * それを回避するため、ここではフロントエンドのポート番号「4200」を指定し、
+ * Angular CLI のリバースプロキシを利用してバックエンドとの通信を実現させる
+ *
+ * 認証専用の URL を設定、バックエンドのapi/がフロントエンドとの連携用に設定してある
+ *
+ * @private
+ * @memberof HttpClientService
+ */
+const AUTH_API_V1: string = 'api/v1/auth'
 
 @Injectable({
   providedIn: 'root'
@@ -17,21 +32,6 @@ export class AuthService {
    * @memberof HttpClientService
    */
   constructor(private http: HttpClient) {}
-
-  /**
-   * REST-API 実行時に指定する URL
-   *
-   * バックエンドは PlayFramework で実装し、ポート番号「9000」で待ち受けているため、
-   * そのまま指定すると CORS でエラーになる
-   * それを回避するため、ここではフロントエンドのポート番号「4200」を指定し、
-   * Angular CLI のリバースプロキシを利用してバックエンドとの通信を実現させる
-   *
-   * 認証専用の URL を設定、バックエンドのapi/がフロントエンドとの連携用に設定してある
-   *
-   * @private
-   * @memberof HttpClientService
-   */
-  private authUrl = 'api/v1/auth';
 
   /**
    *
@@ -54,7 +54,7 @@ export class AuthService {
    * @memberof     HttpClientService
    */
   login(user: User): Observable<{ fullName: string }> {
-    return this.http.post<{ fullName: string }>(`${this.authUrl}/login`, user, this.httpOptions);
+    return this.http.post<{ fullName: string }>(`${AUTH_API_V1}/login`, user);
   }
 
   /**
@@ -67,7 +67,7 @@ export class AuthService {
    * @memberof     HttpClientService
    */
   signup(signup: Signup): Observable<{ fullName: string, email: string }> {
-    return this.http.post<{ fullName: string, email: string }>(`${this.authUrl}/signup`, signup, this.httpOptions);
+    return this.http.post<{ fullName: string, email: string }>(`${AUTH_API_V1}/signup`, signup, this.httpOptions);
   }
 
   /**
@@ -79,7 +79,7 @@ export class AuthService {
    * @memberof   HttpClientService
    */
   logout(): Observable<any> {
-    return this.http.delete<any>(`${this.authUrl}/logout`, this.httpOptions);
+    return this.http.delete<any>(`${AUTH_API_V1}/logout`, this.httpOptions);
   }
 
   /**
@@ -91,7 +91,7 @@ export class AuthService {
    * @memberof  HttpClientService
    */
   isAuthenticate(): Observable<{ isAuth: boolean }> {
-    return this.http.get< {isAuth: boolean} >(`${this.authUrl}/isAuthenticate`, this.httpOptions);
+    return this.http.get< {isAuth: boolean} >(`${AUTH_API_V1}/isAuthenticate`);
   }
 
   /**
@@ -103,6 +103,6 @@ export class AuthService {
    * @memberof  HttpClientService
    */
   isEmailRegistered(payload: {email: string}): Observable<{ isRegistered: boolean }> {
-    return this.http.post<{ isRegistered: boolean }>(`${this.authUrl}/isEmailRegistered`, payload, this.httpOptions);
+    return this.http.post<{ isRegistered: boolean }>(`${AUTH_API_V1}/isEmailRegistered`, payload);
   }
 }

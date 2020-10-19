@@ -1,7 +1,6 @@
 {
   "/": {
-    "target": "http://localhost:9000",
-    "secure": false,
-    "pathRewrite": {"^/": ""}
+    "target": "http://localhost:9000/",
+    "secure": false
   }
 }

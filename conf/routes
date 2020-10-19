@@ -14,7 +14,7 @@ POST    /auth/login                 controllers.UserController.login
 POST    /auth/logout                controllers.UserController.logout
 
 # For v1 REST API
-->      /api/v1                     sub.api.Routes
+->      /auth/api/v1                     sub.api.Routes
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
