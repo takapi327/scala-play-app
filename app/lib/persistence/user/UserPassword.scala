@@ -7,16 +7,16 @@ import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
 import lib.model.{User, UserPassword => Pass}
+import lib.persistence.db.UserPassTable
+import lib.service.SlickDatabaseConfig
 
-@Singleton
-class UserPassRepository @Inject()
-  (dbConfigProvider: DatabaseConfigProvider)
-  (implicit ec: ExecutionContext){
+@Singleton()
+class UserPassRepository @Inject()()(implicit ec: ExecutionContext)
+  extends SlickDatabaseConfig {
     
-  private val dbConfig = dbConfigProvider.get[JdbcProfile]
-
-  import dbConfig._
   import profile.api._
+
+  lazy val userPass = TableQuery[UserPassTable]
 
   def add(uid: User.Id, pass: String): Future[Int] =
     db.run {
@@ -35,6 +35,7 @@ class UserPassRepository @Inject()
       .result.headOption
     }
   /******** 定義 ********/ 
+  /*
   private class UserPassTable(tag: Tag) extends Table[Pass](tag, "userPassword"){
     def user_id       = column[User.Id]          ("user_id", O.PrimaryKey)
     def password      = column[String]           ("password")
@@ -55,4 +56,5 @@ class UserPassRepository @Inject()
     )
   }
   private val userPass = TableQuery[UserPassTable]
+  */
 }

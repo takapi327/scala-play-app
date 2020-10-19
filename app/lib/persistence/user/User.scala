@@ -5,19 +5,19 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 
 import play.api.db.slick.DatabaseConfigProvider
+import play.api.db.slick.HasDatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 
 import lib.model.{UserId, UserName, User, UserPassword => Pass}
+import lib.service.SlickDatabaseConfig
 
-@Singleton
-class UserRepository @Inject()
-  (dbConfigProvider: DatabaseConfigProvider)
-  (implicit ec: ExecutionContext){
+@Singleton()
+class UserRepository @Inject()()(implicit ec: ExecutionContext)
+  extends SlickDatabaseConfig {
     
-  private val dbConfig = dbConfigProvider.get[JdbcProfile]
-
-  import dbConfig._
   import profile.api._
+
+  lazy val user = TableQuery[UserTable]
 
   def getAll(): Future[Seq[User]] =
     db.run {
@@ -60,6 +60,7 @@ class UserRepository @Inject()
     }
 
   /******** 定義 ********/
+  /*
   private class UserTable(tag: Tag) extends Table[User](tag, "user"){
     def id            = column[User.Id]          ("id", O.PrimaryKey, O.AutoInc)
     def firstName     = column[String]           ("first_name")
@@ -82,4 +83,5 @@ class UserRepository @Inject()
     )
   }
   private val user = TableQuery[UserTable]
+  */
 }

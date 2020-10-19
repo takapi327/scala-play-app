@@ -1,30 +1,32 @@
-/*
 package lib.persistence.db
 
 import java.time.LocalDateTime
 import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
-import lib.model.UserPassword
+import lib.model._
+import lib.service.SlickDatabaseConfig
+import lib.service.SlickDatabaseConfig.profile._
+import slick.lifted.Tag
 
-case class UserPassTable()
-  (dbConfigProvider: DatabaseConfigProvider){
+class UserPassTable(tag: Tag) extends Table[UserPassword](tag, "userPassword") with SlickDatabaseConfig {
 
-  private val dbConfig = dbConfigProvider.get[JdbcProfile]
-
-  import dbConfig._
   import profile.api._
-  import lib.model.{UserPassword => Pass}
 
-  private class UserPassTable(tag: Tag) extends Table[UserPassword](tag, "userPassword"){
-    def id            = column[Option[Pass.Id]]  ("id", O.PrimaryKey, O.AutoInc)
-    def password      = column[String]           ("password")
-    def repassword    = column[String]           ("repassword")
-    def updatedAt     = column[LocalDateTime]    ("updated_at")
-    def createdAt     = column[LocalDateTime]    ("created_at")
+  def user_id       = column[User.Id]          ("user_id", O.PrimaryKey)
+  def password      = column[String]           ("password")
+  //def updatedAt     = column[LocalDateTime]    ("updatedAt")
+  //def createdAt     = column[LocalDateTime]    ("createdAt")
 
-    def * = (id, password, repassword, updatedAt, createdAt) <> (
-      (UserPassword.apply _).tupled, UserPassword.unapply
-    )
-  }
+  type TableElementTuple = (
+    User.Id, String
+  )
+
+  def * = (user_id, password) <> (
+    (x: TableElementTuple) => UserPassword(
+      x._1, x._2
+    ),
+  (v: UserPassword) => UserPassword.unapply(v).map {t => (
+      t._1, t._2
+    )}
+  )
 }
-*/

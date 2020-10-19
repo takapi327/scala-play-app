@@ -7,16 +7,15 @@ import slick.jdbc.JdbcProfile
 import scala.concurrent.{ExecutionContext, Future}
 
 import lib.model._
+import lib.service.SlickDatabaseConfig
 
-@Singleton
-class AuthTokenRepository @Inject()
-  (dbConfigProvider: DatabaseConfigProvider)
-  (implicit ec: ExecutionContext){
+@Singleton()
+class AuthTokenRepository @Inject()()(implicit ec: ExecutionContext)
+  extends SlickDatabaseConfig {
     
-  private val dbConfig = dbConfigProvider.get[JdbcProfile]
-
-  import dbConfig._
   import profile.api._
+
+  lazy val userAuthToken = TableQuery[AuthTokenTable]
 
   def add(id: Option[String], uid: Option[User.Id]): Future[Int] =
     db.run {
@@ -40,6 +39,7 @@ class AuthTokenRepository @Inject()
     }
 
   /******** 定義 ********/ 
+  /*
   private class AuthTokenTable(tag: Tag) extends Table[AuthToken](tag, "userAuthToken"){
     def id      = column[String]   ("id")
     def userId  = column[User.Id]  ("user_id", O.PrimaryKey)
@@ -60,4 +60,5 @@ class AuthTokenRepository @Inject()
     )
   }
   private val userAuthToken = TableQuery[AuthTokenTable]
+  */
 }
