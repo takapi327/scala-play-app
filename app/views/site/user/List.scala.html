@@ -1,0 +1,18 @@
+@(vv: model.ViewValueUserList)(implicit 
+  messages: Messages,
+  request:  RequestHeader
+)
+
+@common.main(vv) {
+  <div>@vv.user.id.get</div>
+  <div>@vv.user.nameInfo.fullName</div>
+  <div>@vv.user.email</div>
+
+
+@helper.form(action = routes.UserController.logout()) {
+  <button>ログアウト</button>
+}
+
+  <a href="/">Home</a>
+}
+

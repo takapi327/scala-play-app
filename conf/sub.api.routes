@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# authenticate API
+POST   /auth/login            controllers.api.authenticate.UserLoginController.login
+POST   /auth/signup           controllers.api.authenticate.UserSignupController.signup
+DELETE /auth/logout           controllers.api.authenticate.UserLogoutController.logout
+
+# validation API
+GET    /auth/isAuthenticate      controllers.api.service.ValidationController.isAuthenticate
+POST   /auth/isEmailRegistered   controllers.api.service.ValidationController.isEmailRegistered

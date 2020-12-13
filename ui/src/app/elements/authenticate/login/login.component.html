@@ -1,0 +1,28 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-field">
+
+  <h1>ログイン</h1>
+  <div class="form-field__mail">
+    <label for="email">メールアドレス</label>
+    <input id="email" name="email" type="email" [formControl]="email" />
+    <ng-container *ngFor="let validation of validationMessages.email">
+      <span *ngIf="email.hasError(validation.type) && (email.dirty || email.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
+  </div>
+
+  <div class="form-field__pass">
+    <label for="password">パスワード</label>
+    <input id="password" name="password" type="password" [formControl]="password" />
+    <ng-container *ngFor="let validation of validationMessages.password">
+      <span *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">
+        {{validation.message}}
+      </span>
+    </ng-container>
+  </div>
+
+  <div class="form-field__submit">
+    <input type="submit" value="ログイン" [disabled]="loginForm.invalid" />
+  </div>
+</form>
+
